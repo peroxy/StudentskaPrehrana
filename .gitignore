@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BonParser/BonParser/Properties/Settings.settings
+/BonParser/BonParser/App.config
+/BonParser/BonParser/Properties/Settings.Designer.cs

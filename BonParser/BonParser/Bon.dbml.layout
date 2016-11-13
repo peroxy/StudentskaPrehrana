@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.125, 8.875" name="Bon">
+  <DataContextMoniker Name="/BonDataContext" />
+  <nestedChildShapes>
+    <classShape Id="debe56a5-5202-4590-bde2-a4f5f5f808b0" absoluteBounds="2.5, 1.875, 2, 6.0015283203125">
+      <DataClassMoniker Name="/BonDataContext/v_Restaurant" />
+      <nestedChildShapes>
+        <elementListCompartment Id="82202e0f-aaf7-4ec3-bfd1-34a7a257aa3e" absoluteBounds="2.515, 2.335, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="04669366-f11f-4eb6-8571-066cff428d00" absoluteBounds="10.875, 2.625, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/BonDataContext/Feature" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3dc765ca-384e-4873-9cbb-dd63f19f2b27" absoluteBounds="10.89, 3.0850000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2f6237b9-2796-4078-83d3-5bd5707c877d" absoluteBounds="5.375, 3.375, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/BonDataContext/Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="46301adb-3cc6-49e4-b5fd-5d977fd5a879" absoluteBounds="5.39, 3.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="293f6f0c-19d5-47b9-9976-4e7d5b759619" absoluteBounds="7.625, 6.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BonDataContext/Opening" />
+      <nestedChildShapes>
+        <elementListCompartment Id="57db15f9-7d95-454e-a189-a7ad2e4bf5b7" absoluteBounds="7.64, 6.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81abcc57-9401-4a79-a29d-ea917fd2b62e" absoluteBounds="7.875, 2.625, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/BonDataContext/Restaurant" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7cd93de1-c2c3-4294-b7ad-ffaf8280f5cb" absoluteBounds="7.8900000000000006, 3.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.875 : 4.08735270182292); (9.875 : 4.08735270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BonDataContext/Feature/Feature_Restaurant" />
+      <nodes>
+        <classShapeMoniker Id="04669366-f11f-4eb6-8571-066cff428d00" />
+        <classShapeMoniker Id="81abcc57-9401-4a79-a29d-ea917fd2b62e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.375 : 4.26044840494792); (7.875 : 4.26044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BonDataContext/Menu/Menu_Restaurant" />
+      <nodes>
+        <classShapeMoniker Id="2f6237b9-2796-4078-83d3-5bd5707c877d" />
+        <classShapeMoniker Id="81abcc57-9401-4a79-a29d-ea917fd2b62e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.75 : 6.5); (8.75 : 5.54970540364583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BonDataContext/Opening/Opening_Restaurant" />
+      <nodes>
+        <classShapeMoniker Id="293f6f0c-19d5-47b9-9976-4e7d5b759619" />
+        <classShapeMoniker Id="81abcc57-9401-4a79-a29d-ea917fd2b62e" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
