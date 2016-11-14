@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8825ce4e-d1ef-41d7-a3f2-0d0a62053f8b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://bonwebservice.azurewebsites.net/BonService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BonService.xsd" MetadataType="Schema" ID="ba077944-a5c6-4480-93ac-d0ed3a9034a4" SourceId="1" SourceUrl="http://bonwebservice.azurewebsites.net/BonService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BonService1.xsd" MetadataType="Schema" ID="432c2705-4504-4d3d-aefd-04e9e018c98c" SourceId="1" SourceUrl="http://bonwebservice.azurewebsites.net/BonService.svc?xsd=xsd2" />
+    <MetadataFile FileName="BonService.wsdl" MetadataType="Wsdl" ID="5c60983e-beff-4e1d-ac65-129d9102d2f2" SourceId="1" SourceUrl="http://bonwebservice.azurewebsites.net/BonService.svc?wsdl" />
+    <MetadataFile FileName="BonService.disco" MetadataType="Disco" ID="7de8e424-d00a-4be3-8ad8-ef8cde6b8584" SourceId="1" SourceUrl="http://bonwebservice.azurewebsites.net/BonService.svc?disco" />
+    <MetadataFile FileName="BonService2.xsd" MetadataType="Schema" ID="6ca887a5-a4b2-48b6-816e-e00baca72af6" SourceId="1" SourceUrl="http://bonwebservice.azurewebsites.net/BonService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

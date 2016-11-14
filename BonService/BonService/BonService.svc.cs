@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using BonParser;
 
 namespace BonService
 {
@@ -93,6 +94,11 @@ namespace BonService
                     });
             }
             
+        }
+
+        public void ParseAllRestaurants()
+        {
+            Parser.Begin();
         }
 
         public Restaurants GetFilteredRestaurants(Filter values)

@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace BonParser
 {
-    internal class Program
+    public static class Parser
     {
         public static string BonarApiUrl { get; } = "http://bonar.si/api/restaurants";
 
@@ -29,7 +29,7 @@ namespace BonParser
             FastFood = 13
         }
 
-        private static void Main(string[] args)
+        public static void Begin()
         {
             using (WebClient webClient = new System.Net.WebClient())
             {

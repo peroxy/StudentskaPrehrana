@@ -20,6 +20,9 @@ namespace BonService
 
         [OperationContract]
         Restaurants GetCurrentlyOpenRestaurants(DateTime now);
+
+        [OperationContract]
+        void ParseAllRestaurants();
     }
 
     [DataContract]

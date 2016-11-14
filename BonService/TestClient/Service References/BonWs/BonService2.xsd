@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://bonwebservice.azurewebsites.net/BonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BonService" />
+  <xs:element name="GetAllRestaurants">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllRestaurantsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BonService" minOccurs="0" name="GetAllRestaurantsResult" nillable="true" type="q1:Restaurants" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFilteredRestaurants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BonService" minOccurs="0" name="values" nillable="true" type="q2:Filter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFilteredRestaurantsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BonService" minOccurs="0" name="GetFilteredRestaurantsResult" nillable="true" type="q3:Restaurants" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentlyOpenRestaurants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="now" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentlyOpenRestaurantsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BonService" minOccurs="0" name="GetCurrentlyOpenRestaurantsResult" nillable="true" type="q4:Restaurants" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

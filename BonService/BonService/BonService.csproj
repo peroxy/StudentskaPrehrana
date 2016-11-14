@@ -141,6 +141,12 @@
       <DependentUpon>Bon.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BonParser\BonParser\BonParser.csproj">
+      <Project>{AA53777D-B067-49FA-9F23-F87EB4A94EAB}</Project>
+      <Name>BonParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
