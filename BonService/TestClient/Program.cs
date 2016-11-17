@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using TestClient.BonWs;
 
 namespace TestClient
@@ -12,18 +10,24 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-            var client = new BonServiceClient(new BasicHttpBinding(),
-                new EndpointAddress("http://bonwebservice.azurewebsites.net/BonService.svc?wsdl"));
-            Restaurants response = client.GetFilteredRestaurants(new Filter
+            var binding = new BasicHttpBinding
             {
-                HasDelivery = true
+                MaxBufferSize = 20000000,
+                MaxReceivedMessageSize = 20000000
+            };
+            var client = new BonServiceClient(binding, new EndpointAddress("http://bonwebservice.azurewebsites.net/BonService.svc?wsdl"));
+            Restaurants res = client.GetRestaurantsInRadius(new Coordinates
+            {
+                X = 46.239597M,
+                Y = 14.356079M,  //coordinates of Kranj
+                RadiusKm = 2.5M
             });
-
-            foreach (Restaurant restaurant in response.Values)
+            foreach (Restaurant restaurant in res.Values)
             {
                 Console.WriteLine(restaurant.Name);
             }
-            Console.ReadLine();
+            Console.Read();
+            //client.ParseAllRestaurants();
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Text;
 
 namespace BonService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IBonService
     {
@@ -20,6 +19,9 @@ namespace BonService
 
         [OperationContract]
         Restaurants GetCurrentlyOpenRestaurants(DateTime now);
+
+        [OperationContract]
+        Restaurants GetRestaurantsInRadius(Coordinates value);
 
         [OperationContract]
         void ParseAllRestaurants();
@@ -106,9 +108,6 @@ namespace BonService
         public Price Price { get; set; }
 
         [DataMember]
-        public Coordinates Coordinates{ get; set; }
-
-        [DataMember]
         public OpeningTime OpeningTime { get; set; }
 
         [DataMember]
@@ -146,20 +145,13 @@ namespace BonService
     public class Coordinates
     {
         [DataMember]
-        public Coordinate X { get; set; }
+        public decimal X { get; set; }
 
         [DataMember]
-        public Coordinate Y { get; set; }
-    }
-
-    [DataContract]
-    public class Coordinate
-    {
-        [DataMember]
-        public decimal From { get; set; }
+        public decimal Y { get; set; }
 
         [DataMember]
-        public decimal To { get; set; }
+        public decimal RadiusKm { get; set; }
     }
 
     [DataContract]

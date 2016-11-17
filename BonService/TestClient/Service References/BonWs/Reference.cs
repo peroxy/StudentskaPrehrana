@@ -757,9 +757,6 @@ namespace TestClient.BonWs {
         private string AddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestClient.BonWs.Coordinates CoordinatesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool HasDeliveryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -817,19 +814,6 @@ namespace TestClient.BonWs {
                 if ((object.ReferenceEquals(this.AddressField, value) != true)) {
                     this.AddressField = value;
                     this.RaisePropertyChanged("Address");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestClient.BonWs.Coordinates Coordinates {
-            get {
-                return this.CoordinatesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CoordinatesField, value) != true)) {
-                    this.CoordinatesField = value;
-                    this.RaisePropertyChanged("Coordinates");
                 }
             }
         }
@@ -1015,67 +999,6 @@ namespace TestClient.BonWs {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Coordinates", Namespace="http://schemas.datacontract.org/2004/07/BonService")]
-    [System.SerializableAttribute()]
-    public partial class Coordinates : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestClient.BonWs.Coordinate XField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestClient.BonWs.Coordinate YField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestClient.BonWs.Coordinate X {
-            get {
-                return this.XField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XField, value) != true)) {
-                    this.XField = value;
-                    this.RaisePropertyChanged("X");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestClient.BonWs.Coordinate Y {
-            get {
-                return this.YField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.YField, value) != true)) {
-                    this.YField = value;
-                    this.RaisePropertyChanged("Y");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Price", Namespace="http://schemas.datacontract.org/2004/07/BonService")]
     [System.SerializableAttribute()]
     public partial class Price : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1137,18 +1060,21 @@ namespace TestClient.BonWs {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Coordinate", Namespace="http://schemas.datacontract.org/2004/07/BonService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Coordinates", Namespace="http://schemas.datacontract.org/2004/07/BonService")]
     [System.SerializableAttribute()]
-    public partial class Coordinate : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Coordinates : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal FromField;
+        private decimal RadiusKmField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal ToField;
+        private decimal XField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal YField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1161,27 +1087,40 @@ namespace TestClient.BonWs {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal From {
+        public decimal RadiusKm {
             get {
-                return this.FromField;
+                return this.RadiusKmField;
             }
             set {
-                if ((this.FromField.Equals(value) != true)) {
-                    this.FromField = value;
-                    this.RaisePropertyChanged("From");
+                if ((this.RadiusKmField.Equals(value) != true)) {
+                    this.RadiusKmField = value;
+                    this.RaisePropertyChanged("RadiusKm");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal To {
+        public decimal X {
             get {
-                return this.ToField;
+                return this.XField;
             }
             set {
-                if ((this.ToField.Equals(value) != true)) {
-                    this.ToField = value;
-                    this.RaisePropertyChanged("To");
+                if ((this.XField.Equals(value) != true)) {
+                    this.XField = value;
+                    this.RaisePropertyChanged("X");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Y {
+            get {
+                return this.YField;
+            }
+            set {
+                if ((this.YField.Equals(value) != true)) {
+                    this.YField = value;
+                    this.RaisePropertyChanged("Y");
                 }
             }
         }
@@ -1217,6 +1156,18 @@ namespace TestClient.BonWs {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBonService/GetCurrentlyOpenRestaurants", ReplyAction="http://tempuri.org/IBonService/GetCurrentlyOpenRestaurantsResponse")]
         System.Threading.Tasks.Task<TestClient.BonWs.Restaurants> GetCurrentlyOpenRestaurantsAsync(System.DateTime now);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBonService/GetRestaurantsInRadius", ReplyAction="http://tempuri.org/IBonService/GetRestaurantsInRadiusResponse")]
+        TestClient.BonWs.Restaurants GetRestaurantsInRadius(TestClient.BonWs.Coordinates value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBonService/GetRestaurantsInRadius", ReplyAction="http://tempuri.org/IBonService/GetRestaurantsInRadiusResponse")]
+        System.Threading.Tasks.Task<TestClient.BonWs.Restaurants> GetRestaurantsInRadiusAsync(TestClient.BonWs.Coordinates value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBonService/ParseAllRestaurants", ReplyAction="http://tempuri.org/IBonService/ParseAllRestaurantsResponse")]
+        void ParseAllRestaurants();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBonService/ParseAllRestaurants", ReplyAction="http://tempuri.org/IBonService/ParseAllRestaurantsResponse")]
+        System.Threading.Tasks.Task ParseAllRestaurantsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1268,6 +1219,22 @@ namespace TestClient.BonWs {
         
         public System.Threading.Tasks.Task<TestClient.BonWs.Restaurants> GetCurrentlyOpenRestaurantsAsync(System.DateTime now) {
             return base.Channel.GetCurrentlyOpenRestaurantsAsync(now);
+        }
+        
+        public TestClient.BonWs.Restaurants GetRestaurantsInRadius(TestClient.BonWs.Coordinates value) {
+            return base.Channel.GetRestaurantsInRadius(value);
+        }
+        
+        public System.Threading.Tasks.Task<TestClient.BonWs.Restaurants> GetRestaurantsInRadiusAsync(TestClient.BonWs.Coordinates value) {
+            return base.Channel.GetRestaurantsInRadiusAsync(value);
+        }
+        
+        public void ParseAllRestaurants() {
+            base.Channel.ParseAllRestaurants();
+        }
+        
+        public System.Threading.Tasks.Task ParseAllRestaurantsAsync() {
+            return base.Channel.ParseAllRestaurantsAsync();
         }
     }
 }

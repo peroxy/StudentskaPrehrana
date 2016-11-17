@@ -78,7 +78,6 @@
   <xs:complexType name="Filter">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Coordinates" nillable="true" type="tns:Coordinates" />
       <xs:element minOccurs="0" name="HasDelivery" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasDisabledSupport" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasDisabledWcSupport" type="xs:boolean" />
@@ -95,20 +94,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Filter" nillable="true" type="tns:Filter" />
-  <xs:complexType name="Coordinates">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="X" nillable="true" type="tns:Coordinate" />
-      <xs:element minOccurs="0" name="Y" nillable="true" type="tns:Coordinate" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Coordinates" nillable="true" type="tns:Coordinates" />
-  <xs:complexType name="Coordinate">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="From" type="xs:decimal" />
-      <xs:element minOccurs="0" name="To" type="xs:decimal" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Coordinate" nillable="true" type="tns:Coordinate" />
   <xs:complexType name="Price">
     <xs:sequence>
       <xs:element minOccurs="0" name="From" type="xs:decimal" />
@@ -116,4 +101,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Price" nillable="true" type="tns:Price" />
+  <xs:complexType name="Coordinates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RadiusKm" type="xs:decimal" />
+      <xs:element minOccurs="0" name="X" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Y" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Coordinates" nillable="true" type="tns:Coordinates" />
 </xs:schema>

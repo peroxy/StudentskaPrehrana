@@ -31,4 +31,40 @@
       <Column Name="F_Delivery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Function Name="dbo.fn_GetRestaurantsInRadius" Method="fn_GetRestaurantsInRadius" IsComposable="true">
+    <Parameter Name="x" Type="System.Decimal" DbType="Decimal(9,6)" />
+    <Parameter Name="y" Type="System.Decimal" DbType="Decimal(9,6)" />
+    <Parameter Name="radius" Type="System.Decimal" DbType="Decimal(18,3)" />
+    <ElementType Name="fn_GetRestaurantsInRadiusResult">
+      <Column Name="R_Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="R_Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="R_Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="R_Price" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="R_CoordinateX" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
+      <Column Name="R_CoordinateY" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
+      <Column Name="R_UpdatedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="O_WeekStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_WeekEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SaturdayStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SaturdayEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SundayStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SundayEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="M_Soup" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="M_MainCourse" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="M_Salad" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="M_Dessert" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="F_Lunch" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_SaladBar" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Vegetarian" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_DisabledWC" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Pizzas" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Weekends" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_FastFood" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_StudentBenefits" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Delivery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DistanceKm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DistanceM" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -73,7 +74,7 @@ namespace BonParser
                     phone = item.telephone[0];
                 }
                 string priceStr = (string) item.price;
-                decimal price = Convert.ToDecimal(priceStr.Split(' ')[0]);
+                decimal price = Convert.ToDecimal(priceStr.Split(' ')[0], CultureInfo.GetCultureInfo("de-DE"));
                 TimeSpan? weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd;
                 ParseRestaurantOpeningTimes(item, out weekStart, out weekEnd, out satStart, out satEnd, out sunStart,
                     out sunEnd);
@@ -98,7 +99,7 @@ namespace BonParser
                     soup, mainCourse, salad, dessert, coordinateX, coordinateY, lunch, saladBar, vegetarian, disabled,
                     disabledWc, pizzas, weekends, fastFood, studentBenefits, delivery);
 
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine($"Parsing.. Number of parsed restaurants: {i++}");
                 Console.WriteLine($"Elapsed time: {s.Elapsed.TotalSeconds} sec");
             }

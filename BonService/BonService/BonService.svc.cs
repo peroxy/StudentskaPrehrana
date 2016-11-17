@@ -93,7 +93,68 @@ namespace BonService
                         }
                     });
             }
-            
+        }
+
+        public Restaurants GetRestaurantsInRadius(Coordinates value)
+        {
+            using (var ctx = new BonDataContext())
+            {
+                List<fn_GetRestaurantsInRadiusResult> inRadiusResults =
+                    (from i in ctx.fn_GetRestaurantsInRadius(value.X, value.Y, value.RadiusKm) select i).ToList();
+                var allRestaurants = new Restaurants();
+                FillRestaurants(inRadiusResults, allRestaurants);
+                return allRestaurants;
+            }
+        }
+
+        private static void FillRestaurants(List<fn_GetRestaurantsInRadiusResult> inRadiusResults,
+            Restaurants allRestaurants)
+        {
+            allRestaurants.Values.AddRange(inRadiusResults.Select(i => new Restaurant
+            {
+                Address = i.R_Address,
+                CoordinateX = i.R_CoordinateX,
+                CoordinateY = i.R_CoordinateY,
+                HasDelivery = i.F_Delivery,
+                HasDisabledSupport = i.F_Disabled,
+                HasDisabledWcSupport = i.F_DisabledWC,
+                HasSaladBar = i.F_SaladBar,
+                HasStudentBenefits = i.F_StudentBenefits,
+                HasVegetarianSupport = i.F_Vegetarian,
+                Menu = new Menu
+                {
+                    Dessert = i.M_Dessert,
+                    MainCourse = i.M_MainCourse,
+                    Salad = i.M_Salad,
+                    Soup = i.M_Soup
+                },
+                Name = i.R_Name,
+                OpenDuringWeekends = i.F_Weekends,
+                OpeningTime = new OpeningTime
+                {
+                    Week = new Week
+                    {
+                        From = i.O_WeekStart,
+                        To = i.O_WeekEnd
+                    },
+                    Saturday = new Saturday
+                    {
+                        From = i.O_SaturdayStart,
+                        To = i.O_SaturdayEnd
+                    },
+                    Sunday = new Sunday
+                    {
+                        From = i.O_SundayStart,
+                        To = i.O_SundayEnd
+                    }
+                },
+                Phone = i.R_Phone,
+                Price = i.R_Price.Value,
+                ServesFastFood = i.F_FastFood,
+                ServesLunch = i.F_Lunch,
+                ServesPizzas = i.F_Pizzas,
+                UpdatedOn = i.R_UpdatedOn
+            }));
         }
 
         public void ParseAllRestaurants()
@@ -208,19 +269,13 @@ namespace BonService
                 sql.Append($"R_Price BETWEEN '{filter.Price.From}' AND '{filter.Price.To}' AND ");
             }
 
-            if (filter.Coordinates != null)
-            {
-                if (filter.Coordinates.X != null)
-                {
-                    sql.Append(
-                        $"R_CoordinateX BETWEEN '{filter.Coordinates.X.From}' AND '{filter.Coordinates.X.To}' AND ");
-                }
-                if (filter.Coordinates.Y != null)
-                {
-                    sql.Append(
-                        $"R_CoordinateY BETWEEN '{filter.Coordinates.Y.From}' AND '{filter.Coordinates.Y.To}' AND ");
-                }
-            }
+            //if (filter.Coordinates != null)
+            //{
+            //    sql.Append(
+            //        $"R_CoordinateX BETWEEN '{filter.Coordinates.X.From}' AND '{filter.Coordinates.X.To}' AND ");
+            //    sql.Append(
+            //        $"R_CoordinateY BETWEEN '{filter.Coordinates.Y.From}' AND '{filter.Coordinates.Y.To}' AND ");
+            //}
 
             if (filter.OpeningTime != null)
             {

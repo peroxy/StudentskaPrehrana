@@ -50,6 +50,18 @@
   <wsdl:message name="IBonService_GetCurrentlyOpenRestaurants_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentlyOpenRestaurantsResponse" />
   </wsdl:message>
+  <wsdl:message name="IBonService_GetRestaurantsInRadius_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantsInRadius" />
+  </wsdl:message>
+  <wsdl:message name="IBonService_GetRestaurantsInRadius_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantsInRadiusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBonService_ParseAllRestaurants_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseAllRestaurants" />
+  </wsdl:message>
+  <wsdl:message name="IBonService_ParseAllRestaurants_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseAllRestaurantsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IBonService">
     <wsdl:operation name="GetAllRestaurants">
       <wsdl:input wsaw:Action="http://tempuri.org/IBonService/GetAllRestaurants" message="tns:IBonService_GetAllRestaurants_InputMessage" />
@@ -62,6 +74,14 @@
     <wsdl:operation name="GetCurrentlyOpenRestaurants">
       <wsdl:input wsaw:Action="http://tempuri.org/IBonService/GetCurrentlyOpenRestaurants" message="tns:IBonService_GetCurrentlyOpenRestaurants_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBonService/GetCurrentlyOpenRestaurantsResponse" message="tns:IBonService_GetCurrentlyOpenRestaurants_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurantsInRadius">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBonService/GetRestaurantsInRadius" message="tns:IBonService_GetRestaurantsInRadius_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBonService/GetRestaurantsInRadiusResponse" message="tns:IBonService_GetRestaurantsInRadius_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ParseAllRestaurants">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBonService/ParseAllRestaurants" message="tns:IBonService_ParseAllRestaurants_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBonService/ParseAllRestaurantsResponse" message="tns:IBonService_ParseAllRestaurants_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IBonService" type="tns:IBonService">
@@ -93,6 +113,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRestaurantsInRadius">
+      <soap:operation soapAction="http://tempuri.org/IBonService/GetRestaurantsInRadius" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseAllRestaurants">
+      <soap:operation soapAction="http://tempuri.org/IBonService/ParseAllRestaurants" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpsBinding_IBonService" type="tns:IBonService">
     <wsp:PolicyReference URI="#BasicHttpsBinding_IBonService_policy" />
@@ -117,6 +155,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetCurrentlyOpenRestaurants">
       <soap:operation soapAction="http://tempuri.org/IBonService/GetCurrentlyOpenRestaurants" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurantsInRadius">
+      <soap:operation soapAction="http://tempuri.org/IBonService/GetRestaurantsInRadius" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseAllRestaurants">
+      <soap:operation soapAction="http://tempuri.org/IBonService/ParseAllRestaurants" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
