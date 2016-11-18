@@ -2,6 +2,8 @@ package com.fri.studentskaprehrana;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +32,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private double radius;
 
     private GoogleMap mMap;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.more_tab_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
