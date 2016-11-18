@@ -4,5 +4,6 @@
     <item
         android:id="@+id/action_button"
         app:showAsAction="always"
-        android:title="NASTAVITVE" />
+        android:title="NASTAVITVE"
+        android:onClick="nastavitveClick"/>
 </menu>

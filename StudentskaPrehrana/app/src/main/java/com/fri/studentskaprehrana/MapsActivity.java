@@ -1,9 +1,11 @@
 package com.fri.studentskaprehrana;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,20 +21,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private final LatLng LJUBLJANA = new LatLng(46.052771, 14.503602);
     private final LatLngBounds SLOVENIJA_OUTER_BOUNDS = new LatLngBounds(LOWER_WEST_BOUND, UPPER_EAST_BOUND);
 
-    private boolean lunch;
-    private boolean saladBar;
-    private boolean vegetarian;
-    private boolean disabled;
-    private boolean disabledWC;
-    private boolean pizzas;
-    private boolean weekends;
-    private boolean studentBenefits;
-    private boolean delivery;
-
-    private double radius;
-
     private GoogleMap mMap;
 
+    // Dodaj menu gumb katerega opis se nahaja v res/menu/more_tab_menu.xml
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
@@ -68,22 +59,34 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // omeji kamero na slovenijo
         mMap.setLatLngBoundsForCameraTarget(SLOVENIJA_OUTER_BOUNDS);
+
+        // dodajanje markerjev!
         mMap.addMarker(new MarkerOptions().position(LJUBLJANA).title("Marker in Ljubljana"));
+
+        // premakni kamero in zoomiraj
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LJUBLJANA, 15));
     }
 
+    // Nastavi default vrednosti
     private void initVariables() {
-        lunch = false;
-        saladBar = false;
-        vegetarian = false;
-        disabled = false;
-        disabledWC = false;
-        pizzas = false;
-        weekends = false;
-        studentBenefits = false;
-        delivery = false;
+        StaticRestaurantVariables.lunch = false;
+        StaticRestaurantVariables.saladBar = false;
+        StaticRestaurantVariables.vegetarian = false;
+        StaticRestaurantVariables.disabled = false;
+        StaticRestaurantVariables.disabledWC = false;
+        StaticRestaurantVariables.pizzas = false;
+        StaticRestaurantVariables.weekends = false;
+        StaticRestaurantVariables.studentBenefits = false;
+        StaticRestaurantVariables.delivery = false;
 
-        radius = 10;
+        StaticRestaurantVariables.radius = 10;
+    }
+
+    // pojdi v nastavitve ob kliku na gumb
+    public void nastavitveClick(MenuItem item) {
+        Intent intent = new Intent(this, NastavitveActivity.class);
+        startActivity(intent);
     }
 }
