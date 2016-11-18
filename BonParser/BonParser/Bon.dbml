@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BonDB" Class="BonDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=bondb.database.windows.net;Initial Catalog=BonDB;User ID=peroxy;Connect Timeout=60" SettingsObjectName="BonParser.Properties.Settings" SettingsPropertyName="BonDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=;Initial Catalog=;User ID=;Connect Timeout=60" SettingsObjectName="BonParser.Properties.Settings" SettingsPropertyName="BonDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.v_Restaurant" Member="v_Restaurants">
     <Type Name="v_Restaurant">
       <Column Name="R_Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
