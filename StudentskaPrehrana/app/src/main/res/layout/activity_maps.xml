@@ -5,4 +5,5 @@
     android:layout_height="match_parent"
     android:id="@+id/map"
     tools:context="com.fri.studentskaprehrana.MapsActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    tools:layout="@layout/place_autocomplete_fragment" />
