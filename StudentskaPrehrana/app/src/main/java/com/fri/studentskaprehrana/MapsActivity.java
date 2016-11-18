@@ -1,17 +1,21 @@
 package com.fri.studentskaprehrana;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends ActionBarActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private final LatLng LOWER_WEST_BOUND = new LatLng(45.427882, 13.347119);
+    private final LatLng UPPER_EAST_BOUND = new LatLng(46.904552, 16.664808);
+    private final LatLng LJUBLJANA = new LatLng(46.052771, 14.503602);
+    private final LatLngBounds SLOVENIJA_OUTER_BOUNDS = new LatLngBounds(LOWER_WEST_BOUND, UPPER_EAST_BOUND);
 
     private GoogleMap mMap;
 
@@ -39,9 +43,8 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.setLatLngBoundsForCameraTarget(SLOVENIJA_OUTER_BOUNDS);
+        mMap.addMarker(new MarkerOptions().position(LJUBLJANA).title("Marker in Ljubljana"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LJUBLJANA, 15));
     }
 }
