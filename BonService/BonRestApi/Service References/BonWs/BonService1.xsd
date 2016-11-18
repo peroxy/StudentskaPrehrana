@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BonService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BonService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://bonwebservice.azurewebsites.net/BonService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Restaurants">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Values" nillable="true" type="tns:ArrayOfRestaurant" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Restaurants" nillable="true" type="tns:Restaurants" />
+  <xs:complexType name="ArrayOfRestaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Restaurant" nillable="true" type="tns:Restaurant" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRestaurant" nillable="true" type="tns:ArrayOfRestaurant" />
+  <xs:complexType name="Restaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CoordinateX" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CoordinateY" type="xs:decimal" />
+      <xs:element minOccurs="0" name="HasDelivery" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasDisabledSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasDisabledWcSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasSaladBar" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasStudentBenefits" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasVegetarianSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenDuringWeekends" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OpeningTime" nillable="true" type="tns:OpeningTime" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServesFastFood" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServesLunch" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServesPizzas" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UpdatedOn" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Restaurant" nillable="true" type="tns:Restaurant" />
+  <xs:complexType name="Menu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dessert" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MainCourse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Soup" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Menu" nillable="true" type="tns:Menu" />
+  <xs:complexType name="OpeningTime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Saturday" nillable="true" type="tns:Saturday" />
+      <xs:element minOccurs="0" name="Sunday" nillable="true" type="tns:Sunday" />
+      <xs:element minOccurs="0" name="Week" nillable="true" type="tns:Week" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OpeningTime" nillable="true" type="tns:OpeningTime" />
+  <xs:complexType name="Saturday">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" nillable="true" type="ser:duration" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Saturday" nillable="true" type="tns:Saturday" />
+  <xs:complexType name="Sunday">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" nillable="true" type="ser:duration" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sunday" nillable="true" type="tns:Sunday" />
+  <xs:complexType name="Week">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" nillable="true" type="ser:duration" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Week" nillable="true" type="tns:Week" />
+  <xs:complexType name="Filter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HasDelivery" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasDisabledSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasDisabledWcSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasSaladBar" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasStudentBenefits" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasVegetarianSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenDuringWeekends" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OpeningTime" nillable="true" type="tns:OpeningTime" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="tns:Price" />
+      <xs:element minOccurs="0" name="ServesFastFood" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServesLunch" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServesPizzas" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Filter" nillable="true" type="tns:Filter" />
+  <xs:complexType name="Price">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" type="xs:decimal" />
+      <xs:element minOccurs="0" name="To" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Price" nillable="true" type="tns:Price" />
+  <xs:complexType name="Coordinates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RadiusKm" type="xs:decimal" />
+      <xs:element minOccurs="0" name="X" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Y" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Coordinates" nillable="true" type="tns:Coordinates" />
+</xs:schema>
