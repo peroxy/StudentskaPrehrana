@@ -5,7 +5,7 @@ package com.fri.studentskaprehrana;
  */
 
 class StaticRestaurantVariables {
-   // Jih spremeni uporabnik v NastavitveActivity ali pa jih naložimo na začetku iz datoteke, drugače booleani false in radius 10
+   // Jih spremeni uporabnik v NastavitveActivity ali pa jih naložimo na začetku iz datoteke, drugače booleani true in radius 10
 
    static boolean lunch;
    static boolean saladBar;
