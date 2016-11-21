@@ -2,6 +2,7 @@ package com.fri.studentskaprehrana;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -100,11 +102,38 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         listOfPoints = new TreeSet<>();
+
     }
 
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
+
+//        to enable gps enable message on start uncmment this
+//
+//        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+//
+//        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+//            buildAlertMessageNoGps();
+//        }
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     protected void onStop() {
