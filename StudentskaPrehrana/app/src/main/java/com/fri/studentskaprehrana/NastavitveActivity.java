@@ -1,7 +1,10 @@
 package com.fri.studentskaprehrana;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
@@ -15,7 +18,7 @@ public class NastavitveActivity extends AppCompatActivity {
     public ToggleButton tbWeekends;
     public ToggleButton tbStudentBenefits;
     public ToggleButton tbDelivery;
-
+    public Button btSeznam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +33,9 @@ public class NastavitveActivity extends AppCompatActivity {
         this.tbWeekends = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_weekends);
         this.tbStudentBenefits = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_studentBenefits);
         this.tbDelivery = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_delivery);
+        this.btSeznam=(Button)findViewById(R.id.btSeznam);
 
-        this.tbLunch.setChecked(true);
+                this.tbLunch.setChecked(true);
         this.tbSaladBar.setChecked(true);
         this.tbVegetarian.setChecked(true);
         this.tbDisabled.setChecked(true);
@@ -92,9 +96,15 @@ public class NastavitveActivity extends AppCompatActivity {
         tbDelivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 StaticRestaurantVariables.delivery = isChecked;
+
             }
         });
-
+        btSeznam.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(NastavitveActivity.this, ListViewRestaurants.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

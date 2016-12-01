@@ -44,6 +44,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NastavitveActivity"></activity>
+        <activity android:name=".DetailedViewRestaurant"></activity>
+        <activity android:name=".ListViewRestaurants"></activity>
     </application>
 
 
