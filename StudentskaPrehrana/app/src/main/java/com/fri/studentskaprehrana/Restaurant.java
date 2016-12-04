@@ -1,74 +1,55 @@
 package com.fri.studentskaprehrana;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 
 /**
  * Created by kerry on 30. 11. 2016.
  */
-/* TO DO:
-Create classes for Menu and both times
- */
-class Menu implements Serializable{
-    public String Dessert;
-    public String MainCourse;
-    public String Salad;
-    public String Soup;
-    Menu(String des, String mc, String sal, String sou){
-        this.Dessert=des;
-        this.MainCourse=mc;
-        this.Salad=sal;
-        this.Soup=sou;
-    }
-    @Override
-    public String toString(){
-        return String.format("Main course: %s\nDessert: %s\nSalad: %s\nSoup: %s",this.MainCourse,this.Dessert,this.Salad,this.Soup);
-    }
-}
 public class Restaurant implements Serializable
 {
-    public String Name;
-    public String Address;
-    public String Phone;
-    public float Price;
-    public float CoordinateX;
-    public float CoordinateY;
-    /*public OpeningTime OpeningTime;
-    public DateTime UpdatedOn;*/
-    public Menu Menu;
-    public boolean ServesLunch;
-    public boolean HasSaladBar;
-    public boolean HasVegetarianSupport;
-    public boolean HasDisabledSupport;
-    public boolean HasDisabledWcSupport;
-    public boolean ServesPizzas;
-    public boolean OpenDuringWeekends;
-    public boolean ServesFastFood;
-    public boolean HasStudentBenefits;
-    public boolean HasDelivery;
-    Restaurant(String n, String a, String ph, float pr, float cx, float cy, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
+    protected String name;
+    protected String address;
+    protected String phone;
+    protected double price;
+    protected LatLng coordinates;
+    /*protected OpeningTime OpeningTime;
+    protected DateTime UpdatedOn;*/
+    protected Menu menu;
+    protected boolean servesLunch;
+    protected boolean hasSaladBar;
+    protected boolean hasVegetarianSupport;
+    protected boolean hasDisabledSupport;
+    protected boolean hasDisabledWcSupport;
+    protected boolean servesPizzas;
+    protected boolean openDuringWeekends;
+    protected boolean servesFastFood;
+    protected boolean hasStudentBenefits;
+    protected boolean hasDelivery;
+    Restaurant(String n, String a, String ph, double pr, LatLng coordinates, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
                boolean sff, boolean hstb, boolean hd){ //vse je po vrsti za čim manj confusiona
-        this.Name=n;
-        this.Address=a;
-        this.Phone=ph;
-        this.Price=pr;
-        this.CoordinateX=cx;
-        this.CoordinateY=cy;
-        this.ServesLunch=sl;
-        this.HasSaladBar=hsb;
-        this.HasVegetarianSupport=hvs;
-        this.HasDisabledSupport=hds;
-        this.HasDisabledWcSupport=hdwc;
-        this.ServesPizzas=sp;
-        this.OpenDuringWeekends=ow;
-        this.ServesFastFood=sff;
-        this.HasStudentBenefits=hstb;
-        this.HasDelivery=hd;
+        this.name=n;
+        this.address=a;
+        this.phone=ph;
+        this.price=pr;
+        this.coordinates = coordinates;
+        this.servesLunch=sl;
+        this.hasSaladBar=hsb;
+        this.hasVegetarianSupport=hvs;
+        this.hasDisabledSupport=hds;
+        this.hasDisabledWcSupport=hdwc;
+        this.servesPizzas=sp;
+        this.openDuringWeekends=ow;
+        this.servesFastFood=sff;
+        this.hasStudentBenefits=hstb;
+        this.hasDelivery=hd;
     }
     @Override
     public String toString(){
-        return String.format("%s, %s",this.Name,this.Address);
+        return String.format("%s, %s",this.name,this.address);
     }
-    public void initializeMenu(String des, String mc, String sal, String sou){
-        this.Menu=new Menu(des,mc,sal,sou);
+    protected void initializeMenu(String des, String mc, String sal, String sou){
+        this.menu=new Menu(des,mc,sal,sou);
     }
 }

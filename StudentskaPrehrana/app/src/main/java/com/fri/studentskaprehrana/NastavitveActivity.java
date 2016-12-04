@@ -33,9 +33,10 @@ public class NastavitveActivity extends AppCompatActivity {
         this.tbWeekends = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_weekends);
         this.tbStudentBenefits = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_studentBenefits);
         this.tbDelivery = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_delivery);
+
         this.btSeznam=(Button)findViewById(R.id.btSeznam);
 
-                this.tbLunch.setChecked(true);
+        this.tbLunch.setChecked(true);
         this.tbSaladBar.setChecked(true);
         this.tbVegetarian.setChecked(true);
         this.tbDisabled.setChecked(true);

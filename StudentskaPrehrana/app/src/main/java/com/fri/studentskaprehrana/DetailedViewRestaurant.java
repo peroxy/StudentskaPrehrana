@@ -21,10 +21,10 @@ public class DetailedViewRestaurant extends AppCompatActivity {
         //if(bundle!=null) {
         Restaurant received = (Restaurant) bundle.getSerializable("value");
         Log.e("Received:", received.toString());
-        tvName.setText(received.Name);
-        tvAddress.setText(received.Address);
-        tvPhoneNumber.setText(received.Phone);
-        tvMenu.setText(received.Menu.toString());
+        tvName.setText(received.name);
+        tvAddress.setText(received.address);
+        tvPhoneNumber.setText(received.phone);
+        tvMenu.setText(received.menu.toString());
         //}
     }
 }
