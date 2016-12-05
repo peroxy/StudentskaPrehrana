@@ -1,0 +1,30 @@
+{
+    "Address":"Kardeljeva ploščad 5, Ljubljana",
+    "CoordinateX":46.07423535590020,
+    "CoordinateY":14.51366899516777,
+    "HasDelivery":false,
+    "HasDisabledSupport":false,
+    "HasDisabledWcSupport":true,
+    "HasSaladBar":false,
+    "HasStudentBenefits":false,
+    "HasVegetarianSupport":false,
+    "Menu":{
+        "Dessert":null,
+        "MainCourse":null,
+        "Salad":null,
+        "Soup":null
+    },
+    "Name":"NetCafe",
+    "OpenDuringWeekends":false,
+    "OpeningTime":{
+        "Saturday": {"From":null,"To":null},
+        "Sunday":{"From":null,"To":null},
+        "Week":{"From":"PT10H","To":"PT20H"}
+    },
+    "Phone":null,
+    "Price":0.50,
+    "ServesFastFood":false,
+    "ServesLunch":false,
+    "ServesPizzas":true,
+    "UpdatedOn":"\/Date(1480896000000+0000)\/"
+}
