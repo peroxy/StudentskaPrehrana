@@ -9,9 +9,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.google.android.gms.maps.model.LatLng;
-
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,7 +22,8 @@ public class ListViewRestaurants extends AppCompatActivity {
         Random r = new Random();
         //double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
         float pr=6 * r.nextFloat();
-        LatLng coordinates = new LatLng(48 + (49 - 48) * r.nextFloat(), 48 + (49 - 48) * r.nextFloat());
+        double x = 13.5 + (16.5 - 13.5) * r.nextDouble();
+        double y = 45.5 + (47.5 - 45.5) * r.nextDouble();
         boolean sl=Math.random()<0.5;
         boolean hsb=Math.random()<0.5;
         boolean hvs=Math.random()<0.5;
@@ -34,7 +34,7 @@ public class ListViewRestaurants extends AppCompatActivity {
         boolean sff=Math.random()<0.5;
         boolean htsb=Math.random()<0.5;
         boolean hd=Math.random()<0.5;
-        return new Restaurant(n,a,ph,pr,coordinates,sl,hsb,hvs,hds,hdwc,sp,ow,sff,htsb,hd);
+        return new Restaurant(n,a,ph,pr,x,y,sl,hsb,hvs,hds,hdwc,sp,ow,sff,htsb,hd);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,11 @@ public class ListViewRestaurants extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Restaurant send = (Restaurant)adapter.getItem(position);
-                Log.e("TAG",send.phone);
+                //Log.e("TAG",send.phone);
                 Intent intent = new Intent(ListViewRestaurants.this, DetailedViewRestaurant.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("value", send);
+                Log.e("Res",send.toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

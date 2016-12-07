@@ -7,13 +7,15 @@ import java.io.Serializable;
 /**
  * Created by kerry on 30. 11. 2016.
  */
+
 public class Restaurant implements Serializable
 {
     protected String name;
     protected String address;
     protected String phone;
     protected double price;
-    protected LatLng coordinates;
+    protected double xcoord;
+    protected double ycoord;
     /*protected OpeningTime OpeningTime;
     protected DateTime UpdatedOn;*/
     protected Menu menu;
@@ -27,13 +29,14 @@ public class Restaurant implements Serializable
     protected boolean servesFastFood;
     protected boolean hasStudentBenefits;
     protected boolean hasDelivery;
-    Restaurant(String n, String a, String ph, double pr, LatLng coordinates, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
+    Restaurant(String n, String a, String ph, double pr, double x, double y, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
                boolean sff, boolean hstb, boolean hd){ //vse je po vrsti za čim manj confusiona
         this.name=n;
         this.address=a;
         this.phone=ph;
         this.price=pr;
-        this.coordinates = coordinates;
+        this.xcoord = x;
+        this.ycoord = y;
         this.servesLunch=sl;
         this.hasSaladBar=hsb;
         this.hasVegetarianSupport=hvs;
