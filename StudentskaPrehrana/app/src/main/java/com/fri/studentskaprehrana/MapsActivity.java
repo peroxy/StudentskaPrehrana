@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +39,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -81,6 +83,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Marker currentMarker;
     private TreeSet<LatLng> listOfPoints;
 
+    //temp arrays for testing purposes
+    private ArrayList<Restaurant> restavracije = new ArrayList<>(); //arraylist of a few restaurants for testing purposes
+    private String[] imena={"Marjetica", "Indeks", "McDonalds", "Pub Legende", "Tinetov Hram Zadovoljstva"};
+    private String[] ulica={"Tobačna 2", "Kersnikova 19", "Kolodvorska 22", "Tržaška 17", "Trubarjeva 67"};
+    private double[] xcoords = {46.048819, 46.056294, 46.058160, 46.047381, 46.052395 };
+    private double[] ycoords = {14.494445, 14.504229, 14.510280, 14.495601, 14.513813 };
+
     // Dodaj menu gumb katerega opis se nahaja v res/menu/more_tab_menu.xml
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,7 +103,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        for(int i=0;i<5;i++){
+            //String n, String a, String ph, double pr, double x, double y, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
+            //boolean sff, boolean hstb, boolean hd
+            Restaurant temp = new Restaurant(imena[i], ulica[i], "01 672 28 99", 2.50, xcoords[i], ycoords[i], true, true, false, true, false, true, true, false, true, false);
+            temp.initializeMenu("Puding", "Dunajski in pomfri", "zelena solata s prelivom", "Goveja");
+            restavracije.add(temp);
+        }
         initVariables();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -226,6 +241,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setLatLngBoundsForCameraTarget(SLOVENIJA_OUTER_BOUNDS);
         mUiSettings = mMap.getUiSettings();
 
+
+
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -237,10 +254,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             //Request Location Permission
             checkLocationPermission();
         }
+
+
+
 //        updateMyLocation();
 
 //        updateUI();
     }
+
 
 //    private void updateMyLocation() {
 //        if (!checkReady()) {
@@ -449,7 +470,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
         mLastLocationUpdate = new Date();
-
+        /*double tmpx = 46.044869 ;
+        double tmpy = 14.500535;
+        LatLng tmpLL = new LatLng(tmpx, tmpy);
+        Marker tempMarker = mMap.addMarker(new MarkerOptions()
+                .position(tmpLL)
+                .title("Customzzz"));
+        tempMarker.setTag(0);*/
+        for(int i=0;i<restavracije.size();i++){
+            Restaurant tmp = restavracije.get(i);
+            LatLng tmpLL = new LatLng(tmp.xcoord, tmp.ycoord);
+            Marker tempMarker = mMap.addMarker(new MarkerOptions()
+                    .position(tmpLL)
+                    .title(tmp.name));
+            tempMarker.setTag(0);
+        }
 
         if (StaticRestaurantVariables.mRestaurantSearchLocation == null) {
             StaticRestaurantVariables.mRestaurantSearchLocation = mCurrentLocation;
@@ -458,6 +493,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             StaticRestaurantVariables.mRestaurantSearchLocation = mCurrentLocation;
             zoomToLocation(new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()));
         }
+        //check if a custom location marker exists
+            double tmpx = StaticRestaurantVariables.mRestaurantSearchLocation.getLatitude();
+            double tmpy = StaticRestaurantVariables.mRestaurantSearchLocation.getLongitude();
+            LatLng tmpLL = new LatLng(tmpx, tmpy);
+            Marker tempMarker = mMap.addMarker(new MarkerOptions()
+                    .position(tmpLL)
+                    .title("Search Location"));
+            tempMarker.setTag(0);
+
 //        else if (customLocation && currentMarker != null && mMap != null &&
 //                !currentMarker.getPosition().equals(new LatLng(StaticRestaurantVariables.mRestaurantSearchLocation.getLatitude(),
 //                        StaticRestaurantVariables.mRestaurantSearchLocation.getLongitude()))) {
@@ -506,9 +550,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         StaticRestaurantVariables.mRestaurantSearchLocation.setLatitude(place.getLatLng().latitude);
         StaticRestaurantVariables.mRestaurantSearchLocation.setLongitude(place.getLatLng().longitude);
         customLocation = true;
-        if (mMap != null) {
-            currentMarker = mMap.addMarker(new MarkerOptions().position(place.getLatLng()));
-        }
     }
 
     @Override
