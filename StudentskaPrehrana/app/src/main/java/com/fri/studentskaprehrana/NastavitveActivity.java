@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class NastavitveActivity extends AppCompatActivity {
@@ -18,7 +20,10 @@ public class NastavitveActivity extends AppCompatActivity {
     public ToggleButton tbWeekends;
     public ToggleButton tbStudentBenefits;
     public ToggleButton tbDelivery;
+
     public Button btSeznam;
+
+    public SeekBar sbRadius;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,15 @@ public class NastavitveActivity extends AppCompatActivity {
         this.tbStudentBenefits = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_studentBenefits);
         this.tbDelivery = (ToggleButton) findViewById(R.id.activity_nastavitve_tb_delivery);
 
-        this.btSeznam=(Button)findViewById(R.id.btSeznam);
+        this.sbRadius = (SeekBar) findViewById(R.id.activity_nastavitve_sb_radius);
+
+        if (sbRadius == null) {
+            TextView tv = (TextView) findViewById(R.id.textView);
+
+            tv.setText("null");
+        }
+
+        this.btSeznam = (Button) findViewById(R.id.btSeznam);
 
         this.tbLunch.setChecked(true);
         this.tbSaladBar.setChecked(true);
@@ -104,6 +117,25 @@ public class NastavitveActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(NastavitveActivity.this, ListViewRestaurants.class);
                 startActivity(intent);
+            }
+        });
+
+        sbRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                TextView tv = (TextView) findViewById(R.id.textView);
+
+                tv.setText(Integer.toString(progress + (int) StaticRestaurantVariables.minRadius));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
     }

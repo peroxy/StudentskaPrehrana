@@ -111,11 +111,13 @@
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
+        android:id="@+id/activity_nastavitve_sb_radius"
         android:layout_above="@+id/activity_nastavitve_tb_lunch"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="96dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:max="100"
+        android:progress="10"/>
 
     <Button
         android:text="Seznam"
@@ -124,4 +126,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/btSeznam" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btSeznam"
+        android:layout_alignEnd="@+id/activity_nastavitve_tb_lunch"
+        android:id="@+id/textView" />
+
 </RelativeLayout>

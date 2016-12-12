@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -34,6 +36,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -61,10 +65,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 2;
     private final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 4;
 
+    private final int circleColor = Color.rgb(66, 133, 244);
+
     private final int MY_PERMISSIONS_ALL_GRANTED = 7;
 
     private boolean mShowPermissionDeniedDialog;
-    private boolean customLocation;
     private boolean noGPSMode;
 
     private String[] permissions;
@@ -81,6 +86,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
 
     private Marker currentMarker;
+    private Circle circle;
     private TreeSet<LatLng> listOfPoints;
 
     //temp arrays for testing purposes
@@ -103,13 +109,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        for(int i=0;i<5;i++){
-            //String n, String a, String ph, double pr, double x, double y, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
-            //boolean sff, boolean hstb, boolean hd
-            Restaurant temp = new Restaurant(imena[i], ulica[i], "01 672 28 99", 2.50, xcoords[i], ycoords[i], true, true, false, true, false, true, true, false, true, false);
-            temp.initializeMenu("Puding", "Dunajski in pomfri", "zelena solata s prelivom", "Goveja");
-            restavracije.add(temp);
-        }
+
         initVariables();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -117,6 +117,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(map);
         mapFragment.getMapAsync(this);
 
+        Location x = new Location("daffd");
+        x.setLatitude(LOWER_WEST_BOUND.longitude);
+        x.setLongitude(LOWER_WEST_BOUND.longitude);
+
+        Location y = new Location("daffd");
+        y.setLatitude(UPPER_EAST_BOUND.latitude);
+        y.setLongitude(UPPER_EAST_BOUND.longitude);
+
+        Log.v("DISTANCE: ", String.format("%f", x.distanceTo(y)));
+        Toast.makeText(MapsActivity.this, String.format("%f", x.distanceTo(y)), Toast.LENGTH_LONG).show();
     }
 
     protected void onStart() {
@@ -132,6 +142,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
 //            buildAlertMessageNoGps();
 //        }
+    }
+
+    private void buildAlertMessageNoInternet() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Za delovanje aplikacije je potrebna povezava s spletom")
+                .setCancelable(false)
+                .setTitle("Povezava onemogočena")
+                .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                        noGPSMode = true;
+                    }
+                })
+                .setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        Toast.makeText(MapsActivity.this, "Brez povezave aplikacija ne deluje", Toast.LENGTH_LONG).show();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void buildAlertMessageNoGps() {
@@ -165,7 +195,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onPause() {
         super.onPause();
         stopLocationUpdates();
-        mMap.clear();
+        if (mMap != null) {
+            mMap.clear();
+        }
 //
 //        mMap.clear();
 //
@@ -364,19 +396,32 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment.setBoundsBias(SLOVENIJA_OUTER_BOUNDS);
         autocompleteFragment.setOnPlaceSelectedListener(this);
 
         mLocationManager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+
         if ( !mLocationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertMessageNoGps();
+        }
+        if ( !mLocationManager.isProviderEnabled( LocationManager.NETWORK_PROVIDER ) ) {
+            buildAlertMessageNoInternet();
         }
         if (noGPSMode) {
             Toast.makeText(this, "Izberite lokacijo v iskalniku", Toast.LENGTH_SHORT).show();
         }
 
         mShowPermissionDeniedDialog = false;
-        customLocation = false;
+        //customLocation = false;
         listOfPoints = new TreeSet<>();
+
+        for(int i=0;i<5;i++){
+            //String n, String a, String ph, double pr, double x, double y, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
+            //boolean sff, boolean hstb, boolean hd
+            Restaurant temp = new Restaurant(imena[i], ulica[i], "01 672 28 99", 2.50, xcoords[i], ycoords[i], true, true, false, true, false, true, true, false, true, false);
+            temp.initializeMenu("Puding", "Dunajski in pomfri", "zelena solata s prelivom", "Goveja");
+            restavracije.add(temp);
+        }
     }
 
 
@@ -453,7 +498,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     @Override
@@ -486,21 +531,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             tempMarker.setTag(0);
         }
 
-        if (StaticRestaurantVariables.mRestaurantSearchLocation == null) {
-            StaticRestaurantVariables.mRestaurantSearchLocation = mCurrentLocation;
+        if (!StaticRestaurantVariables.customLocation && mMap != null) {
+            StaticRestaurantVariables.setLocaation(location.toString(), location.getLatitude(),
+                    location.getLongitude());
+
+            if (currentMarker != null ) {
+                currentMarker.remove();
+            }
+            if (circle != null) {
+                circle.remove();
+            }
+
+            circle = mMap.addCircle(new CircleOptions()
+                    .center(StaticRestaurantVariables.mRestaurantLatLng)
+                    .radius(StaticRestaurantVariables.radius * 1000)
+                    .strokeColor(circleColor)
+                    .strokeWidth(4f));
         }
-        else if (!customLocation && StaticRestaurantVariables.mRestaurantSearchLocation.distanceTo(mCurrentLocation) > 10) {
-            StaticRestaurantVariables.mRestaurantSearchLocation = mCurrentLocation;
-            zoomToLocation(new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()));
+        else if (StaticRestaurantVariables.customLocation && mMap != null) {
+            if (circle != null) {
+                circle.remove();
+            }
+
+            currentMarker = mMap.addMarker(new MarkerOptions()
+                    .position(StaticRestaurantVariables.mRestaurantLatLng)
+                    .title(StaticRestaurantVariables.mSelectedPlaceName));
+            currentMarker.setTag(0);
+
+            circle = mMap.addCircle(new CircleOptions()
+                    .center(StaticRestaurantVariables.mRestaurantLatLng)
+                    .radius(StaticRestaurantVariables.radius * 1000)
+                    .strokeColor(circleColor)
+                    .strokeWidth(4f));
+
+            if (StaticRestaurantVariables.customLocationJustSelected) {
+                zoomToLocation(StaticRestaurantVariables.mRestaurantLatLng);
+                StaticRestaurantVariables.customLocationJustSelected = false;
+            }
         }
-        //check if a custom location marker exists
-            double tmpx = StaticRestaurantVariables.mRestaurantSearchLocation.getLatitude();
-            double tmpy = StaticRestaurantVariables.mRestaurantSearchLocation.getLongitude();
-            LatLng tmpLL = new LatLng(tmpx, tmpy);
-            Marker tempMarker = mMap.addMarker(new MarkerOptions()
-                    .position(tmpLL)
-                    .title("Search Location"));
-            tempMarker.setTag(0);
 
 //        else if (customLocation && currentMarker != null && mMap != null &&
 //                !currentMarker.getPosition().equals(new LatLng(StaticRestaurantVariables.mRestaurantSearchLocation.getLatitude(),
@@ -531,7 +599,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 @Override
                 public boolean onMyLocationButtonClick()
                 {
-                    //TODO: Any custom actions
+                    StaticRestaurantVariables.customLocation = false;
+
                     return false;
                 }
             });
@@ -546,10 +615,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onPlaceSelected(Place place) {
-        StaticRestaurantVariables.mRestaurantSearchLocation = new Location(place.getAddress().toString());
-        StaticRestaurantVariables.mRestaurantSearchLocation.setLatitude(place.getLatLng().latitude);
-        StaticRestaurantVariables.mRestaurantSearchLocation.setLongitude(place.getLatLng().longitude);
-        customLocation = true;
+        StaticRestaurantVariables.setLocaation(place.getName().toString(), place.getLatLng().latitude,
+                place.getLatLng().longitude);
+
+        StaticRestaurantVariables.customLocation = true;
+        StaticRestaurantVariables.customLocationJustSelected = true;
+
+        onLocationChanged(StaticRestaurantVariables.mRestaurantSearchLocation);
     }
 
     @Override
