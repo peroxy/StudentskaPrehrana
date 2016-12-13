@@ -41,12 +41,6 @@ public class NastavitveActivity extends AppCompatActivity {
 
         this.sbRadius = (SeekBar) findViewById(R.id.activity_nastavitve_sb_radius);
 
-        if (sbRadius == null) {
-            TextView tv = (TextView) findViewById(R.id.textView);
-
-            tv.setText("null");
-        }
-
         this.btSeznam = (Button) findViewById(R.id.btSeznam);
 
         this.tbLunch.setChecked(true);

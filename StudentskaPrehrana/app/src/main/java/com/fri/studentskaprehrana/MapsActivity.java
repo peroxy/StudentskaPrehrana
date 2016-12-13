@@ -552,6 +552,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (circle != null) {
                 circle.remove();
             }
+            if (currentMarker != null) {
+                currentMarker.remove();
+            }
 
             currentMarker = mMap.addMarker(new MarkerOptions()
                     .position(StaticRestaurantVariables.mRestaurantLatLng)
@@ -566,6 +569,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             if (StaticRestaurantVariables.customLocationJustSelected) {
                 zoomToLocation(StaticRestaurantVariables.mRestaurantLatLng);
+
                 StaticRestaurantVariables.customLocationJustSelected = false;
             }
         }
