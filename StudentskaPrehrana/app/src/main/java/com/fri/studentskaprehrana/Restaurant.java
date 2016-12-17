@@ -138,5 +138,4 @@ public class Restaurant implements Serializable {
         this.menu = new Menu(des, mc, sal, sou);
     }
 
-
 }

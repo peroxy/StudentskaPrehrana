@@ -3,6 +3,7 @@ package com.fri.studentskaprehrana;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -10,7 +11,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class NastavitveActivity extends AppCompatActivity {
+import com.fri.studentskaprehrana.utils.RequestHandler;
+
+import java.util.List;
+
+public class NastavitveActivity extends AppCompatActivity implements RequestHandler {
     public ToggleButton tbLunch;
     public ToggleButton tbSaladBar;
     public ToggleButton tbVegetarian;
@@ -132,6 +137,12 @@ public class NastavitveActivity extends AppCompatActivity {
 
             }
         });
+
+        RestaurantsModel.getRestaurants(this, "getRestaurants");
     }
 
+    @Override
+    public void handleResponse(List<Restaurant> restaurants) {
+        Log.d("Response: ", restaurants.toString());
+    }
 }

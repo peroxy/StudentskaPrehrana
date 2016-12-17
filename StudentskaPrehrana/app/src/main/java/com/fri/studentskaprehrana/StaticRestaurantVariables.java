@@ -13,15 +13,15 @@ import java.util.LinkedList;
 class StaticRestaurantVariables {
     // Jih spremeni uporabnik v NastavitveActivity ali pa jih naložimo na začetku iz datoteke, drugače booleani true in radius 10
 
-    static boolean lunch = true;
-    static boolean saladBar = true;
-    static boolean vegetarian = true;
-    static boolean disabled = true;
-    static boolean disabledWC = true;
-    static boolean pizzas = true;
-    static boolean weekends = true;
-    static boolean studentBenefits = true;
-    static boolean delivery = true;
+    static boolean lunch = false;
+    static boolean saladBar = false;
+    static boolean vegetarian = false;
+    static boolean disabled = false;
+    static boolean disabledWC = false;
+    static boolean pizzas = false;
+    static boolean weekends = false;
+    static boolean studentBenefits = false;
+    static boolean delivery = false;
 
     static boolean customLocation = false;
 
