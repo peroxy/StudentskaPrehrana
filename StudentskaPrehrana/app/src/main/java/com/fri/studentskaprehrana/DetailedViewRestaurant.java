@@ -12,10 +12,13 @@ public class DetailedViewRestaurant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_view_restaurant);
-        TextView tvName = (TextView)findViewById(R.id.tvName);
-        TextView tvAddress = (TextView)findViewById(R.id.tvAddress);
-        TextView tvPhoneNumber = (TextView)findViewById(R.id.tvPhone);
-        TextView tvMenu = (TextView)findViewById(R.id.tvMenu);
+        TextView tvName = (TextView)findViewById(R.id.tv_name);
+        TextView tvAddress = (TextView)findViewById(R.id.tv_address);
+        TextView tvPhoneNumber = (TextView)findViewById(R.id.tv_phone);
+        TextView tvSoup = (TextView)findViewById(R.id.tv_soup);
+        TextView tvSalad = (TextView)findViewById(R.id.tv_salad);
+        TextView tvMainCourse = (TextView)findViewById(R.id.tv_mainCourse);
+        TextView tvDessert = (TextView)findViewById(R.id.tv_dessert);
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         //if(bundle!=null) {
@@ -24,7 +27,11 @@ public class DetailedViewRestaurant extends AppCompatActivity {
         tvName.setText(received.name);
         tvAddress.setText(received.address);
         tvPhoneNumber.setText(received.phone);
-        tvMenu.setText(received.menu.toString());
+        Menu menu = received.menu;
+        tvSoup.setText(menu.soup);
+        tvSalad.setText(menu.salad);
+        tvMainCourse.setText(menu.mainCourse);
+        tvDessert.setText(menu.dessert);
         //}
     }
 }

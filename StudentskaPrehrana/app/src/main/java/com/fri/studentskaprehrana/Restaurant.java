@@ -1,5 +1,6 @@
 package com.fri.studentskaprehrana;
 
+import com.fri.studentskaprehrana.utils.JsonHelper;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONObject;
@@ -58,71 +59,29 @@ public class Restaurant implements Serializable {
     public Restaurant(JSONObject json) {
         this.json = json;
 
-        this.name = getStringFromJSON("Name");
-        this.address = getStringFromJSON("Address");
-        this.phone = getStringFromJSON("Phone");
-        this.price = getDoubleFromJSON("Price");
+        this.name = JsonHelper.getStringFromJSON(this.json, "Name");
+        this.address = JsonHelper.getStringFromJSON(this.json, "Address");
+        this.phone = JsonHelper.getStringFromJSON(this.json, "Phone");
+        this.price = JsonHelper.getDoubleFromJSON(this.json, "Price");
 
-        this.xcoord = getDoubleFromJSON("CoordinateX");
-        this.ycoord = getDoubleFromJSON("CoordinateY");
+        this.xcoord = JsonHelper.getDoubleFromJSON(this.json, "CoordinateX");
+        this.ycoord = JsonHelper.getDoubleFromJSON(this.json, "CoordinateY");
 
-        this.menu = new Menu(getJSONObjectFromJSON("Menu"));
-        this.servesLunch = getBooleanFromJSON("ServesLunch");
+        this.menu = new Menu(JsonHelper.getJSONObjectFromJSON(this.json, "Menu"));
+        this.servesLunch = JsonHelper.getBooleanFromJSON(this.json, "ServesLunch");
 
-        this.hasDelivery = getBooleanFromJSON("HasDelivery");
-        this.hasDisabledSupport = getBooleanFromJSON("HasDisabledSupport");
-        this.hasDisabledWcSupport = getBooleanFromJSON("HasDisabledWcSupport");
-        this.hasSaladBar = getBooleanFromJSON("HasSaladBar");
-        this.hasStudentBenefits = getBooleanFromJSON("HasStudentBenefits");
-        this.hasVegetarianSupport = getBooleanFromJSON("HasVegetarianSupport");
+        this.hasDelivery = JsonHelper.getBooleanFromJSON(this.json, "HasDelivery");
+        this.hasDisabledSupport = JsonHelper.getBooleanFromJSON(this.json, "HasDisabledSupport");
+        this.hasDisabledWcSupport = JsonHelper.getBooleanFromJSON(this.json, "HasDisabledWcSupport");
+        this.hasSaladBar = JsonHelper.getBooleanFromJSON(this.json, "HasSaladBar");
+        this.hasStudentBenefits = JsonHelper.getBooleanFromJSON(this.json, "HasStudentBenefits");
+        this.hasVegetarianSupport = JsonHelper.getBooleanFromJSON(this.json, "HasVegetarianSupport");
 
-        this.servesPizzas = getBooleanFromJSON("ServesPizzas");
-        this.servesFastFood = getBooleanFromJSON("ServesFastFood");
+        this.servesPizzas = JsonHelper.getBooleanFromJSON(this.json, "ServesPizzas");
+        this.servesFastFood = JsonHelper.getBooleanFromJSON(this.json, "ServesFastFood");
 
-        this.openDuringWeekends = getBooleanFromJSON("OpenDuringWeekends");
-        this.openingTime = new OpeningTime(getJSONObjectFromJSON("OpeningTime"));
-    }
-
-    private String getStringFromJSON(String name) {
-        String value = null;
-
-        try {
-            value = this.json.getString(name);
-        } catch(Exception e) {}
-
-        return value;
-    }
-
-    private Double getDoubleFromJSON(String name) {
-        Double value = null;
-
-        try {
-            value = this.json.getDouble(name);
-        } catch(Exception e) {}
-
-        return value;
-    }
-
-    private JSONObject getJSONObjectFromJSON(String name) {
-        JSONObject value = null;
-
-        try {
-            value = this.json.getJSONObject(name);
-        } catch(Exception e) {
-            value = new JSONObject();
-        }
-
-        return value;
-    }
-
-    private boolean getBooleanFromJSON(String name) {
-        boolean value = false;
-
-        try {
-            value = this.json.getBoolean(name);
-        } catch(Exception e) {}
-
-        return value;
+        this.openDuringWeekends = JsonHelper.getBooleanFromJSON(this.json, "OpenDuringWeekends");
+        this.openingTime = new OpeningTime(JsonHelper.getJSONObjectFromJSON(this.json, "OpeningTime"));
     }
 
     @Override
