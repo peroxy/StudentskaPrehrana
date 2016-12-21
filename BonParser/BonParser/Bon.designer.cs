@@ -74,14 +74,6 @@ namespace BonParser
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<v_Restaurant> v_Restaurants
-		{
-			get
-			{
-				return this.GetTable<v_Restaurant>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Feature> Features
 		{
 			get
@@ -114,6 +106,14 @@ namespace BonParser
 			}
 		}
 		
+		public System.Data.Linq.Table<v_Restaurant> v_Restaurants
+		{
+			get
+			{
+				return this.GetTable<v_Restaurant>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertFeature")]
 		public int InsertFeature([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> lunch, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> saladBar, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> vegetarian, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> disabled, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> disabledWc, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> pizzas, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> weekends, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> fastFood, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> studentBenefits, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> delivery, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] ref System.Nullable<int> iD)
 		{
@@ -123,10 +123,10 @@ namespace BonParser
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertMenu")]
-		public int InsertMenu([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string soup, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string mainCourse, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string salad, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string dessert, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] ref System.Nullable<int> iD)
+		public int InsertMenu([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string soup, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string mainCourse, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string salad, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string dessert, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="R_ID", DbType="Int")] System.Nullable<int> r_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] ref System.Nullable<int> iD)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), soup, mainCourse, salad, dessert, iD);
-			iD = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), soup, mainCourse, salad, dessert, r_ID, iD);
+			iD = ((System.Nullable<int>)(result.GetParameterValue(5)));
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -138,513 +138,25 @@ namespace BonParser
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertRestaurant")]
-		public int InsertRestaurant([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(MAX)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(MAX)")] string address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(15)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(4,2)")] System.Nullable<decimal> price, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,14)")] System.Nullable<decimal> coordinateX, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,14)")] System.Nullable<decimal> coordinateY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> updatedOn, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> menuID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> openingID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> featureID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, address, phone, price, coordinateX, coordinateY, updatedOn, menuID, openingID, featureID);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.TruncateAll")]
 		public int TruncateAll()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((int)(result.ReturnValue));
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_Restaurant")]
-	public partial class v_Restaurant
-	{
 		
-		private string _R_Name;
-		
-		private string _R_Address;
-		
-		private string _R_Phone;
-		
-		private decimal _R_Price;
-		
-		private decimal _R_CoordinateX;
-		
-		private decimal _R_CoordinateY;
-		
-		private System.DateTime _R_UpdatedOn;
-		
-		private System.Nullable<System.DateTime> _O_WeekStart;
-		
-		private System.Nullable<System.DateTime> _O_WeekEnd;
-		
-		private System.Nullable<System.DateTime> _O_SaturdayStart;
-		
-		private System.Nullable<System.DateTime> _O_SaturdayEnd;
-		
-		private System.Nullable<System.DateTime> _O_SundayStart;
-		
-		private System.Nullable<System.DateTime> _O_SundayEnd;
-		
-		private string _M_Soup;
-		
-		private string _M_MainCourse;
-		
-		private string _M_Salad;
-		
-		private string _M_Dessert;
-		
-		private bool _F_Lunch;
-		
-		private bool _F_SaladBar;
-		
-		private bool _F_Vegetarian;
-		
-		private bool _F_Disabled;
-		
-		private bool _F_DisabledWC;
-		
-		private bool _F_Pizzas;
-		
-		private bool _F_Weekends;
-		
-		private bool _F_FastFood;
-		
-		private bool _F_StudentBenefits;
-		
-		private bool _F_Delivery;
-		
-		public v_Restaurant()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_GetRestaurantsInRadius", IsComposable=true)]
+		public IQueryable<fn_GetRestaurantsInRadiusResult> fn_GetRestaurantsInRadius([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(9,6)")] System.Nullable<decimal> x, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(9,6)")] System.Nullable<decimal> y, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,3)")] System.Nullable<decimal> radius)
 		{
+			return this.CreateMethodCallQuery<fn_GetRestaurantsInRadiusResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), x, y, radius);
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string R_Name
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertRestaurant")]
+		public int InsertRestaurant([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(MAX)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(MAX)")] string address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(15)")] string phone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(4,2)")] System.Nullable<decimal> price, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,14)")] System.Nullable<decimal> coordinateX, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,14)")] System.Nullable<decimal> coordinateY, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> updatedOn, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> openingID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> featureID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] ref System.Nullable<int> iD)
 		{
-			get
-			{
-				return this._R_Name;
-			}
-			set
-			{
-				if ((this._R_Name != value))
-				{
-					this._R_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Address", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string R_Address
-		{
-			get
-			{
-				return this._R_Address;
-			}
-			set
-			{
-				if ((this._R_Address != value))
-				{
-					this._R_Address = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Phone", DbType="NVarChar(15)")]
-		public string R_Phone
-		{
-			get
-			{
-				return this._R_Phone;
-			}
-			set
-			{
-				if ((this._R_Phone != value))
-				{
-					this._R_Phone = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Price", DbType="Decimal(2,2) NOT NULL")]
-		public decimal R_Price
-		{
-			get
-			{
-				return this._R_Price;
-			}
-			set
-			{
-				if ((this._R_Price != value))
-				{
-					this._R_Price = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateX", DbType="Decimal(9,6) NOT NULL")]
-		public decimal R_CoordinateX
-		{
-			get
-			{
-				return this._R_CoordinateX;
-			}
-			set
-			{
-				if ((this._R_CoordinateX != value))
-				{
-					this._R_CoordinateX = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateY", DbType="Decimal(9,6) NOT NULL")]
-		public decimal R_CoordinateY
-		{
-			get
-			{
-				return this._R_CoordinateY;
-			}
-			set
-			{
-				if ((this._R_CoordinateY != value))
-				{
-					this._R_CoordinateY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_UpdatedOn", DbType="Date NOT NULL")]
-		public System.DateTime R_UpdatedOn
-		{
-			get
-			{
-				return this._R_UpdatedOn;
-			}
-			set
-			{
-				if ((this._R_UpdatedOn != value))
-				{
-					this._R_UpdatedOn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekStart", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_WeekStart
-		{
-			get
-			{
-				return this._O_WeekStart;
-			}
-			set
-			{
-				if ((this._O_WeekStart != value))
-				{
-					this._O_WeekStart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_WeekEnd
-		{
-			get
-			{
-				return this._O_WeekEnd;
-			}
-			set
-			{
-				if ((this._O_WeekEnd != value))
-				{
-					this._O_WeekEnd = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayStart", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SaturdayStart
-		{
-			get
-			{
-				return this._O_SaturdayStart;
-			}
-			set
-			{
-				if ((this._O_SaturdayStart != value))
-				{
-					this._O_SaturdayStart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SaturdayEnd
-		{
-			get
-			{
-				return this._O_SaturdayEnd;
-			}
-			set
-			{
-				if ((this._O_SaturdayEnd != value))
-				{
-					this._O_SaturdayEnd = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayStart", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SundayStart
-		{
-			get
-			{
-				return this._O_SundayStart;
-			}
-			set
-			{
-				if ((this._O_SundayStart != value))
-				{
-					this._O_SundayStart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SundayEnd
-		{
-			get
-			{
-				return this._O_SundayEnd;
-			}
-			set
-			{
-				if ((this._O_SundayEnd != value))
-				{
-					this._O_SundayEnd = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Soup", DbType="NVarChar(100)")]
-		public string M_Soup
-		{
-			get
-			{
-				return this._M_Soup;
-			}
-			set
-			{
-				if ((this._M_Soup != value))
-				{
-					this._M_Soup = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_MainCourse", DbType="NVarChar(100)")]
-		public string M_MainCourse
-		{
-			get
-			{
-				return this._M_MainCourse;
-			}
-			set
-			{
-				if ((this._M_MainCourse != value))
-				{
-					this._M_MainCourse = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Salad", DbType="NVarChar(100)")]
-		public string M_Salad
-		{
-			get
-			{
-				return this._M_Salad;
-			}
-			set
-			{
-				if ((this._M_Salad != value))
-				{
-					this._M_Salad = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Dessert", DbType="NVarChar(100)")]
-		public string M_Dessert
-		{
-			get
-			{
-				return this._M_Dessert;
-			}
-			set
-			{
-				if ((this._M_Dessert != value))
-				{
-					this._M_Dessert = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Lunch", DbType="Bit NOT NULL")]
-		public bool F_Lunch
-		{
-			get
-			{
-				return this._F_Lunch;
-			}
-			set
-			{
-				if ((this._F_Lunch != value))
-				{
-					this._F_Lunch = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_SaladBar", DbType="Bit NOT NULL")]
-		public bool F_SaladBar
-		{
-			get
-			{
-				return this._F_SaladBar;
-			}
-			set
-			{
-				if ((this._F_SaladBar != value))
-				{
-					this._F_SaladBar = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Vegetarian", DbType="Bit NOT NULL")]
-		public bool F_Vegetarian
-		{
-			get
-			{
-				return this._F_Vegetarian;
-			}
-			set
-			{
-				if ((this._F_Vegetarian != value))
-				{
-					this._F_Vegetarian = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Disabled", DbType="Bit NOT NULL")]
-		public bool F_Disabled
-		{
-			get
-			{
-				return this._F_Disabled;
-			}
-			set
-			{
-				if ((this._F_Disabled != value))
-				{
-					this._F_Disabled = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_DisabledWC", DbType="Bit NOT NULL")]
-		public bool F_DisabledWC
-		{
-			get
-			{
-				return this._F_DisabledWC;
-			}
-			set
-			{
-				if ((this._F_DisabledWC != value))
-				{
-					this._F_DisabledWC = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Pizzas", DbType="Bit NOT NULL")]
-		public bool F_Pizzas
-		{
-			get
-			{
-				return this._F_Pizzas;
-			}
-			set
-			{
-				if ((this._F_Pizzas != value))
-				{
-					this._F_Pizzas = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Weekends", DbType="Bit NOT NULL")]
-		public bool F_Weekends
-		{
-			get
-			{
-				return this._F_Weekends;
-			}
-			set
-			{
-				if ((this._F_Weekends != value))
-				{
-					this._F_Weekends = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_FastFood", DbType="Bit NOT NULL")]
-		public bool F_FastFood
-		{
-			get
-			{
-				return this._F_FastFood;
-			}
-			set
-			{
-				if ((this._F_FastFood != value))
-				{
-					this._F_FastFood = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_StudentBenefits", DbType="Bit NOT NULL")]
-		public bool F_StudentBenefits
-		{
-			get
-			{
-				return this._F_StudentBenefits;
-			}
-			set
-			{
-				if ((this._F_StudentBenefits != value))
-				{
-					this._F_StudentBenefits = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Delivery", DbType="Bit NOT NULL")]
-		public bool F_Delivery
-		{
-			get
-			{
-				return this._F_Delivery;
-			}
-			set
-			{
-				if ((this._F_Delivery != value))
-				{
-					this._F_Delivery = value;
-				}
-			}
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, address, phone, price, coordinateX, coordinateY, updatedOn, openingID, featureID, iD);
+			iD = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -994,7 +506,9 @@ namespace BonParser
 		
 		private string _M_Dessert;
 		
-		private EntitySet<Restaurant> _Restaurants;
+		private int _M_R_ID;
+		
+		private EntityRef<Restaurant> _Restaurant;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1010,11 +524,13 @@ namespace BonParser
     partial void OnM_SaladChanged();
     partial void OnM_DessertChanging(string value);
     partial void OnM_DessertChanged();
+    partial void OnM_R_IDChanging(int value);
+    partial void OnM_R_IDChanged();
     #endregion
 		
 		public Menu()
 		{
-			this._Restaurants = new EntitySet<Restaurant>(new Action<Restaurant>(this.attach_Restaurants), new Action<Restaurant>(this.detach_Restaurants));
+			this._Restaurant = default(EntityRef<Restaurant>);
 			OnCreated();
 		}
 		
@@ -1118,16 +634,61 @@ namespace BonParser
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menu_Restaurant", Storage="_Restaurants", ThisKey="M_ID", OtherKey="R_M_ID")]
-		public EntitySet<Restaurant> Restaurants
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_R_ID", DbType="Int NOT NULL")]
+		public int M_R_ID
 		{
 			get
 			{
-				return this._Restaurants;
+				return this._M_R_ID;
 			}
 			set
 			{
-				this._Restaurants.Assign(value);
+				if ((this._M_R_ID != value))
+				{
+					if (this._Restaurant.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnM_R_IDChanging(value);
+					this.SendPropertyChanging();
+					this._M_R_ID = value;
+					this.SendPropertyChanged("M_R_ID");
+					this.OnM_R_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Menu", Storage="_Restaurant", ThisKey="M_R_ID", OtherKey="R_ID", IsForeignKey=true)]
+		public Restaurant Restaurant
+		{
+			get
+			{
+				return this._Restaurant.Entity;
+			}
+			set
+			{
+				Restaurant previousValue = this._Restaurant.Entity;
+				if (((previousValue != value) 
+							|| (this._Restaurant.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Restaurant.Entity = null;
+						previousValue.Menus.Remove(this);
+					}
+					this._Restaurant.Entity = value;
+					if ((value != null))
+					{
+						value.Menus.Add(this);
+						this._M_R_ID = value.R_ID;
+					}
+					else
+					{
+						this._M_R_ID = default(int);
+					}
+					this.SendPropertyChanged("Restaurant");
+				}
 			}
 		}
 		
@@ -1149,18 +710,6 @@ namespace BonParser
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Restaurants(Restaurant entity)
-		{
-			this.SendPropertyChanging();
-			entity.Menu = this;
-		}
-		
-		private void detach_Restaurants(Restaurant entity)
-		{
-			this.SendPropertyChanging();
-			entity.Menu = null;
 		}
 	}
 	
@@ -1420,15 +969,13 @@ namespace BonParser
 		
 		private System.DateTime _R_UpdatedOn;
 		
-		private System.Nullable<int> _R_M_ID;
-		
 		private int _R_O_ID;
 		
 		private int _R_F_ID;
 		
-		private EntityRef<Feature> _Feature;
+		private EntitySet<Menu> _Menus;
 		
-		private EntityRef<Menu> _Menu;
+		private EntityRef<Feature> _Feature;
 		
 		private EntityRef<Opening> _Opening;
 		
@@ -1452,8 +999,6 @@ namespace BonParser
     partial void OnR_CoordinateYChanged();
     partial void OnR_UpdatedOnChanging(System.DateTime value);
     partial void OnR_UpdatedOnChanged();
-    partial void OnR_M_IDChanging(System.Nullable<int> value);
-    partial void OnR_M_IDChanged();
     partial void OnR_O_IDChanging(int value);
     partial void OnR_O_IDChanged();
     partial void OnR_F_IDChanging(int value);
@@ -1462,8 +1007,8 @@ namespace BonParser
 		
 		public Restaurant()
 		{
+			this._Menus = new EntitySet<Menu>(new Action<Menu>(this.attach_Menus), new Action<Menu>(this.detach_Menus));
 			this._Feature = default(EntityRef<Feature>);
-			this._Menu = default(EntityRef<Menu>);
 			this._Opening = default(EntityRef<Opening>);
 			OnCreated();
 		}
@@ -1628,30 +1173,6 @@ namespace BonParser
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_M_ID", DbType="Int")]
-		public System.Nullable<int> R_M_ID
-		{
-			get
-			{
-				return this._R_M_ID;
-			}
-			set
-			{
-				if ((this._R_M_ID != value))
-				{
-					if (this._Menu.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnR_M_IDChanging(value);
-					this.SendPropertyChanging();
-					this._R_M_ID = value;
-					this.SendPropertyChanged("R_M_ID");
-					this.OnR_M_IDChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_O_ID", DbType="Int NOT NULL")]
 		public int R_O_ID
 		{
@@ -1700,6 +1221,19 @@ namespace BonParser
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Menu", Storage="_Menus", ThisKey="R_ID", OtherKey="M_R_ID")]
+		public EntitySet<Menu> Menus
+		{
+			get
+			{
+				return this._Menus;
+			}
+			set
+			{
+				this._Menus.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Feature_Restaurant", Storage="_Feature", ThisKey="R_F_ID", OtherKey="F_ID", IsForeignKey=true)]
 		public Feature Feature
 		{
@@ -1730,40 +1264,6 @@ namespace BonParser
 						this._R_F_ID = default(int);
 					}
 					this.SendPropertyChanged("Feature");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menu_Restaurant", Storage="_Menu", ThisKey="R_M_ID", OtherKey="M_ID", IsForeignKey=true)]
-		public Menu Menu
-		{
-			get
-			{
-				return this._Menu.Entity;
-			}
-			set
-			{
-				Menu previousValue = this._Menu.Entity;
-				if (((previousValue != value) 
-							|| (this._Menu.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Menu.Entity = null;
-						previousValue.Restaurants.Remove(this);
-					}
-					this._Menu.Entity = value;
-					if ((value != null))
-					{
-						value.Restaurants.Add(this);
-						this._R_M_ID = value.M_ID;
-					}
-					else
-					{
-						this._R_M_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Menu");
 				}
 			}
 		}
@@ -1819,6 +1319,971 @@ namespace BonParser
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Menus(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = this;
+		}
+		
+		private void detach_Menus(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_Restaurant")]
+	public partial class v_Restaurant
+	{
+		
+		private string _R_Name;
+		
+		private string _R_Address;
+		
+		private string _R_Phone;
+		
+		private System.Nullable<decimal> _R_Price;
+		
+		private decimal _R_CoordinateX;
+		
+		private decimal _R_CoordinateY;
+		
+		private System.DateTime _R_UpdatedOn;
+		
+		private System.Nullable<System.TimeSpan> _O_WeekStart;
+		
+		private System.Nullable<System.TimeSpan> _O_WeekEnd;
+		
+		private System.Nullable<System.TimeSpan> _O_SaturdayStart;
+		
+		private System.Nullable<System.TimeSpan> _O_SaturdayEnd;
+		
+		private System.Nullable<System.TimeSpan> _O_SundayStart;
+		
+		private System.Nullable<System.TimeSpan> _O_SundayEnd;
+		
+		private bool _F_Lunch;
+		
+		private bool _F_SaladBar;
+		
+		private bool _F_Vegetarian;
+		
+		private bool _F_Disabled;
+		
+		private bool _F_DisabledWC;
+		
+		private bool _F_Pizzas;
+		
+		private bool _F_Weekends;
+		
+		private bool _F_FastFood;
+		
+		private bool _F_StudentBenefits;
+		
+		private bool _F_Delivery;
+		
+		public v_Restaurant()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string R_Name
+		{
+			get
+			{
+				return this._R_Name;
+			}
+			set
+			{
+				if ((this._R_Name != value))
+				{
+					this._R_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Address", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string R_Address
+		{
+			get
+			{
+				return this._R_Address;
+			}
+			set
+			{
+				if ((this._R_Address != value))
+				{
+					this._R_Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Phone", DbType="NVarChar(15)")]
+		public string R_Phone
+		{
+			get
+			{
+				return this._R_Phone;
+			}
+			set
+			{
+				if ((this._R_Phone != value))
+				{
+					this._R_Phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Price", DbType="Decimal(4,2)")]
+		public System.Nullable<decimal> R_Price
+		{
+			get
+			{
+				return this._R_Price;
+			}
+			set
+			{
+				if ((this._R_Price != value))
+				{
+					this._R_Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateX", DbType="Decimal(18,14) NOT NULL")]
+		public decimal R_CoordinateX
+		{
+			get
+			{
+				return this._R_CoordinateX;
+			}
+			set
+			{
+				if ((this._R_CoordinateX != value))
+				{
+					this._R_CoordinateX = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateY", DbType="Decimal(18,14) NOT NULL")]
+		public decimal R_CoordinateY
+		{
+			get
+			{
+				return this._R_CoordinateY;
+			}
+			set
+			{
+				if ((this._R_CoordinateY != value))
+				{
+					this._R_CoordinateY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_UpdatedOn", DbType="Date NOT NULL")]
+		public System.DateTime R_UpdatedOn
+		{
+			get
+			{
+				return this._R_UpdatedOn;
+			}
+			set
+			{
+				if ((this._R_UpdatedOn != value))
+				{
+					this._R_UpdatedOn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_WeekStart
+		{
+			get
+			{
+				return this._O_WeekStart;
+			}
+			set
+			{
+				if ((this._O_WeekStart != value))
+				{
+					this._O_WeekStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_WeekEnd
+		{
+			get
+			{
+				return this._O_WeekEnd;
+			}
+			set
+			{
+				if ((this._O_WeekEnd != value))
+				{
+					this._O_WeekEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SaturdayStart
+		{
+			get
+			{
+				return this._O_SaturdayStart;
+			}
+			set
+			{
+				if ((this._O_SaturdayStart != value))
+				{
+					this._O_SaturdayStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SaturdayEnd
+		{
+			get
+			{
+				return this._O_SaturdayEnd;
+			}
+			set
+			{
+				if ((this._O_SaturdayEnd != value))
+				{
+					this._O_SaturdayEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SundayStart
+		{
+			get
+			{
+				return this._O_SundayStart;
+			}
+			set
+			{
+				if ((this._O_SundayStart != value))
+				{
+					this._O_SundayStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SundayEnd
+		{
+			get
+			{
+				return this._O_SundayEnd;
+			}
+			set
+			{
+				if ((this._O_SundayEnd != value))
+				{
+					this._O_SundayEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Lunch", DbType="Bit NOT NULL")]
+		public bool F_Lunch
+		{
+			get
+			{
+				return this._F_Lunch;
+			}
+			set
+			{
+				if ((this._F_Lunch != value))
+				{
+					this._F_Lunch = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_SaladBar", DbType="Bit NOT NULL")]
+		public bool F_SaladBar
+		{
+			get
+			{
+				return this._F_SaladBar;
+			}
+			set
+			{
+				if ((this._F_SaladBar != value))
+				{
+					this._F_SaladBar = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Vegetarian", DbType="Bit NOT NULL")]
+		public bool F_Vegetarian
+		{
+			get
+			{
+				return this._F_Vegetarian;
+			}
+			set
+			{
+				if ((this._F_Vegetarian != value))
+				{
+					this._F_Vegetarian = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Disabled", DbType="Bit NOT NULL")]
+		public bool F_Disabled
+		{
+			get
+			{
+				return this._F_Disabled;
+			}
+			set
+			{
+				if ((this._F_Disabled != value))
+				{
+					this._F_Disabled = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_DisabledWC", DbType="Bit NOT NULL")]
+		public bool F_DisabledWC
+		{
+			get
+			{
+				return this._F_DisabledWC;
+			}
+			set
+			{
+				if ((this._F_DisabledWC != value))
+				{
+					this._F_DisabledWC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Pizzas", DbType="Bit NOT NULL")]
+		public bool F_Pizzas
+		{
+			get
+			{
+				return this._F_Pizzas;
+			}
+			set
+			{
+				if ((this._F_Pizzas != value))
+				{
+					this._F_Pizzas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Weekends", DbType="Bit NOT NULL")]
+		public bool F_Weekends
+		{
+			get
+			{
+				return this._F_Weekends;
+			}
+			set
+			{
+				if ((this._F_Weekends != value))
+				{
+					this._F_Weekends = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_FastFood", DbType="Bit NOT NULL")]
+		public bool F_FastFood
+		{
+			get
+			{
+				return this._F_FastFood;
+			}
+			set
+			{
+				if ((this._F_FastFood != value))
+				{
+					this._F_FastFood = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_StudentBenefits", DbType="Bit NOT NULL")]
+		public bool F_StudentBenefits
+		{
+			get
+			{
+				return this._F_StudentBenefits;
+			}
+			set
+			{
+				if ((this._F_StudentBenefits != value))
+				{
+					this._F_StudentBenefits = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Delivery", DbType="Bit NOT NULL")]
+		public bool F_Delivery
+		{
+			get
+			{
+				return this._F_Delivery;
+			}
+			set
+			{
+				if ((this._F_Delivery != value))
+				{
+					this._F_Delivery = value;
+				}
+			}
+		}
+	}
+	
+	public partial class fn_GetRestaurantsInRadiusResult
+	{
+		
+		private string _R_Name;
+		
+		private string _R_Address;
+		
+		private string _R_Phone;
+		
+		private System.Nullable<decimal> _R_Price;
+		
+		private decimal _R_CoordinateX;
+		
+		private decimal _R_CoordinateY;
+		
+		private System.DateTime _R_UpdatedOn;
+		
+		private System.Nullable<System.TimeSpan> _O_WeekStart;
+		
+		private System.Nullable<System.TimeSpan> _O_WeekEnd;
+		
+		private System.Nullable<System.TimeSpan> _O_SaturdayStart;
+		
+		private System.Nullable<System.TimeSpan> _O_SaturdayEnd;
+		
+		private System.Nullable<System.TimeSpan> _O_SundayStart;
+		
+		private System.Nullable<System.TimeSpan> _O_SundayEnd;
+		
+		private string _M_Soup;
+		
+		private string _M_MainCourse;
+		
+		private string _M_Salad;
+		
+		private string _M_Dessert;
+		
+		private bool _F_Lunch;
+		
+		private bool _F_SaladBar;
+		
+		private bool _F_Vegetarian;
+		
+		private bool _F_Disabled;
+		
+		private bool _F_DisabledWC;
+		
+		private bool _F_Pizzas;
+		
+		private bool _F_Weekends;
+		
+		private bool _F_FastFood;
+		
+		private bool _F_StudentBenefits;
+		
+		private bool _F_Delivery;
+		
+		private System.Nullable<double> _DistanceKm;
+		
+		private System.Nullable<double> _DistanceM;
+		
+		public fn_GetRestaurantsInRadiusResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string R_Name
+		{
+			get
+			{
+				return this._R_Name;
+			}
+			set
+			{
+				if ((this._R_Name != value))
+				{
+					this._R_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Address", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string R_Address
+		{
+			get
+			{
+				return this._R_Address;
+			}
+			set
+			{
+				if ((this._R_Address != value))
+				{
+					this._R_Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Phone", DbType="NVarChar(15)")]
+		public string R_Phone
+		{
+			get
+			{
+				return this._R_Phone;
+			}
+			set
+			{
+				if ((this._R_Phone != value))
+				{
+					this._R_Phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Price", DbType="Decimal(4,2)")]
+		public System.Nullable<decimal> R_Price
+		{
+			get
+			{
+				return this._R_Price;
+			}
+			set
+			{
+				if ((this._R_Price != value))
+				{
+					this._R_Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateX", DbType="Decimal(18,14) NOT NULL")]
+		public decimal R_CoordinateX
+		{
+			get
+			{
+				return this._R_CoordinateX;
+			}
+			set
+			{
+				if ((this._R_CoordinateX != value))
+				{
+					this._R_CoordinateX = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateY", DbType="Decimal(18,14) NOT NULL")]
+		public decimal R_CoordinateY
+		{
+			get
+			{
+				return this._R_CoordinateY;
+			}
+			set
+			{
+				if ((this._R_CoordinateY != value))
+				{
+					this._R_CoordinateY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_UpdatedOn", DbType="Date NOT NULL")]
+		public System.DateTime R_UpdatedOn
+		{
+			get
+			{
+				return this._R_UpdatedOn;
+			}
+			set
+			{
+				if ((this._R_UpdatedOn != value))
+				{
+					this._R_UpdatedOn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_WeekStart
+		{
+			get
+			{
+				return this._O_WeekStart;
+			}
+			set
+			{
+				if ((this._O_WeekStart != value))
+				{
+					this._O_WeekStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_WeekEnd
+		{
+			get
+			{
+				return this._O_WeekEnd;
+			}
+			set
+			{
+				if ((this._O_WeekEnd != value))
+				{
+					this._O_WeekEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SaturdayStart
+		{
+			get
+			{
+				return this._O_SaturdayStart;
+			}
+			set
+			{
+				if ((this._O_SaturdayStart != value))
+				{
+					this._O_SaturdayStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SaturdayEnd
+		{
+			get
+			{
+				return this._O_SaturdayEnd;
+			}
+			set
+			{
+				if ((this._O_SaturdayEnd != value))
+				{
+					this._O_SaturdayEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SundayStart
+		{
+			get
+			{
+				return this._O_SundayStart;
+			}
+			set
+			{
+				if ((this._O_SundayStart != value))
+				{
+					this._O_SundayStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SundayEnd
+		{
+			get
+			{
+				return this._O_SundayEnd;
+			}
+			set
+			{
+				if ((this._O_SundayEnd != value))
+				{
+					this._O_SundayEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Soup", DbType="NVarChar(100)")]
+		public string M_Soup
+		{
+			get
+			{
+				return this._M_Soup;
+			}
+			set
+			{
+				if ((this._M_Soup != value))
+				{
+					this._M_Soup = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_MainCourse", DbType="NVarChar(100)")]
+		public string M_MainCourse
+		{
+			get
+			{
+				return this._M_MainCourse;
+			}
+			set
+			{
+				if ((this._M_MainCourse != value))
+				{
+					this._M_MainCourse = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Salad", DbType="NVarChar(100)")]
+		public string M_Salad
+		{
+			get
+			{
+				return this._M_Salad;
+			}
+			set
+			{
+				if ((this._M_Salad != value))
+				{
+					this._M_Salad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Dessert", DbType="NVarChar(100)")]
+		public string M_Dessert
+		{
+			get
+			{
+				return this._M_Dessert;
+			}
+			set
+			{
+				if ((this._M_Dessert != value))
+				{
+					this._M_Dessert = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Lunch", DbType="Bit NOT NULL")]
+		public bool F_Lunch
+		{
+			get
+			{
+				return this._F_Lunch;
+			}
+			set
+			{
+				if ((this._F_Lunch != value))
+				{
+					this._F_Lunch = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_SaladBar", DbType="Bit NOT NULL")]
+		public bool F_SaladBar
+		{
+			get
+			{
+				return this._F_SaladBar;
+			}
+			set
+			{
+				if ((this._F_SaladBar != value))
+				{
+					this._F_SaladBar = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Vegetarian", DbType="Bit NOT NULL")]
+		public bool F_Vegetarian
+		{
+			get
+			{
+				return this._F_Vegetarian;
+			}
+			set
+			{
+				if ((this._F_Vegetarian != value))
+				{
+					this._F_Vegetarian = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Disabled", DbType="Bit NOT NULL")]
+		public bool F_Disabled
+		{
+			get
+			{
+				return this._F_Disabled;
+			}
+			set
+			{
+				if ((this._F_Disabled != value))
+				{
+					this._F_Disabled = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_DisabledWC", DbType="Bit NOT NULL")]
+		public bool F_DisabledWC
+		{
+			get
+			{
+				return this._F_DisabledWC;
+			}
+			set
+			{
+				if ((this._F_DisabledWC != value))
+				{
+					this._F_DisabledWC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Pizzas", DbType="Bit NOT NULL")]
+		public bool F_Pizzas
+		{
+			get
+			{
+				return this._F_Pizzas;
+			}
+			set
+			{
+				if ((this._F_Pizzas != value))
+				{
+					this._F_Pizzas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Weekends", DbType="Bit NOT NULL")]
+		public bool F_Weekends
+		{
+			get
+			{
+				return this._F_Weekends;
+			}
+			set
+			{
+				if ((this._F_Weekends != value))
+				{
+					this._F_Weekends = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_FastFood", DbType="Bit NOT NULL")]
+		public bool F_FastFood
+		{
+			get
+			{
+				return this._F_FastFood;
+			}
+			set
+			{
+				if ((this._F_FastFood != value))
+				{
+					this._F_FastFood = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_StudentBenefits", DbType="Bit NOT NULL")]
+		public bool F_StudentBenefits
+		{
+			get
+			{
+				return this._F_StudentBenefits;
+			}
+			set
+			{
+				if ((this._F_StudentBenefits != value))
+				{
+					this._F_StudentBenefits = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Delivery", DbType="Bit NOT NULL")]
+		public bool F_Delivery
+		{
+			get
+			{
+				return this._F_Delivery;
+			}
+			set
+			{
+				if ((this._F_Delivery != value))
+				{
+					this._F_Delivery = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DistanceKm", DbType="Float")]
+		public System.Nullable<double> DistanceKm
+		{
+			get
+			{
+				return this._DistanceKm;
+			}
+			set
+			{
+				if ((this._DistanceKm != value))
+				{
+					this._DistanceKm = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DistanceM", DbType="Float")]
+		public System.Nullable<double> DistanceM
+		{
+			get
+			{
+				return this._DistanceM;
+			}
+			set
+			{
+				if ((this._DistanceM != value))
+				{
+					this._DistanceM = value;
+				}
 			}
 		}
 	}

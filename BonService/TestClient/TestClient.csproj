@@ -105,6 +105,12 @@
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BonParser\BonParser\BonParser.csproj">
+      <Project>{AA53777D-B067-49FA-9F23-F87EB4A94EAB}</Project>
+      <Name>BonParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

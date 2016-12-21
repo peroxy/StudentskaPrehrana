@@ -62,7 +62,7 @@ namespace BonService
         public DateTime UpdatedOn { get; set; }
 
         [DataMember]
-        public Menu Menu { get; set; }
+        public List<MenuActual> Menu { get; set; }
 
         [DataMember]
         public bool ServesLunch { get; set; }
@@ -208,7 +208,7 @@ namespace BonService
     }
 
     [DataContract]
-    public class Menu
+    public class MenuActual
     {
         [DataMember]
         public string Soup { get; set; }

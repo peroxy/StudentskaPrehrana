@@ -1,36 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BonDB" Class="BonDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=bondb.database.windows.net;Initial Catalog=BonDB;User ID=peroxy;Connect Timeout=60" SettingsObjectName="BonParser.Properties.Settings" SettingsPropertyName="BonDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.v_Restaurant" Member="v_Restaurants">
-    <Type Name="v_Restaurant">
-      <Column Name="R_Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="R_Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="R_Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="R_Price" Type="System.Decimal" DbType="Decimal(2,2) NOT NULL" CanBeNull="false" />
-      <Column Name="R_CoordinateX" Type="System.Decimal" DbType="Decimal(9,6) NOT NULL" CanBeNull="false" />
-      <Column Name="R_CoordinateY" Type="System.Decimal" DbType="Decimal(9,6) NOT NULL" CanBeNull="false" />
-      <Column Name="R_UpdatedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="O_WeekStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="O_WeekEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="O_SaturdayStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="O_SaturdayEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="O_SundayStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="O_SundayEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="M_Soup" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="M_MainCourse" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="M_Salad" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="M_Dessert" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="F_Lunch" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_SaladBar" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_Vegetarian" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_Disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_DisabledWC" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_Pizzas" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_Weekends" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_FastFood" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_StudentBenefits" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F_Delivery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Feature" Member="Features">
     <Type Name="Feature">
       <Column Name="F_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -54,7 +23,8 @@
       <Column Name="M_MainCourse" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="M_Salad" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="M_Dessert" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Association Name="Menu_Restaurant" Member="Restaurants" ThisKey="M_ID" OtherKey="R_M_ID" Type="Restaurant" />
+      <Column Name="M_R_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Restaurant_Menu" Member="Restaurant" ThisKey="M_R_ID" OtherKey="R_ID" Type="Restaurant" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Opening" Member="Openings">
@@ -79,12 +49,38 @@
       <Column Name="R_CoordinateX" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
       <Column Name="R_CoordinateY" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
       <Column Name="R_UpdatedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="R_M_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="R_O_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="R_F_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Restaurant_Menu" Member="Menus" ThisKey="R_ID" OtherKey="M_R_ID" Type="Menu" />
       <Association Name="Feature_Restaurant" Member="Feature" ThisKey="R_F_ID" OtherKey="F_ID" Type="Feature" IsForeignKey="true" />
-      <Association Name="Menu_Restaurant" Member="Menu" ThisKey="R_M_ID" OtherKey="M_ID" Type="Menu" IsForeignKey="true" />
       <Association Name="Opening_Restaurant" Member="Opening" ThisKey="R_O_ID" OtherKey="O_ID" Type="Opening" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_Restaurant" Member="v_Restaurants">
+    <Type Name="v_Restaurant">
+      <Column Name="R_Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="R_Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="R_Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="R_Price" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="R_CoordinateX" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
+      <Column Name="R_CoordinateY" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
+      <Column Name="R_UpdatedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="O_WeekStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_WeekEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SaturdayStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SaturdayEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SundayStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SundayEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="F_Lunch" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_SaladBar" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Vegetarian" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_DisabledWC" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Pizzas" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Weekends" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_FastFood" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_StudentBenefits" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Delivery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.InsertFeature" Method="InsertFeature">
@@ -106,6 +102,7 @@
     <Parameter Name="mainCourse" Type="System.String" DbType="NVarChar(100)" />
     <Parameter Name="salad" Type="System.String" DbType="NVarChar(100)" />
     <Parameter Name="dessert" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="R_ID" Parameter="r_ID" Type="System.Int32" DbType="Int" />
     <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
@@ -119,6 +116,45 @@
     <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.TruncateAll" Method="TruncateAll">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_GetRestaurantsInRadius" Method="fn_GetRestaurantsInRadius" IsComposable="true">
+    <Parameter Name="x" Type="System.Decimal" DbType="Decimal(9,6)" />
+    <Parameter Name="y" Type="System.Decimal" DbType="Decimal(9,6)" />
+    <Parameter Name="radius" Type="System.Decimal" DbType="Decimal(18,3)" />
+    <ElementType Name="fn_GetRestaurantsInRadiusResult">
+      <Column Name="R_Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="R_Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="R_Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="R_Price" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="R_CoordinateX" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
+      <Column Name="R_CoordinateY" Type="System.Decimal" DbType="Decimal(18,14) NOT NULL" CanBeNull="false" />
+      <Column Name="R_UpdatedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="O_WeekStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_WeekEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SaturdayStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SaturdayEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SundayStart" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="O_SundayEnd" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="M_Soup" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="M_MainCourse" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="M_Salad" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="M_Dessert" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="F_Lunch" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_SaladBar" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Vegetarian" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_DisabledWC" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Pizzas" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Weekends" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_FastFood" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_StudentBenefits" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F_Delivery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DistanceKm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DistanceM" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.InsertRestaurant" Method="InsertRestaurant">
     <Parameter Name="name" Type="System.String" DbType="NVarChar(MAX)" />
     <Parameter Name="address" Type="System.String" DbType="NVarChar(MAX)" />
@@ -127,12 +163,9 @@
     <Parameter Name="coordinateX" Type="System.Decimal" DbType="Decimal(18,14)" />
     <Parameter Name="coordinateY" Type="System.Decimal" DbType="Decimal(18,14)" />
     <Parameter Name="updatedOn" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="menuID" Type="System.Int32" DbType="Int" />
     <Parameter Name="openingID" Type="System.Int32" DbType="Int" />
     <Parameter Name="featureID" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.TruncateAll" Method="TruncateAll">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

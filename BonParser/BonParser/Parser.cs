@@ -78,8 +78,7 @@ namespace BonParser
                 TimeSpan? weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd;
                 ParseRestaurantOpeningTimes(item, out weekStart, out weekEnd, out satStart, out satEnd, out sunStart,
                     out sunEnd);
-                string soup, mainCourse, salad, dessert;
-                ParseRestaurantMenus(item, out soup, out mainCourse, out salad, out dessert);
+                List<Menu> menus = ParseRestaurantMenus(item);
 
                 decimal coordinateX = item.coordinates[0];
                 decimal coordinateY = item.coordinates[1];
@@ -95,11 +94,11 @@ namespace BonParser
                     delivery;
                 ParseRestaurantFeatures(item, out lunch, out saladBar, out vegetarian, out disabled, out disabledWc,
                     out pizzas, out weekends, out fastFood, out studentBenefits, out delivery);
-                InsertIntoDatabase(name, address, phone, price, weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd,
-                    soup, mainCourse, salad, dessert, coordinateX, coordinateY, lunch, saladBar, vegetarian, disabled,
-                    disabledWc, pizzas, weekends, fastFood, studentBenefits, delivery);
+                InsertIntoDatabase(name, address, phone, price, weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd, coordinateX, coordinateY, lunch, saladBar, vegetarian, disabled,
+                    disabledWc, pizzas, weekends, fastFood, studentBenefits, delivery, menus);
 
-                //Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Clear();
                 Console.WriteLine($"Parsing.. Number of parsed restaurants: {i++}");
                 Console.WriteLine($"Elapsed time: {s.Elapsed.TotalSeconds} sec");
             }
@@ -107,25 +106,25 @@ namespace BonParser
 
         private static void InsertIntoDatabase(string name, string address, string phone, decimal price,
             TimeSpan? weekStart, TimeSpan? weekEnd, TimeSpan? satStart, TimeSpan? satEnd, TimeSpan? sunStart,
-            TimeSpan? sunEnd, string soup, string mainCourse, string salad, string dessert, decimal coordinateX,
+            TimeSpan? sunEnd, decimal coordinateX,
             decimal coordinateY, bool lunch, bool saladBar, bool vegetarian, bool disabled, bool disabledWc, bool pizzas,
-            bool weekends, bool fastFood, bool studentBenefits, bool delivery)
+            bool weekends, bool fastFood, bool studentBenefits, bool delivery, List<Menu> menus)
         {
             int featureId = DbOperations.InsertFeature(lunch, saladBar, vegetarian, disabled, disabledWc, pizzas,
                 weekends, fastFood, studentBenefits, delivery);
-            int menuId = DbOperations.InsertMenu(soup, mainCourse, salad, dessert);
             int openingId = DbOperations.InsertOpening(weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd);
-            DbOperations.InsertRestaurant(name, address, phone, price, coordinateX, coordinateY,
+            int restaurantId = DbOperations.InsertRestaurant(name, address, phone, price, coordinateX, coordinateY,
                 TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
                     TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time")),
-                menuId, openingId, featureId);
+                openingId, featureId);
+            DbOperations.InsertMenus(menus, restaurantId);
         }
 
         private static void ParseRestaurantFeatures(dynamic item, out bool lunch, out bool saladBar, out bool vegetarian,
             out bool disabled, out bool disabledWc, out bool pizzas, out bool weekends, out bool fastFood,
             out bool studentBenefits, out bool delivery)
         {
-            List<int> features = new List<int>();
+            var features = new List<int>();
             foreach (dynamic feature in item.features)
             {
                 features.Add((int) feature.id);
@@ -143,13 +142,9 @@ namespace BonParser
             delivery = features.Contains((int) Features.Delivery);
         }
 
-        private static void ParseRestaurantMenus(dynamic item, out string soup, out string mainCourse, out string salad,
-            out string dessert)
+        private static List<Menu> ParseRestaurantMenus(dynamic item)
         {
-            soup = null;
-            mainCourse = null;
-            salad = null;
-            dessert = null;
+            var menus = new List<Menu>();
             if ((int) item.menu.Count > 0)
             {
                 foreach (dynamic menu in item.menu)
@@ -157,26 +152,39 @@ namespace BonParser
                     switch ((int) menu.Count)
                     {
                         case 1:
-                            mainCourse = menu[0];
+                            menus.Add(new Menu
+                            {
+                                M_MainCourse = menu[0]
+                            });
                             break;
                         case 2:
-                            soup = menu[0];
-                            mainCourse = menu[1];
+                            menus.Add(new Menu
+                            {
+                                M_Soup = menu[0],
+                                M_MainCourse = menu[1]
+                            });
                             break;
                         case 3:
-                            mainCourse = menu[0];
-                            salad = menu[1];
-                            dessert = menu[2];
+                            menus.Add(new Menu
+                            {
+                                M_Salad = menu[1],
+                                M_MainCourse = menu[0],
+                                M_Dessert = menu[2]
+                            });
                             break;
                         case 4:
-                            soup = menu[0];
-                            mainCourse = menu[1];
-                            salad = menu[2];
-                            dessert = menu[3];
+                            menus.Add(new Menu
+                            {
+                                M_Soup = menu[0],
+                                M_Salad = menu[2],
+                                M_MainCourse = menu[1],
+                                M_Dessert = menu[3]
+                            });
                             break;
                     }
                 }
             }
+            return menus;
         }
 
         private static void ParseRestaurantOpeningTimes(dynamic item, out TimeSpan? weekStart, out TimeSpan? weekEnd,

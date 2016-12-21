@@ -30,6 +30,9 @@ namespace BonService
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertMenu(Menu instance);
+    partial void UpdateMenu(Menu instance);
+    partial void DeleteMenu(Menu instance);
     #endregion
 		
 		public BonDataContext() : 
@@ -62,6 +65,14 @@ namespace BonService
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Menu> Menus
+		{
+			get
+			{
+				return this.GetTable<Menu>();
+			}
+		}
+		
 		public System.Data.Linq.Table<v_Restaurant> v_Restaurants
 		{
 			get
@@ -77,6 +88,188 @@ namespace BonService
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Menu")]
+	public partial class Menu : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _M_ID;
+		
+		private string _M_Soup;
+		
+		private string _M_MainCourse;
+		
+		private string _M_Salad;
+		
+		private string _M_Dessert;
+		
+		private int _M_R_ID;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnM_IDChanging(int value);
+    partial void OnM_IDChanged();
+    partial void OnM_SoupChanging(string value);
+    partial void OnM_SoupChanged();
+    partial void OnM_MainCourseChanging(string value);
+    partial void OnM_MainCourseChanged();
+    partial void OnM_SaladChanging(string value);
+    partial void OnM_SaladChanged();
+    partial void OnM_DessertChanging(string value);
+    partial void OnM_DessertChanged();
+    partial void OnM_R_IDChanging(int value);
+    partial void OnM_R_IDChanged();
+    #endregion
+		
+		public Menu()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int M_ID
+		{
+			get
+			{
+				return this._M_ID;
+			}
+			set
+			{
+				if ((this._M_ID != value))
+				{
+					this.OnM_IDChanging(value);
+					this.SendPropertyChanging();
+					this._M_ID = value;
+					this.SendPropertyChanged("M_ID");
+					this.OnM_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Soup", DbType="NVarChar(100)")]
+		public string M_Soup
+		{
+			get
+			{
+				return this._M_Soup;
+			}
+			set
+			{
+				if ((this._M_Soup != value))
+				{
+					this.OnM_SoupChanging(value);
+					this.SendPropertyChanging();
+					this._M_Soup = value;
+					this.SendPropertyChanged("M_Soup");
+					this.OnM_SoupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_MainCourse", DbType="NVarChar(100)")]
+		public string M_MainCourse
+		{
+			get
+			{
+				return this._M_MainCourse;
+			}
+			set
+			{
+				if ((this._M_MainCourse != value))
+				{
+					this.OnM_MainCourseChanging(value);
+					this.SendPropertyChanging();
+					this._M_MainCourse = value;
+					this.SendPropertyChanged("M_MainCourse");
+					this.OnM_MainCourseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Salad", DbType="NVarChar(100)")]
+		public string M_Salad
+		{
+			get
+			{
+				return this._M_Salad;
+			}
+			set
+			{
+				if ((this._M_Salad != value))
+				{
+					this.OnM_SaladChanging(value);
+					this.SendPropertyChanging();
+					this._M_Salad = value;
+					this.SendPropertyChanged("M_Salad");
+					this.OnM_SaladChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Dessert", DbType="NVarChar(100)")]
+		public string M_Dessert
+		{
+			get
+			{
+				return this._M_Dessert;
+			}
+			set
+			{
+				if ((this._M_Dessert != value))
+				{
+					this.OnM_DessertChanging(value);
+					this.SendPropertyChanging();
+					this._M_Dessert = value;
+					this.SendPropertyChanged("M_Dessert");
+					this.OnM_DessertChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_R_ID", DbType="Int NOT NULL")]
+		public int M_R_ID
+		{
+			get
+			{
+				return this._M_R_ID;
+			}
+			set
+			{
+				if ((this._M_R_ID != value))
+				{
+					this.OnM_R_IDChanging(value);
+					this.SendPropertyChanging();
+					this._M_R_ID = value;
+					this.SendPropertyChanged("M_R_ID");
+					this.OnM_R_IDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_Restaurant")]
 	public partial class v_Restaurant
 	{
@@ -87,7 +280,7 @@ namespace BonService
 		
 		private string _R_Phone;
 		
-		private decimal _R_Price;
+		private System.Nullable<decimal> _R_Price;
 		
 		private decimal _R_CoordinateX;
 		
@@ -95,25 +288,17 @@ namespace BonService
 		
 		private System.DateTime _R_UpdatedOn;
 		
-		private System.Nullable<System.DateTime> _O_WeekStart;
+		private System.Nullable<System.TimeSpan> _O_WeekStart;
 		
-		private System.Nullable<System.DateTime> _O_WeekEnd;
+		private System.Nullable<System.TimeSpan> _O_WeekEnd;
 		
-		private System.Nullable<System.DateTime> _O_SaturdayStart;
+		private System.Nullable<System.TimeSpan> _O_SaturdayStart;
 		
-		private System.Nullable<System.DateTime> _O_SaturdayEnd;
+		private System.Nullable<System.TimeSpan> _O_SaturdayEnd;
 		
-		private System.Nullable<System.DateTime> _O_SundayStart;
+		private System.Nullable<System.TimeSpan> _O_SundayStart;
 		
-		private System.Nullable<System.DateTime> _O_SundayEnd;
-		
-		private string _M_Soup;
-		
-		private string _M_MainCourse;
-		
-		private string _M_Salad;
-		
-		private string _M_Dessert;
+		private System.Nullable<System.TimeSpan> _O_SundayEnd;
 		
 		private bool _F_Lunch;
 		
@@ -134,6 +319,8 @@ namespace BonService
 		private bool _F_StudentBenefits;
 		
 		private bool _F_Delivery;
+		
+		private int _R_ID;
 		
 		public v_Restaurant()
 		{
@@ -187,8 +374,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Price", DbType="Decimal(2,2) NOT NULL")]
-		public decimal R_Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Price", DbType="Decimal(4,2)")]
+		public System.Nullable<decimal> R_Price
 		{
 			get
 			{
@@ -203,7 +390,7 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateX", DbType="Decimal(9,6) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateX", DbType="Decimal(18,14) NOT NULL")]
 		public decimal R_CoordinateX
 		{
 			get
@@ -219,7 +406,7 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateY", DbType="Decimal(9,6) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_CoordinateY", DbType="Decimal(18,14) NOT NULL")]
 		public decimal R_CoordinateY
 		{
 			get
@@ -251,8 +438,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekStart", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_WeekStart
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_WeekStart
 		{
 			get
 			{
@@ -267,8 +454,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_WeekEnd
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_WeekEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_WeekEnd
 		{
 			get
 			{
@@ -283,8 +470,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayStart", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SaturdayStart
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SaturdayStart
 		{
 			get
 			{
@@ -299,8 +486,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SaturdayEnd
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SaturdayEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SaturdayEnd
 		{
 			get
 			{
@@ -315,8 +502,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayStart", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SundayStart
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayStart", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SundayStart
 		{
 			get
 			{
@@ -331,8 +518,8 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> O_SundayEnd
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_O_SundayEnd", DbType="Time")]
+		public System.Nullable<System.TimeSpan> O_SundayEnd
 		{
 			get
 			{
@@ -343,70 +530,6 @@ namespace BonService
 				if ((this._O_SundayEnd != value))
 				{
 					this._O_SundayEnd = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Soup", DbType="NVarChar(100)")]
-		public string M_Soup
-		{
-			get
-			{
-				return this._M_Soup;
-			}
-			set
-			{
-				if ((this._M_Soup != value))
-				{
-					this._M_Soup = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_MainCourse", DbType="NVarChar(100)")]
-		public string M_MainCourse
-		{
-			get
-			{
-				return this._M_MainCourse;
-			}
-			set
-			{
-				if ((this._M_MainCourse != value))
-				{
-					this._M_MainCourse = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Salad", DbType="NVarChar(100)")]
-		public string M_Salad
-		{
-			get
-			{
-				return this._M_Salad;
-			}
-			set
-			{
-				if ((this._M_Salad != value))
-				{
-					this._M_Salad = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Dessert", DbType="NVarChar(100)")]
-		public string M_Dessert
-		{
-			get
-			{
-				return this._M_Dessert;
-			}
-			set
-			{
-				if ((this._M_Dessert != value))
-				{
-					this._M_Dessert = value;
 				}
 			}
 		}
@@ -570,6 +693,22 @@ namespace BonService
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_ID", DbType="Int NOT NULL")]
+		public int R_ID
+		{
+			get
+			{
+				return this._R_ID;
+			}
+			set
+			{
+				if ((this._R_ID != value))
+				{
+					this._R_ID = value;
+				}
+			}
+		}
 	}
 	
 	public partial class fn_GetRestaurantsInRadiusResult
@@ -601,14 +740,6 @@ namespace BonService
 		
 		private System.Nullable<System.TimeSpan> _O_SundayEnd;
 		
-		private string _M_Soup;
-		
-		private string _M_MainCourse;
-		
-		private string _M_Salad;
-		
-		private string _M_Dessert;
-		
 		private bool _F_Lunch;
 		
 		private bool _F_SaladBar;
@@ -628,6 +759,8 @@ namespace BonService
 		private bool _F_StudentBenefits;
 		
 		private bool _F_Delivery;
+		
+		private int _R_ID;
 		
 		private System.Nullable<double> _DistanceKm;
 		
@@ -845,70 +978,6 @@ namespace BonService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Soup", DbType="NVarChar(100)")]
-		public string M_Soup
-		{
-			get
-			{
-				return this._M_Soup;
-			}
-			set
-			{
-				if ((this._M_Soup != value))
-				{
-					this._M_Soup = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_MainCourse", DbType="NVarChar(100)")]
-		public string M_MainCourse
-		{
-			get
-			{
-				return this._M_MainCourse;
-			}
-			set
-			{
-				if ((this._M_MainCourse != value))
-				{
-					this._M_MainCourse = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Salad", DbType="NVarChar(100)")]
-		public string M_Salad
-		{
-			get
-			{
-				return this._M_Salad;
-			}
-			set
-			{
-				if ((this._M_Salad != value))
-				{
-					this._M_Salad = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Dessert", DbType="NVarChar(100)")]
-		public string M_Dessert
-		{
-			get
-			{
-				return this._M_Dessert;
-			}
-			set
-			{
-				if ((this._M_Dessert != value))
-				{
-					this._M_Dessert = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_Lunch", DbType="Bit NOT NULL")]
 		public bool F_Lunch
 		{
@@ -1065,6 +1134,22 @@ namespace BonService
 				if ((this._F_Delivery != value))
 				{
 					this._F_Delivery = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_ID", DbType="Int NOT NULL")]
+		public int R_ID
+		{
+			get
+			{
+				return this._R_ID;
+			}
+			set
+			{
+				if ((this._R_ID != value))
+				{
+					this._R_ID = value;
 				}
 			}
 		}
