@@ -1,0 +1,68 @@
+[{
+    "Address":"Kardeljeva ploščad 5, Ljubljana",
+    "CoordinateX":46.07423535590020,
+    "CoordinateY":14.51366899516777,
+    "HasDelivery":false,
+    "HasDisabledSupport":false,
+    "HasDisabledWcSupport":true,
+    "HasSaladBar":false,
+    "HasStudentBenefits":false,
+    "HasVegetarianSupport":false,
+    "Menu":{
+        "Dessert":null,
+        "MainCourse":null,
+        "Salad":null,
+        "Soup":null
+    },
+    "Name":"NetCafe",
+    "OpenDuringWeekends":false,
+    "OpeningTime":{
+        "Saturday": {"From":null,"To":null},
+        "Sunday":{"From":null,"To":null},
+        "Week":{"From":"PT10H","To":"PT20H"}
+    },
+    "Phone":null,
+    "Price":0.50,
+    "ServesFastFood":false,
+    "ServesLunch":false,
+    "ServesPizzas":true,
+    "UpdatedOn":"\/Date(1480896000000+0000)\/"
+}, {
+    "Address":"Taborska ulica 12, Maribor",
+    "CoordinateX":46.55509578166970,
+    "CoordinateY":15.64505288282290,
+    "HasDelivery":false,
+    "HasDisabledSupport":true,
+    "HasDisabledWcSupport":false,
+    "HasSaladBar":false,
+    "HasStudentBenefits":true,
+    "HasVegetarianSupport":true,
+    "Menu":{
+        "Dessert":"sestavljena solata",
+        "MainCourse":"dnevna juha",
+        "Salad":"Sexy čevapčiči",
+        "Soup":null
+    },
+    "Name":"Restavracija ORIENT",
+    "OpenDuringWeekends":true,
+    "OpeningTime":{
+        "Saturday":{
+            "From":"PT11H30M",
+            "To":"PT20H"
+        },
+        "Sunday":{
+            "From":"PT11H30M",
+            "To":"PT18H"
+        },
+        "Week":{
+            "From":"PT11H",
+            "To":"PT20H"
+        }
+    },
+    "Phone":"022321600",
+    "Price":2.85,
+    "ServesFastFood":false,
+    "ServesLunch":true,
+    "ServesPizzas":false,
+    "UpdatedOn":"\/Date(1481328000000+0000)\/"
+}]

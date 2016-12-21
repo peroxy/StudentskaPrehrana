@@ -11,11 +11,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+    }
+    defaultConfig {
+        multiDexEnabled true
     }
 }
 
@@ -24,7 +29,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.google.android.gms:play-services:9.6.1'
+    compile 'com.google.android.gms:play-services:@integer/google_play_services_version'
+    compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
+    testCompile 'org.json:json:20140107'
+
 }
