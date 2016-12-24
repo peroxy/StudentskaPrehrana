@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.fri.studentskaprehrana.utils.RequestHandler;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
@@ -138,6 +139,7 @@ public class NastavitveActivity extends AppCompatActivity implements RequestHand
             }
         });
 
+        StaticRestaurantVariables.mRestaurantLatLng = new LatLng(46.052771, 14.503602);
         RestaurantsModel.getRestaurants(this, "getRestaurants");
     }
 

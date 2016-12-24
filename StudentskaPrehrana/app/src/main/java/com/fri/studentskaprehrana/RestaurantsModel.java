@@ -12,11 +12,9 @@ import com.fri.studentskaprehrana.utils.RequestHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.fri.studentskaprehrana.StaticRestaurantVariables.lunch;
+import java.util.Locale;
 
 /**
  * Created by domengaber on 10/12/2016.
@@ -31,7 +29,7 @@ public class RestaurantsModel {
         double locationLongitude = StaticRestaurantVariables.mRestaurantLatLng.longitude;
         double radius = StaticRestaurantVariables.radius;
 
-        String requestUrl = String.format("%s/%f/%f/%f", urlInRadius, locationLatitude, locationLongitude, radius);
+        String requestUrl = String.format(Locale.US, "%s/%f/%f/%f", urlInRadius, locationLatitude, locationLongitude, radius);
         Log.d("Request url:", requestUrl);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
