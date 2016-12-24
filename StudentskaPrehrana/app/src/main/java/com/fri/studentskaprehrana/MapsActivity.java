@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -401,10 +403,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mLocationManager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
-        if ( !mLocationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+        if (!mLocationManager.isProviderEnabled( LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
         }
-        if ( !mLocationManager.isProviderEnabled( LocationManager.NETWORK_PROVIDER ) ) {
+        if (!isNetworkAvailable()) {
             buildAlertMessageNoInternet();
         }
         if (noGPSMode) {
@@ -626,6 +628,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         StaticRestaurantVariables.customLocationJustSelected = true;
 
         onLocationChanged(StaticRestaurantVariables.mRestaurantSearchLocation);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
