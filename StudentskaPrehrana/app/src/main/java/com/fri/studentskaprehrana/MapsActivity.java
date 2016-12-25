@@ -523,7 +523,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         if (!StaticRestaurantVariables.customLocation && mMap != null) {
-            StaticRestaurantVariables.setLocaation(location.toString(), location.getLatitude(),
+            StaticRestaurantVariables.setLocation(location.toString(), location.getLatitude(),
                     location.getLongitude());
 
             if (currentMarker != null ) {
@@ -621,7 +621,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onPlaceSelected(Place place) {
-        StaticRestaurantVariables.setLocaation(place.getName().toString(), place.getLatLng().latitude,
+        StaticRestaurantVariables.setLocation(place.getName().toString(), place.getLatLng().latitude,
                 place.getLatLng().longitude);
 
         StaticRestaurantVariables.customLocation = true;

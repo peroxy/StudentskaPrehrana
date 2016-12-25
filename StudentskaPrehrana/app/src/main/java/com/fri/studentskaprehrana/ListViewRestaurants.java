@@ -8,27 +8,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fri.studentskaprehrana.utils.RequestHandler;
-import com.google.android.gms.maps.model.LatLng;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ListViewRestaurants extends AppCompatActivity  implements RequestHandler {
     ArrayList<Restaurant> listItems;
     ArrayAdapter<Restaurant> adapter;
-    public Restaurant randomRestaurantWithName(String n, String a, String ph){ //za lepšo preglednost lahko naključno nastavimo vse razen imena, naslova in telefonske
+
+    /*    public Restaurant randomRestaurantWithName(String n, String a, String ph){ //za lepšo preglednost lahko naključno nastavimo vse razen imena, naslova in telefonske
         //function that generates a random restaurant, hard-coding is boring
         Random r = new Random();
         //double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
@@ -47,6 +42,8 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
         boolean hd=Math.random()<0.5;
         return new Restaurant(n,a,ph,pr,x,y,sl,hsb,hvs,hds,hdwc,sp,ow,sff,htsb,hd);
     }
+    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +51,11 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
 
         listItems=new ArrayList<Restaurant>();
 
-        // Test
-        StaticRestaurantVariables.mRestaurantLatLng = new LatLng(46.1422922, 14.4062103);
-        RestaurantsModel.getRestaurants(this, "getRestaurants");
+        if (StaticRestaurantVariables.mRestaurantLatLng != null) {
+            RestaurantsModel.getRestaurants(this, "getRestaurants");
+        } else {
+            Toast.makeText(this, "Lokacija ni izbrana", Toast.LENGTH_SHORT);
+        }
     }
 
     @Override
