@@ -52,6 +52,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.fri.studentskaprehrana.R.id.map;
+import static com.fri.studentskaprehrana.StaticRestaurantVariables.customLocationJustSelected;
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -196,6 +197,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mMap != null) {
             mMap.clear();
         }
+
+        clearMarkers();
 //
 //        mMap.clear();
 //
@@ -234,6 +237,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (StaticRestaurantVariables.mRestaurantSearchLocation != null) {
             RestaurantsModel.getRestaurants(this, "getRestaurants");
         }
+
+        StaticRestaurantVariables.customLocationJustSelected = true;
 
 //
 //        try {
@@ -540,14 +545,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .strokeWidth(4f));
 
             // Request new restaurants on update or when location change is 400m or more
-            if (StaticRestaurantVariables.customLocationJustSelected ||
+            if (customLocationJustSelected ||
                     StaticRestaurantVariables.mRestaurantChangeLocation
                             .distanceTo(StaticRestaurantVariables.mRestaurantSearchLocation) > 400) {
+                clearMarkers();
                 RestaurantsModel.getRestaurants(this, "getRestaurants");
 
-                clearMarkers();
                 StaticRestaurantVariables.mRestaurantChangeLocation = location;
-                StaticRestaurantVariables.customLocationJustSelected = false;
+                customLocationJustSelected = false;
             }
         }
         else if (StaticRestaurantVariables.customLocation && mMap != null) {
@@ -569,9 +574,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .strokeColor(circleColor)
                     .strokeWidth(4f));
 
-            if (StaticRestaurantVariables.customLocationJustSelected) {
+            if (customLocationJustSelected) {
                 zoomToLocation(StaticRestaurantVariables.mRestaurantLatLng);
-                StaticRestaurantVariables.customLocationJustSelected = false;
+                customLocationJustSelected = false;
             }
         }
 
@@ -605,7 +610,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 public boolean onMyLocationButtonClick()
                 {
                     StaticRestaurantVariables.customLocation = false;
-                    StaticRestaurantVariables.customLocationJustSelected = true;
+                    customLocationJustSelected = true;
 
                     return false;
                 }
@@ -625,7 +630,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 place.getLatLng().longitude);
 
         StaticRestaurantVariables.customLocation = true;
-        StaticRestaurantVariables.customLocationJustSelected = true;
+        customLocationJustSelected = true;
 
         onLocationChanged(StaticRestaurantVariables.mRestaurantSearchLocation);
     }
@@ -679,6 +684,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 bundle.putSerializable("value", (Restaurant) restaurants.get(i));
                 intent.putExtras(bundle);
                 startActivity(intent);
+                break;
             }
         }
     }
