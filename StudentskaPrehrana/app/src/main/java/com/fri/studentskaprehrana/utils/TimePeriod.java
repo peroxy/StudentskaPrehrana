@@ -2,13 +2,14 @@ package com.fri.studentskaprehrana.utils;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by domengaber on 10/12/2016.
  */
 
-public class TimePeriod {
+public class TimePeriod implements Serializable {
     private Time openingTime;
     private Time closingTime;
     public final String error;

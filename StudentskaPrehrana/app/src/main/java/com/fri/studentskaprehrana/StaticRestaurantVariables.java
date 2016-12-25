@@ -28,17 +28,18 @@ class StaticRestaurantVariables {
     static boolean userLocationJustSelected = false;
 
     // Ker v onPlaceSelected() ne moremo delati z mapo ob customLocation pribliza nanjo
-    static boolean customLocationJustSelected = false;
+    static boolean customLocationJustSelected = true;
 
     static LinkedList<Restaurant> restaurants = new LinkedList<>();
 
     static Location mRestaurantSearchLocation;
+    static Location mRestaurantChangeLocation;
     static LatLng mRestaurantLatLng;
     static String mSelectedPlaceName;
     static double radius = 10;
     static final double minRadius = 5;
 
-    static void setLocaation(String name, double lat, double lon) {
+    static void setLocation(String name, double lat, double lon) {
         mRestaurantSearchLocation = new Location(name);
         mRestaurantSearchLocation.setLatitude(lat);
         mRestaurantSearchLocation.setLongitude(lon);

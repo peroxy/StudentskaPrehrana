@@ -5,13 +5,14 @@ import com.fri.studentskaprehrana.utils.TimePeriod;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by domengaber on 10/12/2016.
  */
 
-public class OpeningTime {
+public class OpeningTime implements Serializable {
     private TimePeriod weekDay, saturday, sunday;
 
     public OpeningTime() {

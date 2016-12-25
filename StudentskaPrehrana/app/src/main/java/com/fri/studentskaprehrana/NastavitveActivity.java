@@ -12,10 +12,11 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.fri.studentskaprehrana.utils.RequestHandler;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-public class NastavitveActivity extends AppCompatActivity implements RequestHandler {
+public class NastavitveActivity extends AppCompatActivity {
     public ToggleButton tbLunch;
     public ToggleButton tbSaladBar;
     public ToggleButton tbVegetarian;
@@ -48,15 +49,15 @@ public class NastavitveActivity extends AppCompatActivity implements RequestHand
 
         this.btSeznam = (Button) findViewById(R.id.btSeznam);
 
-        this.tbLunch.setChecked(true);
-        this.tbSaladBar.setChecked(true);
-        this.tbVegetarian.setChecked(true);
-        this.tbDisabled.setChecked(true);
-        this.tbDisabledWC.setChecked(true);
-        this.tbPizzas.setChecked(true);
-        this.tbWeekends.setChecked(true);
-        this.tbStudentBenefits.setChecked(true);
-        this.tbDelivery.setChecked(true);
+        this.tbLunch.setChecked(StaticRestaurantVariables.lunch);
+        this.tbSaladBar.setChecked(StaticRestaurantVariables.saladBar);
+        this.tbVegetarian.setChecked(StaticRestaurantVariables.vegetarian);
+        this.tbDisabled.setChecked(StaticRestaurantVariables.disabled);
+        this.tbDisabledWC.setChecked(StaticRestaurantVariables.disabledWC);
+        this.tbPizzas.setChecked(StaticRestaurantVariables.pizzas);
+        this.tbWeekends.setChecked(StaticRestaurantVariables.weekends);
+        this.tbStudentBenefits.setChecked(StaticRestaurantVariables.studentBenefits);
+        this.tbDelivery.setChecked(StaticRestaurantVariables.delivery);
 
         tbLunch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -138,11 +139,6 @@ public class NastavitveActivity extends AppCompatActivity implements RequestHand
             }
         });
 
-        RestaurantsModel.getRestaurants(this, "getRestaurants");
     }
 
-    @Override
-    public void handleResponse(List<Restaurant> restaurants) {
-        Log.d("Response: ", restaurants.toString());
-    }
 }

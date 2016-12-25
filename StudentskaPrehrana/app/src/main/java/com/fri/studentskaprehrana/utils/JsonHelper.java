@@ -1,5 +1,6 @@
 package com.fri.studentskaprehrana.utils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -40,6 +41,18 @@ public class JsonHelper {
         return value;
     }
 
+    public static JSONArray getJSONArrayFromJSON(JSONObject json, String name) {
+        JSONArray value = null;
+
+        try {
+            value = json.getJSONArray(name);
+        } catch(Exception e) {
+            value = new JSONArray();
+        }
+
+        return value;
+    }
+
     public static boolean getBooleanFromJSON(JSONObject json, String name) {
         boolean value = false;
 
@@ -48,5 +61,14 @@ public class JsonHelper {
         } catch(Exception e) {}
 
         return value;
+    }
+
+    public static JSONObject getJsonObjectFromString(String s) {
+        JSONObject json = null;
+        try {
+            json = new JSONObject(s);
+        } catch (Exception e) {}
+
+        return json;
     }
 }

@@ -1,10 +1,12 @@
 package com.fri.studentskaprehrana.utils;
 
+import java.io.Serializable;
+
 /**
  * Created by domengaber on 10/12/2016.
  */
 
-public class Time {
+public class Time implements Serializable {
     private int hour, minutes;
 
     public Time(int hour, int minutes) {
