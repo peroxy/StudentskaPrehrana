@@ -2,16 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Bon">
   <DataContextMoniker Name="/BonDataContext" />
   <nestedChildShapes>
-    <classShape Id="5f827df3-939c-47fc-ae55-5b3ce34e0aa4" absoluteBounds="6.25, 1.375, 2, 1.9631982421874998">
-      <DataClassMoniker Name="/BonDataContext/Menu" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0de4baf8-2a88-442e-8a10-f55be0514aee" absoluteBounds="6.265, 1.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="30436b0c-4f18-4359-b2d2-6578ca87cd11" absoluteBounds="2.625, 0.875, 2, 5.4246240234375">
+    <classShape Id="101f5696-1f84-4e4e-abd9-af593680cc7c" absoluteBounds="2.125, 0.75, 2, 5.6169254557291657">
       <DataClassMoniker Name="/BonDataContext/v_Restaurant" />
       <nestedChildShapes>
-        <elementListCompartment Id="1c541ee6-aa43-4c97-ac6f-44bfd98ad897" absoluteBounds="2.6399999999999997, 1.335, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d1d573a0-b9d9-4cc8-8a70-225461ac4aa0" absoluteBounds="2.14, 1.21, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

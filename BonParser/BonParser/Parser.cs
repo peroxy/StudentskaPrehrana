@@ -32,31 +32,31 @@ namespace BonParser
 
         public static void Begin()
         {
-            using (WebClient webClient = new System.Net.WebClient())
+            using (WebClient webClient = new WebClient())
             {
-                Console.WriteLine("Initializing program...");
+                //Console.WriteLine("Initializing program...");
                 var s = new Stopwatch();
                 s.Start();
                 webClient.Encoding = Encoding.UTF8;
                 string json = "";
                 try
                 {
-                    Console.WriteLine("Downloading data from Bonar API...");
+                    //  Console.WriteLine("Downloading data from Bonar API...");
                     json = webClient.DownloadString(BonarApiUrl);
-                    Console.WriteLine("Successfully downloaded data from Bonar API...");
+                    //Console.WriteLine("Successfully downloaded data from Bonar API...");
                 }
                 catch (Exception)
                 {
                     Environment.Exit(-1);
                 }
 
-                Console.WriteLine("Truncating all tables...");
+                //Console.WriteLine("Truncating all tables...");
                 DbOperations.TruncateAllTables();
-                Console.WriteLine("Begin inserting..");
+                //Console.WriteLine("Begin inserting..");
 
                 ParseRestaurants(s, json);
 
-                Console.WriteLine($"Finished parsing and inserting into DB in {s.Elapsed.TotalSeconds} seconds.");
+                //Console.WriteLine($"Finished parsing and inserting into DB in {s.Elapsed.TotalSeconds} seconds.");
             }
         }
 
@@ -64,7 +64,7 @@ namespace BonParser
         {
             dynamic data = JsonConvert.DeserializeObject(json);
             int i = 1;
-            foreach (dynamic item in (IEnumerable) data)
+            foreach (dynamic item in (IEnumerable)data)
             {
                 string name = item.name;
                 string address = item.address;
@@ -73,12 +73,12 @@ namespace BonParser
                 {
                     phone = item.telephone[0];
                 }
-                string priceStr = (string) item.price;
+                string priceStr = (string)item.price;
                 decimal price = Convert.ToDecimal(priceStr.Split(' ')[0], CultureInfo.GetCultureInfo("de-DE"));
                 TimeSpan? weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd;
                 ParseRestaurantOpeningTimes(item, out weekStart, out weekEnd, out satStart, out satEnd, out sunStart,
                     out sunEnd);
-                List<Menu> menus = ParseRestaurantMenus(item);
+                string menus = ParseRestaurantMenus(item);
 
                 decimal coordinateX = item.coordinates[0];
                 decimal coordinateY = item.coordinates[1];
@@ -97,10 +97,6 @@ namespace BonParser
                 InsertIntoDatabase(name, address, phone, price, weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd, coordinateX, coordinateY, lunch, saladBar, vegetarian, disabled,
                     disabledWc, pizzas, weekends, fastFood, studentBenefits, delivery, menus);
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Clear();
-                Console.WriteLine($"Parsing.. Number of parsed restaurants: {i++}");
-                Console.WriteLine($"Elapsed time: {s.Elapsed.TotalSeconds} sec");
             }
         }
 
@@ -108,16 +104,16 @@ namespace BonParser
             TimeSpan? weekStart, TimeSpan? weekEnd, TimeSpan? satStart, TimeSpan? satEnd, TimeSpan? sunStart,
             TimeSpan? sunEnd, decimal coordinateX,
             decimal coordinateY, bool lunch, bool saladBar, bool vegetarian, bool disabled, bool disabledWc, bool pizzas,
-            bool weekends, bool fastFood, bool studentBenefits, bool delivery, List<Menu> menus)
+            bool weekends, bool fastFood, bool studentBenefits, bool delivery, string menus)
         {
             int featureId = DbOperations.InsertFeature(lunch, saladBar, vegetarian, disabled, disabledWc, pizzas,
                 weekends, fastFood, studentBenefits, delivery);
             int openingId = DbOperations.InsertOpening(weekStart, weekEnd, satStart, satEnd, sunStart, sunEnd);
-            int restaurantId = DbOperations.InsertRestaurant(name, address, phone, price, coordinateX, coordinateY,
+            DbOperations.InsertRestaurant(name, address, phone, price, coordinateX, coordinateY,
                 TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
                     TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time")),
-                openingId, featureId);
-            DbOperations.InsertMenus(menus, restaurantId);
+                openingId, featureId, menus);
+            //DbOperations.InsertMenus(menus, restaurantId);
         }
 
         private static void ParseRestaurantFeatures(dynamic item, out bool lunch, out bool saladBar, out bool vegetarian,
@@ -127,64 +123,53 @@ namespace BonParser
             var features = new List<int>();
             foreach (dynamic feature in item.features)
             {
-                features.Add((int) feature.id);
+                features.Add((int)feature.id);
             }
 
-            lunch = features.Contains((int) Features.Lunch);
-            saladBar = features.Contains((int) Features.SaladBar);
-            vegetarian = features.Contains((int) Features.Vegetarian);
-            disabled = features.Contains((int) Features.Disabled);
-            disabledWc = features.Contains((int) Features.DisabledWc);
-            pizzas = features.Contains((int) Features.Pizzas);
-            weekends = features.Contains((int) Features.Weekends);
-            fastFood = features.Contains((int) Features.FastFood);
-            studentBenefits = features.Contains((int) Features.StudentBenefits);
-            delivery = features.Contains((int) Features.Delivery);
+            lunch = features.Contains((int)Features.Lunch);
+            saladBar = features.Contains((int)Features.SaladBar);
+            vegetarian = features.Contains((int)Features.Vegetarian);
+            disabled = features.Contains((int)Features.Disabled);
+            disabledWc = features.Contains((int)Features.DisabledWc);
+            pizzas = features.Contains((int)Features.Pizzas);
+            weekends = features.Contains((int)Features.Weekends);
+            fastFood = features.Contains((int)Features.FastFood);
+            studentBenefits = features.Contains((int)Features.StudentBenefits);
+            delivery = features.Contains((int)Features.Delivery);
         }
 
-        private static List<Menu> ParseRestaurantMenus(dynamic item)
+        private static string ParseRestaurantMenus(dynamic item)
         {
-            var menus = new List<Menu>();
-            if ((int) item.menu.Count > 0)
+            var menus = new StringBuilder("[");
+            if ((int)item.menu.Count > 0)
             {
                 foreach (dynamic menu in item.menu)
                 {
-                    switch ((int) menu.Count)
+                    switch ((int)menu.Count)
                     {
                         case 1:
-                            menus.Add(new Menu
-                            {
-                                M_MainCourse = menu[0]
-                            });
+                            menus.AppendFormat(@"{{""Dessert:""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""null""}},", menu[0]);
                             break;
                         case 2:
-                            menus.Add(new Menu
-                            {
-                                M_Soup = menu[0],
-                                M_MainCourse = menu[1]
-                            });
+                            menus.AppendFormat(@"{{""Dessert:""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""{1}""}},", menu[1], menu[0]);
                             break;
                         case 3:
-                            menus.Add(new Menu
-                            {
-                                M_Salad = menu[1],
-                                M_MainCourse = menu[0],
-                                M_Dessert = menu[2]
-                            });
+                            menus.AppendFormat(@"{{""Dessert:""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""null""}},", menu[0], menu[1], menu[2]);
                             break;
                         case 4:
-                            menus.Add(new Menu
-                            {
-                                M_Soup = menu[0],
-                                M_Salad = menu[2],
-                                M_MainCourse = menu[1],
-                                M_Dessert = menu[3]
-                            });
+                            menus.AppendFormat(@"{{""Dessert:""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""{3}""}},", menu[1], menu[2], menu[3], menu[0]);
                             break;
                     }
+
                 }
             }
-            return menus;
+            else
+            {
+                return "[]";
+            }
+            menus.Remove(menus.Length - 1, 1);
+            menus.Append("]");
+            return menus.ToString();
         }
 
         private static void ParseRestaurantOpeningTimes(dynamic item, out TimeSpan? weekStart, out TimeSpan? weekEnd,
@@ -196,22 +181,25 @@ namespace BonParser
             satEnd = null;
             sunStart = null;
             sunEnd = null;
-            if (item.opening.week is JArray && (int) item.opening.week.Count > 0)
+            if (item.opening.week is JArray && (int)item.opening.week.Count > 0)
             {
-                weekStart = TimeSpan.Parse((string) item.opening.week[0]);
-                weekEnd = TimeSpan.Parse((string) item.opening.week[1]);
+                weekStart = TimeSpan.Parse((string)item.opening.week[0]);
+                weekEnd = TimeSpan.Parse((string)item.opening.week[1]);
             }
-            if (item.opening.saturday is JArray && (int) item.opening.saturday.Count > 0)
+            if (item.opening.saturday is JArray && (int)item.opening.saturday.Count > 0)
             {
-                satStart = TimeSpan.Parse((string) item.opening.saturday[0]);
-                satEnd = TimeSpan.Parse((string) item.opening.saturday[1]);
+                satStart = TimeSpan.Parse((string)item.opening.saturday[0]);
+                satEnd = TimeSpan.Parse((string)item.opening.saturday[1]);
             }
-            if (item.opening.sunday is JArray && (int) item.opening.sunday.Count > 0)
+            if (item.opening.sunday is JArray && (int)item.opening.sunday.Count > 0)
             {
-                sunStart = TimeSpan.Parse((string) item.opening.sunday[0]);
-                sunEnd = TimeSpan.Parse((string) item.opening.sunday[1]);
+                sunStart = TimeSpan.Parse((string)item.opening.sunday[0]);
+                sunEnd = TimeSpan.Parse((string)item.opening.sunday[1]);
             }
         }
     }
+
+
+
 }
 

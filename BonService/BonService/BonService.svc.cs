@@ -40,7 +40,8 @@ namespace BonService
             FastFood = 20,
             StudentBenefits = 21,
             Delivery = 22,
-            RestaurantId = 23
+            RestaurantId = 23,
+            Menu = 24
         }
 
         public Restaurants GetAllRestaurants()
@@ -104,23 +105,24 @@ namespace BonService
             }
         }
 
-        private static List<MenuActual> GetRestaurantMenus(int id)
-        {
-            using (var ctx = new BonDataContext())
-            {
-                return ctx.Menus.Where(i => i.M_R_ID == id).Select(x => new MenuActual
-                {
-                    MainCourse = x.M_MainCourse,
-                    Dessert = x.M_Dessert,
-                    Salad = x.M_Salad,
-                    Soup = x.M_Soup
-                }).ToList();
-            }
-        }
+        //private static List<Menu> GetRestaurantMenus()
+        //{
+        //    using (var ctx = new BonDataContext())
+        //    {
+        //        return ctx.Menus.ToList();//Select(x => new MenuActual
+        //        //{
+        //        //    MainCourse = x.M_MainCourse,
+        //        //    Dessert = x.M_Dessert,
+        //        //    Salad = x.M_Salad,
+        //        //    Soup = x.M_Soup
+        //        //}).ToList();
+        //    }
+        //}
 
         private static void FillRestaurants(List<fn_GetRestaurantsInRadiusResult> inRadiusResults,
             Restaurants allRestaurants)
         {
+            //List<Menu> menus = GetRestaurantMenus();
             allRestaurants.Values.AddRange(inRadiusResults.Select(i => new Restaurant
             {
                 Address = i.R_Address,
@@ -132,7 +134,7 @@ namespace BonService
                 HasSaladBar = i.F_SaladBar,
                 HasStudentBenefits = i.F_StudentBenefits,
                 HasVegetarianSupport = i.F_Vegetarian,
-                Menu = GetRestaurantMenus(i.R_ID),
+                Menu = i.R_Menu,
                 Name = i.R_Name,
                 OpenDuringWeekends = i.F_Weekends,
                 OpeningTime = new OpeningTime
@@ -169,21 +171,17 @@ namespace BonService
 
         public Restaurants GetFilteredRestaurants(Filter values)
         {
-            var s = new Stopwatch();
-            s.Start();
             string sql = GetSqlCommand(values);
-            Debug.WriteLine("After GetSqlCommand: {0} ms", s.ElapsedMilliseconds);
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["BonDBConnectionString"].ConnectionString))
             {
                 conn.Open();
                 var cmd = new SqlCommand(sql, conn) {CommandType = CommandType.Text};
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    Debug.WriteLine("After executing reader: {0} ms", s.ElapsedMilliseconds);
                     var restaurants = new Restaurants();
+                    //List<Menu> menus = GetRestaurantMenus();
                     while (reader.Read())
                     {
-                        Debug.WriteLine("After reading: {0} ms", s.ElapsedMilliseconds);
                         restaurants.Values.Add(new Restaurant
                         {
                             Address = reader.GetString((int) Row.Address),
@@ -195,17 +193,15 @@ namespace BonService
                             HasSaladBar = reader.GetBoolean((int) Row.SaladBar),
                             HasStudentBenefits = reader.GetBoolean((int) Row.StudentBenefits),
                             HasVegetarianSupport = reader.GetBoolean((int) Row.Vegetarian),
-                            Menu = GetRestaurantMenus(reader.GetInt32((int) Row.RestaurantId)),
-                            //{
-                            //    Dessert =
-                            //        reader.IsDBNull((int) Row.Dessert) ? null : reader.GetString((int) Row.Dessert),
-                            //    MainCourse =
-                            //        reader.IsDBNull((int) Row.MainCourse)
-                            //            ? null
-                            //            : reader.GetString((int) Row.MainCourse),
-                            //    Salad = reader.IsDBNull((int) Row.Salad) ? null : reader.GetString((int) Row.Salad),
-                            //    Soup = reader.IsDBNull((int) Row.Soup) ? null : reader.GetString((int) Row.Soup),
-                            //},
+                            Menu = reader.GetString((int) Row.Menu),
+                                //menus.Where(x => x.M_R_ID == reader.GetInt32((int) Row.RestaurantId))
+                                //    .Select(x => new MenuActual
+                                //    {
+                                //        MainCourse = x.M_MainCourse,
+                                //        Dessert = x.M_Dessert,
+                                //        Salad = x.M_Salad,
+                                //        Soup = x.M_Soup
+                                //    }).ToList(),
                             Name = reader.GetString((int) Row.Name),
                             OpenDuringWeekends = reader.GetBoolean((int) Row.Weekends),
                             OpeningTime = new OpeningTime
@@ -251,7 +247,6 @@ namespace BonService
                             ServesPizzas = reader.GetBoolean((int) Row.Pizzas),
                             UpdatedOn = reader.GetDateTime((int) Row.UpdatedOn)
                         });
-                        Debug.WriteLine("After adding: {0} ms", s.ElapsedMilliseconds);
                     }
                     return restaurants;
                 }

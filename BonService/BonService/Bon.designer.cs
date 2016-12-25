@@ -30,9 +30,6 @@ namespace BonService
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertMenu(Menu instance);
-    partial void UpdateMenu(Menu instance);
-    partial void DeleteMenu(Menu instance);
     #endregion
 		
 		public BonDataContext() : 
@@ -65,14 +62,6 @@ namespace BonService
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Menu> Menus
-		{
-			get
-			{
-				return this.GetTable<Menu>();
-			}
-		}
-		
 		public System.Data.Linq.Table<v_Restaurant> v_Restaurants
 		{
 			get
@@ -85,188 +74,6 @@ namespace BonService
 		public IQueryable<fn_GetRestaurantsInRadiusResult> fn_GetRestaurantsInRadius([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(9,6)")] System.Nullable<decimal> x, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(9,6)")] System.Nullable<decimal> y, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,3)")] System.Nullable<decimal> radius)
 		{
 			return this.CreateMethodCallQuery<fn_GetRestaurantsInRadiusResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), x, y, radius);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Menu")]
-	public partial class Menu : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _M_ID;
-		
-		private string _M_Soup;
-		
-		private string _M_MainCourse;
-		
-		private string _M_Salad;
-		
-		private string _M_Dessert;
-		
-		private int _M_R_ID;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnM_IDChanging(int value);
-    partial void OnM_IDChanged();
-    partial void OnM_SoupChanging(string value);
-    partial void OnM_SoupChanged();
-    partial void OnM_MainCourseChanging(string value);
-    partial void OnM_MainCourseChanged();
-    partial void OnM_SaladChanging(string value);
-    partial void OnM_SaladChanged();
-    partial void OnM_DessertChanging(string value);
-    partial void OnM_DessertChanged();
-    partial void OnM_R_IDChanging(int value);
-    partial void OnM_R_IDChanged();
-    #endregion
-		
-		public Menu()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int M_ID
-		{
-			get
-			{
-				return this._M_ID;
-			}
-			set
-			{
-				if ((this._M_ID != value))
-				{
-					this.OnM_IDChanging(value);
-					this.SendPropertyChanging();
-					this._M_ID = value;
-					this.SendPropertyChanged("M_ID");
-					this.OnM_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Soup", DbType="NVarChar(100)")]
-		public string M_Soup
-		{
-			get
-			{
-				return this._M_Soup;
-			}
-			set
-			{
-				if ((this._M_Soup != value))
-				{
-					this.OnM_SoupChanging(value);
-					this.SendPropertyChanging();
-					this._M_Soup = value;
-					this.SendPropertyChanged("M_Soup");
-					this.OnM_SoupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_MainCourse", DbType="NVarChar(100)")]
-		public string M_MainCourse
-		{
-			get
-			{
-				return this._M_MainCourse;
-			}
-			set
-			{
-				if ((this._M_MainCourse != value))
-				{
-					this.OnM_MainCourseChanging(value);
-					this.SendPropertyChanging();
-					this._M_MainCourse = value;
-					this.SendPropertyChanged("M_MainCourse");
-					this.OnM_MainCourseChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Salad", DbType="NVarChar(100)")]
-		public string M_Salad
-		{
-			get
-			{
-				return this._M_Salad;
-			}
-			set
-			{
-				if ((this._M_Salad != value))
-				{
-					this.OnM_SaladChanging(value);
-					this.SendPropertyChanging();
-					this._M_Salad = value;
-					this.SendPropertyChanged("M_Salad");
-					this.OnM_SaladChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_Dessert", DbType="NVarChar(100)")]
-		public string M_Dessert
-		{
-			get
-			{
-				return this._M_Dessert;
-			}
-			set
-			{
-				if ((this._M_Dessert != value))
-				{
-					this.OnM_DessertChanging(value);
-					this.SendPropertyChanging();
-					this._M_Dessert = value;
-					this.SendPropertyChanged("M_Dessert");
-					this.OnM_DessertChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M_R_ID", DbType="Int NOT NULL")]
-		public int M_R_ID
-		{
-			get
-			{
-				return this._M_R_ID;
-			}
-			set
-			{
-				if ((this._M_R_ID != value))
-				{
-					this.OnM_R_IDChanging(value);
-					this.SendPropertyChanging();
-					this._M_R_ID = value;
-					this.SendPropertyChanged("M_R_ID");
-					this.OnM_R_IDChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -321,6 +128,8 @@ namespace BonService
 		private bool _F_Delivery;
 		
 		private int _R_ID;
+		
+		private string _R_Menu;
 		
 		public v_Restaurant()
 		{
@@ -709,6 +518,22 @@ namespace BonService
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Menu", DbType="NVarChar(MAX)")]
+		public string R_Menu
+		{
+			get
+			{
+				return this._R_Menu;
+			}
+			set
+			{
+				if ((this._R_Menu != value))
+				{
+					this._R_Menu = value;
+				}
+			}
+		}
 	}
 	
 	public partial class fn_GetRestaurantsInRadiusResult
@@ -761,6 +586,8 @@ namespace BonService
 		private bool _F_Delivery;
 		
 		private int _R_ID;
+		
+		private string _R_Menu;
 		
 		private System.Nullable<double> _DistanceKm;
 		
@@ -1150,6 +977,22 @@ namespace BonService
 				if ((this._R_ID != value))
 				{
 					this._R_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R_Menu", DbType="NVarChar(MAX)")]
+		public string R_Menu
+		{
+			get
+			{
+				return this._R_Menu;
+			}
+			set
+			{
+				if ((this._R_Menu != value))
+				{
+					this._R_Menu = value;
 				}
 			}
 		}

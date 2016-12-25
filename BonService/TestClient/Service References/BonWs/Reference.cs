@@ -95,7 +95,7 @@ namespace TestClient.BonWs {
         private bool HasVegetarianSupportField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TestClient.BonWs.Menu MenuField;
+        private string MenuField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -252,7 +252,7 @@ namespace TestClient.BonWs {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TestClient.BonWs.Menu Menu {
+        public string Menu {
             get {
                 return this.MenuField;
             }
@@ -377,99 +377,6 @@ namespace TestClient.BonWs {
                 if ((this.UpdatedOnField.Equals(value) != true)) {
                     this.UpdatedOnField = value;
                     this.RaisePropertyChanged("UpdatedOn");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Menu", Namespace="http://schemas.datacontract.org/2004/07/BonService")]
-    [System.SerializableAttribute()]
-    public partial class Menu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DessertField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MainCourseField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SaladField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SoupField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Dessert {
-            get {
-                return this.DessertField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DessertField, value) != true)) {
-                    this.DessertField = value;
-                    this.RaisePropertyChanged("Dessert");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MainCourse {
-            get {
-                return this.MainCourseField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MainCourseField, value) != true)) {
-                    this.MainCourseField = value;
-                    this.RaisePropertyChanged("MainCourse");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Salad {
-            get {
-                return this.SaladField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SaladField, value) != true)) {
-                    this.SaladField = value;
-                    this.RaisePropertyChanged("Salad");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Soup {
-            get {
-                return this.SoupField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SoupField, value) != true)) {
-                    this.SoupField = value;
-                    this.RaisePropertyChanged("Soup");
                 }
             }
         }
