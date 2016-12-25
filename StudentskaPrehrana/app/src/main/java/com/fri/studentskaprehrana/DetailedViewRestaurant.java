@@ -27,7 +27,7 @@ public class DetailedViewRestaurant extends AppCompatActivity {
         tvName.setText(received.name);
         tvAddress.setText(received.address);
         tvPhoneNumber.setText(received.phone);
-        Menu menu = received.menu;
+        Menu menu = received.menu[0];
         tvSoup.setText(menu.soup);
         tvSalad.setText(menu.salad);
         tvMainCourse.setText(menu.mainCourse);

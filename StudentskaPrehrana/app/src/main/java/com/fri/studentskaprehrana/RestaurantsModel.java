@@ -85,6 +85,11 @@ public class RestaurantsModel {
         handler.handleResponse(getRestaurantsFromJson(restaurantsArray));
     }
 
+    public static void cancelAllRequest() {
+        AppController.getInstance().cancelPendingRequests(AppController.TAG);
+        Log.d("Canceling request: ", AppController.TAG);
+    }
+
     private static List<Restaurant> getRestaurantsFromJson(JSONArray json) {
         List<Restaurant> restaurants = new LinkedList<>();
         Restaurant currentRestaurant;

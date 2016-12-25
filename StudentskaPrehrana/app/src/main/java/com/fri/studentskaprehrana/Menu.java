@@ -2,6 +2,8 @@ package com.fri.studentskaprehrana;
 
 import com.fri.studentskaprehrana.utils.JsonHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -13,6 +15,7 @@ import java.io.Serializable;
 /* TO DO:
 Create classes for Menu and both times
  */
+
 public class Menu implements Serializable {
     protected String dessert;
     protected String mainCourse;
@@ -41,5 +44,18 @@ public class Menu implements Serializable {
     @Override
     public String toString(){
         return String.format("Main course: %s\nDessert: %s\nSalad: %s\nSoup: %s",this.mainCourse,this.dessert,this.salad,this.soup);
+    }
+
+    public static Menu[] getMenuItems(JSONArray json) {
+        Menu[] menuItems = new Menu[json.length()];
+
+        for (int i = 0; i < json.length(); i++) {
+            try {
+                menuItems[i] = new Menu(json.getJSONObject(i));
+            } catch (JSONException e) {
+            }
+        }
+
+        return menuItems;
     }
 }

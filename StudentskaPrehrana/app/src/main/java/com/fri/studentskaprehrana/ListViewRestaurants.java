@@ -9,12 +9,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.fri.studentskaprehrana.utils.RequestHandler;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class ListViewRestaurants extends AppCompatActivity {
+public class ListViewRestaurants extends AppCompatActivity  implements RequestHandler {
     ArrayList<Restaurant> listItems;
     ArrayAdapter<Restaurant> adapter;
     public Restaurant randomRestaurantWithName(String n, String a, String ph){ //za lepšo preglednost lahko naključno nastavimo vse razen imena, naslova in telefonske
@@ -42,17 +47,23 @@ public class ListViewRestaurants extends AppCompatActivity {
         setContentView(R.layout.activity_list_view_restaurants);
 
         listItems=new ArrayList<Restaurant>();
+
+        // Test
+        StaticRestaurantVariables.mRestaurantLatLng = new LatLng(46.052771, 14.503602);
+        RestaurantsModel.getRestaurants(this, "getRestaurants");
+    }
+
+    @Override
+    public void handleResponse(List<Restaurant> restaurants) {
+        Log.d("Response: ", restaurants.toString());
+        Log.d("Restaurant 0: ", restaurants.get(0).menu[0].toString());
+
+        listItems = new ArrayList<>(restaurants);
         ListView lv = (ListView)findViewById(R.id.lv);
         adapter = new ArrayAdapter<Restaurant>(this, android.R.layout.simple_list_item_1, listItems);
+
         lv.setAdapter(adapter);
         lv.setTextFilterEnabled(true);
-        String[] imena={"Marjetica", "Indeks", "McDonalds", "Pub Legende", "Tinetov Hram Zadovoljstva"};
-        String[] ulica={"Tobačna 2", "Kersnikova 19", "Kolodvorska 22", "Tržaška 17", "Trubarjeva 67"};
-        for(int i=0;i<5;i++){
-            Restaurant temp = randomRestaurantWithName(imena[i],ulica[i],"01 675 667 7");
-            temp.initializeMenu("Puding", "Dunajski in pomfri", "zelena solata s prelivom", "Goveja");
-            listItems.add(temp);
-        }
         adapter.notifyDataSetChanged();
 
         lv.setOnItemClickListener(new OnItemClickListener() {

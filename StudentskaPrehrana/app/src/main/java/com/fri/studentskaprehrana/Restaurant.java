@@ -19,7 +19,7 @@ public class Restaurant implements Serializable {
     protected double xcoord;
     protected double ycoord;
     protected OpeningTime openingTime;
-    protected Menu menu;
+    protected Menu[] menu;
     protected boolean servesLunch;
     protected boolean hasSaladBar;
     protected boolean hasVegetarianSupport;
@@ -67,7 +67,7 @@ public class Restaurant implements Serializable {
         this.xcoord = JsonHelper.getDoubleFromJSON(this.json, "CoordinateX");
         this.ycoord = JsonHelper.getDoubleFromJSON(this.json, "CoordinateY");
 
-        this.menu = new Menu(JsonHelper.getJSONObjectFromJSON(this.json, "Menu"));
+        this.menu = Menu.getMenuItems(JsonHelper.getJSONArrayFromJSON(this.json, "Menu"));
         this.servesLunch = JsonHelper.getBooleanFromJSON(this.json, "ServesLunch");
 
         this.hasDelivery = JsonHelper.getBooleanFromJSON(this.json, "HasDelivery");
@@ -91,10 +91,6 @@ public class Restaurant implements Serializable {
 
     public String getJSONString() {
         return this.json.toString();
-    }
-
-    protected void initializeMenu(String des, String mc, String sal, String sou) {
-        this.menu = new Menu(des, mc, sal, sou);
     }
 
 }

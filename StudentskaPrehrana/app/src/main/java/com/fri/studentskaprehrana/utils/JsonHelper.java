@@ -1,5 +1,6 @@
 package com.fri.studentskaprehrana.utils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -35,6 +36,18 @@ public class JsonHelper {
             value = json.getJSONObject(name);
         } catch(Exception e) {
             value = new JSONObject();
+        }
+
+        return value;
+    }
+
+    public static JSONArray getJSONArrayFromJSON(JSONObject json, String name) {
+        JSONArray value = null;
+
+        try {
+            value = json.getJSONArray(name);
+        } catch(Exception e) {
+            value = new JSONArray();
         }
 
         return value;

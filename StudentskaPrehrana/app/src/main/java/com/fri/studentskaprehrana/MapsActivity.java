@@ -421,7 +421,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             //String n, String a, String ph, double pr, double x, double y, boolean sl, boolean hsb, boolean hvs, boolean hds, boolean hdwc, boolean sp, boolean ow,
             //boolean sff, boolean hstb, boolean hd
             Restaurant temp = new Restaurant(imena[i], ulica[i], "01 672 28 99", 2.50, xcoords[i], ycoords[i], true, true, false, true, false, true, true, false, true, false);
-            temp.initializeMenu("Puding", "Dunajski in pomfri", "zelena solata s prelivom", "Goveja");
+//            temp.initializeMenu("Puding", "Dunajski in pomfri", "zelena solata s prelivom", "Goveja");
             restavracije.add(temp);
         }
     }

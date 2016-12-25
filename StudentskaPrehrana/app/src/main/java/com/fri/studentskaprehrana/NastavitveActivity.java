@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-public class NastavitveActivity extends AppCompatActivity implements RequestHandler {
+public class NastavitveActivity extends AppCompatActivity {
     public ToggleButton tbLunch;
     public ToggleButton tbSaladBar;
     public ToggleButton tbVegetarian;
@@ -139,13 +139,6 @@ public class NastavitveActivity extends AppCompatActivity implements RequestHand
             }
         });
 
-        // Test
-        StaticRestaurantVariables.mRestaurantLatLng = new LatLng(46.052771, 14.503602);
-        RestaurantsModel.getRestaurants(this, "getRestaurants");
     }
 
-    @Override
-    public void handleResponse(List<Restaurant> restaurants) {
-        Log.d("Response: ", restaurants.toString());
-    }
 }
