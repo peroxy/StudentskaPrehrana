@@ -1,14 +1,20 @@
 package com.fri.studentskaprehrana;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.fri.studentskaprehrana.utils.RequestHandler;
 import com.google.android.gms.maps.model.LatLng;
@@ -54,30 +60,68 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
     }
 
     @Override
-    public void handleResponse(List<Restaurant> restaurants) {
-        Log.d("Response: ", restaurants.toString());
-        Log.d("Restaurant 0: ", restaurants.get(0).menu[0].toString());
+    public void handleResponse(final List<Restaurant> restaurants) {
+//        listItems = new ArrayList<>(restaurants);
+//        ListView lv = (ListView)findViewById(R.id.lv);
+//        adapter = new ArrayAdapter<Restaurant>(this, android.R.layout.simple_list_item_1, listItems);
+//
+//        for (int i = 0; i < restaurants.size(); i++) {
+//            Log.d("Distance: ", String.format("%.1f", restaurants.get(i).getDistanceInKm(StaticRestaurantVariables.mRestaurantLatLng)));
+//        }
+//
+//        lv.setAdapter(adapter);
+//        lv.setTextFilterEnabled(true);
+//        adapter.notifyDataSetChanged();
+//
+//        lv.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position,
+//                                    long id) {
+//                Restaurant send = (Restaurant)adapter.getItem(position);
+//                Intent intent = new Intent(ListViewRestaurants.this, DetailedViewRestaurant.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("value", send);
+//                Log.e("Res",send.toString());
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+//            }
+//        });
 
-        listItems = new ArrayList<>(restaurants);
-        ListView lv = (ListView)findViewById(R.id.lv);
-        adapter = new ArrayAdapter<Restaurant>(this, android.R.layout.simple_list_item_1, listItems);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        RelativeLayout parent = (RelativeLayout) inflater.inflate(R.layout.activity_list_view_restaurants,
+                null, false);
+        LinearLayout list = ((LinearLayout) parent.findViewById(R.id.restaurantsList));
 
-        lv.setAdapter(adapter);
-        lv.setTextFilterEnabled(true);
-        adapter.notifyDataSetChanged();
+        for (int i = 0; i < restaurants.size(); i++) {
+            Restaurant currentRes = restaurants.get(i);
+            View custom = inflater.inflate(R.layout.restaurantlistitem, null, false);
+            LinearLayout restaurantItem = (LinearLayout) custom.findViewById(R.id.restaurantItem);
 
-        lv.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Restaurant send = (Restaurant)adapter.getItem(position);
-                Intent intent = new Intent(ListViewRestaurants.this, DetailedViewRestaurant.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("value", send);
-                Log.e("Res",send.toString());
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
+            if(restaurantItem.getParent()!=null)
+                ((ViewGroup)restaurantItem.getParent()).removeView(restaurantItem);
+
+
+            ((TextView)restaurantItem.findViewById(R.id.tv_restaurantName)).setText(currentRes.name);
+            ((TextView)restaurantItem.findViewById(R.id.tv_restaurantLocation)).setText("Naslov: " + currentRes.address);
+            ((TextView)restaurantItem.findViewById(R.id.tv_restaurantDistance)).setText(String.format("Oddaljenost: %.1fkm", currentRes.getDistanceInKm(StaticRestaurantVariables.mRestaurantLatLng)));
+            ((TextView)restaurantItem.findViewById(R.id.restaurant_number)).setText(Integer.toString(i));
+
+            restaurantItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int resNumber = Integer.parseInt((String) ((TextView)v.findViewById(R.id.restaurant_number)).getText());
+                    Restaurant toSend = (Restaurant)restaurants.get(resNumber);
+                    Intent intent = new Intent(ListViewRestaurants.this, DetailedViewRestaurant.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("value", toSend);
+                    Log.e("Res",toSend.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            list.addView(restaurantItem);
+        }
+
+        setContentView(parent);
     }
 }

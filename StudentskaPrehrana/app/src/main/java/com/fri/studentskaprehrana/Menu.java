@@ -58,4 +58,28 @@ public class Menu implements Serializable {
 
         return menuItems;
     }
+
+    public String getDessert() {
+        if (dessert == null || dessert.equals("null"))
+            return "brez";
+        return dessert;
+    }
+
+    public String getMainCourse() {
+        if (mainCourse == null || mainCourse.equals("null"))
+            return "brez";
+        return mainCourse;
+    }
+
+    public String getSalad() {
+        if (salad == null || salad.equals("null"))
+            return "brez";
+        return salad;
+    }
+
+    public String getSoup() {
+        if (soup == null || soup.equals("null"))
+            return "brez";
+        return soup;
+    }
 }

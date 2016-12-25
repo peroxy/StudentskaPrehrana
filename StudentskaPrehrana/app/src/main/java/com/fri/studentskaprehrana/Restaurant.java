@@ -1,5 +1,7 @@
 package com.fri.studentskaprehrana;
 
+import android.location.Location;
+
 import com.fri.studentskaprehrana.utils.JsonHelper;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -30,7 +32,6 @@ public class Restaurant implements Serializable {
     protected boolean servesFastFood;
     protected boolean hasStudentBenefits;
     protected boolean hasDelivery;
-    protected JSONObject json;
 
     public Restaurant(String name, String address, String phone, double price,
                double xcoord, double ycoord,
@@ -53,35 +54,33 @@ public class Restaurant implements Serializable {
         this.servesFastFood = servesFastFood;
         this.hasStudentBenefits = hasStudentBenefits;
         this.hasDelivery = hasDelivery;
-        this.json = null;
     }
 
     public Restaurant(JSONObject json) {
-        this.json = json;
 
-        this.name = JsonHelper.getStringFromJSON(this.json, "Name");
-        this.address = JsonHelper.getStringFromJSON(this.json, "Address");
-        this.phone = JsonHelper.getStringFromJSON(this.json, "Phone");
-        this.price = JsonHelper.getDoubleFromJSON(this.json, "Price");
+        this.name = JsonHelper.getStringFromJSON(json, "Name");
+        this.address = JsonHelper.getStringFromJSON(json, "Address");
+        this.phone = JsonHelper.getStringFromJSON(json, "Phone");
+        this.price = JsonHelper.getDoubleFromJSON(json, "Price");
 
-        this.xcoord = JsonHelper.getDoubleFromJSON(this.json, "CoordinateX");
-        this.ycoord = JsonHelper.getDoubleFromJSON(this.json, "CoordinateY");
+        this.xcoord = JsonHelper.getDoubleFromJSON(json, "CoordinateX");
+        this.ycoord = JsonHelper.getDoubleFromJSON(json, "CoordinateY");
 
-        this.menu = Menu.getMenuItems(JsonHelper.getJSONArrayFromJSON(this.json, "Menu"));
-        this.servesLunch = JsonHelper.getBooleanFromJSON(this.json, "ServesLunch");
+        this.menu = Menu.getMenuItems(JsonHelper.getJSONArrayFromJSON(json, "Menu"));
+        this.servesLunch = JsonHelper.getBooleanFromJSON(json, "ServesLunch");
 
-        this.hasDelivery = JsonHelper.getBooleanFromJSON(this.json, "HasDelivery");
-        this.hasDisabledSupport = JsonHelper.getBooleanFromJSON(this.json, "HasDisabledSupport");
-        this.hasDisabledWcSupport = JsonHelper.getBooleanFromJSON(this.json, "HasDisabledWcSupport");
-        this.hasSaladBar = JsonHelper.getBooleanFromJSON(this.json, "HasSaladBar");
-        this.hasStudentBenefits = JsonHelper.getBooleanFromJSON(this.json, "HasStudentBenefits");
-        this.hasVegetarianSupport = JsonHelper.getBooleanFromJSON(this.json, "HasVegetarianSupport");
+        this.hasDelivery = JsonHelper.getBooleanFromJSON(json, "HasDelivery");
+        this.hasDisabledSupport = JsonHelper.getBooleanFromJSON(json, "HasDisabledSupport");
+        this.hasDisabledWcSupport = JsonHelper.getBooleanFromJSON(json, "HasDisabledWcSupport");
+        this.hasSaladBar = JsonHelper.getBooleanFromJSON(json, "HasSaladBar");
+        this.hasStudentBenefits = JsonHelper.getBooleanFromJSON(json, "HasStudentBenefits");
+        this.hasVegetarianSupport = JsonHelper.getBooleanFromJSON(json, "HasVegetarianSupport");
 
-        this.servesPizzas = JsonHelper.getBooleanFromJSON(this.json, "ServesPizzas");
-        this.servesFastFood = JsonHelper.getBooleanFromJSON(this.json, "ServesFastFood");
+        this.servesPizzas = JsonHelper.getBooleanFromJSON(json, "ServesPizzas");
+        this.servesFastFood = JsonHelper.getBooleanFromJSON(json, "ServesFastFood");
 
-        this.openDuringWeekends = JsonHelper.getBooleanFromJSON(this.json, "OpenDuringWeekends");
-        this.openingTime = new OpeningTime(JsonHelper.getJSONObjectFromJSON(this.json, "OpeningTime"));
+        this.openDuringWeekends = JsonHelper.getBooleanFromJSON(json, "OpenDuringWeekends");
+        this.openingTime = new OpeningTime(JsonHelper.getJSONObjectFromJSON(json, "OpeningTime"));
     }
 
     @Override
@@ -89,8 +88,20 @@ public class Restaurant implements Serializable {
         return String.format("%s, %s", this.name, this.address);
     }
 
-    public String getJSONString() {
-        return this.json.toString();
+    public float getDistance(LatLng userLocation) {
+        Location restaurantLoc = new Location("Restaurant location");
+        restaurantLoc.setLatitude(this.xcoord);
+        restaurantLoc.setLongitude(this.ycoord);
+
+        Location userLoc = new Location("User location");
+        userLoc.setLatitude(userLocation.latitude);
+        userLoc.setLongitude(userLocation.longitude);
+
+        return userLoc.distanceTo(restaurantLoc);
+    }
+
+    public float getDistanceInKm(LatLng userLocation) {
+        return this.getDistance(userLocation)/1000;
     }
 
 }
