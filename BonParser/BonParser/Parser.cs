@@ -148,16 +148,21 @@ namespace BonParser
                     switch ((int)menu.Count)
                     {
                         case 1:
-                            menus.AppendFormat(@"{{""Dessert:""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""null""}},", menu[0]);
+                            menus.AppendFormat(@"{{""Dessert"":""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""null""}},", 
+                                menu[0].Value.Replace(@"""", ""));
                             break;
                         case 2:
-                            menus.AppendFormat(@"{{""Dessert:""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""{1}""}},", menu[1], menu[0]);
+                            menus.AppendFormat(@"{{""Dessert"":""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""{1}""}},", 
+                                menu[1].Value.Replace(@"""", ""), menu[0].Value.Replace(@"""", ""));
                             break;
                         case 3:
-                            menus.AppendFormat(@"{{""Dessert:""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""null""}},", menu[0], menu[1], menu[2]);
+                            menus.AppendFormat(@"{{""Dessert"":""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""null""}},", 
+                                menu[0].Value.Replace(@"""", ""), menu[1].Value.Replace(@"""", ""), menu[2].Value.Replace(@"""", ""));
                             break;
                         case 4:
-                            menus.AppendFormat(@"{{""Dessert:""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""{3}""}},", menu[1], menu[2], menu[3], menu[0]);
+                            menus.AppendFormat(@"{{""Dessert"":""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""{3}""}},", 
+                                menu[1].Value.Replace(@"""", ""), menu[2].Value.Replace(@"""", ""), menu[3].Value.Replace(@"""", ""),
+                                menu[0].Value.Replace(@"""", ""));
                             break;
                     }
 

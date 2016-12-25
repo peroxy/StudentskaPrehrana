@@ -14,6 +14,8 @@ namespace TestClient
     {
         private static void Main(string[] args)
         {
+            //Parser.Begin();
+            //return;
             try
             {
                 var binding = new BasicHttpBinding
@@ -30,7 +32,9 @@ namespace TestClient
                 {
                     s.Restart();
                     Restaurants res = client.GetAllRestaurants();
+                    s.Stop();
                     elapsed.Add(s.ElapsedMilliseconds);
+                    Debug.WriteLine(s.ElapsedMilliseconds);
                 }
 
                 Debug.WriteLine(elapsed.Average());

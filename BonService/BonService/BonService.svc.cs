@@ -10,11 +10,14 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using BonParser;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BonService
 {
     public class BonService : IBonService
     {
+        private static int fail = 0;
         private enum Row
         {
             Name = 0,
@@ -134,7 +137,7 @@ namespace BonService
                 HasSaladBar = i.F_SaladBar,
                 HasStudentBenefits = i.F_StudentBenefits,
                 HasVegetarianSupport = i.F_Vegetarian,
-                Menu = i.R_Menu,
+                Menu = MenuToList(i.R_Menu),
                 Name = i.R_Name,
                 OpenDuringWeekends = i.F_Weekends,
                 OpeningTime = new OpeningTime
@@ -175,7 +178,7 @@ namespace BonService
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["BonDBConnectionString"].ConnectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(sql, conn) {CommandType = CommandType.Text};
+                var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     var restaurants = new Restaurants();
@@ -184,68 +187,68 @@ namespace BonService
                     {
                         restaurants.Values.Add(new Restaurant
                         {
-                            Address = reader.GetString((int) Row.Address),
-                            CoordinateX = reader.GetDecimal((int) Row.CoordinateX),
-                            CoordinateY = reader.GetDecimal((int) Row.CoordinateY),
-                            HasDelivery = reader.GetBoolean((int) Row.Delivery),
-                            HasDisabledSupport = reader.GetBoolean((int) Row.Disabled),
-                            HasDisabledWcSupport = reader.GetBoolean((int) Row.DisabledWc),
-                            HasSaladBar = reader.GetBoolean((int) Row.SaladBar),
-                            HasStudentBenefits = reader.GetBoolean((int) Row.StudentBenefits),
-                            HasVegetarianSupport = reader.GetBoolean((int) Row.Vegetarian),
-                            Menu = reader.GetString((int) Row.Menu),
-                                //menus.Where(x => x.M_R_ID == reader.GetInt32((int) Row.RestaurantId))
-                                //    .Select(x => new MenuActual
-                                //    {
-                                //        MainCourse = x.M_MainCourse,
-                                //        Dessert = x.M_Dessert,
-                                //        Salad = x.M_Salad,
-                                //        Soup = x.M_Soup
-                                //    }).ToList(),
-                            Name = reader.GetString((int) Row.Name),
-                            OpenDuringWeekends = reader.GetBoolean((int) Row.Weekends),
+                            Address = reader.GetString((int)Row.Address),
+                            CoordinateX = reader.GetDecimal((int)Row.CoordinateX),
+                            CoordinateY = reader.GetDecimal((int)Row.CoordinateY),
+                            HasDelivery = reader.GetBoolean((int)Row.Delivery),
+                            HasDisabledSupport = reader.GetBoolean((int)Row.Disabled),
+                            HasDisabledWcSupport = reader.GetBoolean((int)Row.DisabledWc),
+                            HasSaladBar = reader.GetBoolean((int)Row.SaladBar),
+                            HasStudentBenefits = reader.GetBoolean((int)Row.StudentBenefits),
+                            HasVegetarianSupport = reader.GetBoolean((int)Row.Vegetarian),
+                            Menu = MenuToList(reader.GetString((int)Row.Menu)),
+                            //menus.Where(x => x.M_R_ID == reader.GetInt32((int) Row.RestaurantId))
+                            //    .Select(x => new MenuActual
+                            //    {
+                            //        MainCourse = x.M_MainCourse,
+                            //        Dessert = x.M_Dessert,
+                            //        Salad = x.M_Salad,
+                            //        Soup = x.M_Soup
+                            //    }).ToList(),
+                            Name = reader.GetString((int)Row.Name),
+                            OpenDuringWeekends = reader.GetBoolean((int)Row.Weekends),
                             OpeningTime = new OpeningTime
                             {
                                 Week = new Week
                                 {
                                     From =
-                                        reader.IsDBNull((int) Row.WeekStart)
-                                            ? (TimeSpan?) null
-                                            : reader.GetTimeSpan((int) Row.WeekStart),
+                                        reader.IsDBNull((int)Row.WeekStart)
+                                            ? (TimeSpan?)null
+                                            : reader.GetTimeSpan((int)Row.WeekStart),
                                     To =
-                                        reader.IsDBNull((int) Row.WeekEnd)
-                                            ? (TimeSpan?) null
-                                            : reader.GetTimeSpan((int) Row.WeekEnd)
+                                        reader.IsDBNull((int)Row.WeekEnd)
+                                            ? (TimeSpan?)null
+                                            : reader.GetTimeSpan((int)Row.WeekEnd)
                                 },
                                 Saturday = new Saturday
                                 {
                                     From =
-                                        reader.IsDBNull((int) Row.SaturdayStart)
-                                            ? (TimeSpan?) null
-                                            : reader.GetTimeSpan((int) Row.SaturdayStart),
+                                        reader.IsDBNull((int)Row.SaturdayStart)
+                                            ? (TimeSpan?)null
+                                            : reader.GetTimeSpan((int)Row.SaturdayStart),
                                     To =
-                                        reader.IsDBNull((int) Row.SaturdayEnd)
-                                            ? (TimeSpan?) null
-                                            : reader.GetTimeSpan((int) Row.SaturdayEnd)
+                                        reader.IsDBNull((int)Row.SaturdayEnd)
+                                            ? (TimeSpan?)null
+                                            : reader.GetTimeSpan((int)Row.SaturdayEnd)
                                 },
                                 Sunday = new Sunday
                                 {
                                     From =
-                                        reader.IsDBNull((int) Row.SundayStart)
-                                            ? (TimeSpan?) null
-                                            : reader.GetTimeSpan((int) Row.SundayStart),
+                                        reader.IsDBNull((int)Row.SundayStart)
+                                            ? (TimeSpan?)null
+                                            : reader.GetTimeSpan((int)Row.SundayStart),
                                     To =
-                                        reader.IsDBNull((int) Row.SundayEnd)
-                                            ? (TimeSpan?) null
-                                            : reader.GetTimeSpan((int) Row.SundayEnd)
+                                        reader.IsDBNull((int)Row.SundayEnd)
+                                            ? (TimeSpan?)null
+                                            : reader.GetTimeSpan((int)Row.SundayEnd)
                                 }
                             },
-                            Phone = reader.IsDBNull((int) Row.Phone) ? null : reader.GetString((int) Row.Phone),
-                            Price = reader.GetDecimal((int) Row.Price),
-                            ServesFastFood = reader.GetBoolean((int) Row.FastFood),
-                            ServesLunch = reader.GetBoolean((int) Row.Lunch),
-                            ServesPizzas = reader.GetBoolean((int) Row.Pizzas),
-                            UpdatedOn = reader.GetDateTime((int) Row.UpdatedOn)
+                            Phone = reader.IsDBNull((int)Row.Phone) ? null : reader.GetString((int)Row.Phone),
+                            Price = reader.GetDecimal((int)Row.Price),
+                            ServesFastFood = reader.GetBoolean((int)Row.FastFood),
+                            ServesLunch = reader.GetBoolean((int)Row.Lunch),
+                            ServesPizzas = reader.GetBoolean((int)Row.Pizzas),
+                            UpdatedOn = reader.GetDateTime((int)Row.UpdatedOn)
                         });
                     }
                     return restaurants;
@@ -335,5 +338,22 @@ namespace BonService
             sql.Remove(sql.Length - 5, 5);
             return sql.ToString();
         }
+
+        private static List<Menu> MenuToList(string menus)
+        {
+            try
+            {
+                return menus == "[]" ? new List<Menu>() : JsonConvert.DeserializeObject<List<Menu>>(menus);
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine(++fail);
+                return new List<Menu>();
+            }
+        }
     }
+
+
+
+
 }

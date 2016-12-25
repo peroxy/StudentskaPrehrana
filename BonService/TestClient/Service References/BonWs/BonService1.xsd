@@ -24,7 +24,7 @@
       <xs:element minOccurs="0" name="HasSaladBar" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasStudentBenefits" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasVegetarianSupport" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Menu" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:ArrayOfMenu" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OpenDuringWeekends" type="xs:boolean" />
       <xs:element minOccurs="0" name="OpeningTime" nillable="true" type="tns:OpeningTime" />
@@ -37,6 +37,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Restaurant" nillable="true" type="tns:Restaurant" />
+  <xs:complexType name="ArrayOfMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Menu" nillable="true" type="tns:Menu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMenu" nillable="true" type="tns:ArrayOfMenu" />
+  <xs:complexType name="Menu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dessert" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MainCourse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Soup" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Menu" nillable="true" type="tns:Menu" />
   <xs:complexType name="OpeningTime">
     <xs:sequence>
       <xs:element minOccurs="0" name="Saturday" nillable="true" type="tns:Saturday" />
