@@ -14,8 +14,8 @@ namespace TestClient
     {
         private static void Main(string[] args)
         {
-            //Parser.Begin();
-            //return;
+            Parser.Begin();
+            return;
             try
             {
                 var binding = new BasicHttpBinding

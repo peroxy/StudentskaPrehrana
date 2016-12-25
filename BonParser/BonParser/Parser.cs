@@ -148,15 +148,15 @@ namespace BonParser
                     switch ((int)menu.Count)
                     {
                         case 1:
-                            menus.AppendFormat(@"{{""Dessert"":""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""null""}},", 
+                            menus.AppendFormat(@"{{""Dessert"":null,""MainCourse"":""{0}"",""Salad"":null,""Soup"":null}},", 
                                 menu[0].Value.Replace(@"""", ""));
                             break;
                         case 2:
-                            menus.AppendFormat(@"{{""Dessert"":""null"",""MainCourse"":""{0}"",""Salad"":""null"",""Soup"":""{1}""}},", 
+                            menus.AppendFormat(@"{{""Dessert"":null,""MainCourse"":""{0}"",""Salad"":null,""Soup"":""{1}""}},", 
                                 menu[1].Value.Replace(@"""", ""), menu[0].Value.Replace(@"""", ""));
                             break;
                         case 3:
-                            menus.AppendFormat(@"{{""Dessert"":""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":""null""}},", 
+                            menus.AppendFormat(@"{{""Dessert"":""{2}"",""MainCourse"":""{0}"",""Salad"":""{1}"",""Soup"":null}},", 
                                 menu[0].Value.Replace(@"""", ""), menu[1].Value.Replace(@"""", ""), menu[2].Value.Replace(@"""", ""));
                             break;
                         case 4:
