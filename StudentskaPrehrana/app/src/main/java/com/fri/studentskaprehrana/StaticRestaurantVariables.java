@@ -28,11 +28,12 @@ class StaticRestaurantVariables {
     static boolean userLocationJustSelected = false;
 
     // Ker v onPlaceSelected() ne moremo delati z mapo ob customLocation pribliza nanjo
-    static boolean customLocationJustSelected = false;
+    static boolean customLocationJustSelected = true;
 
     static LinkedList<Restaurant> restaurants = new LinkedList<>();
 
     static Location mRestaurantSearchLocation;
+    static Location mRestaurantChangeLocation;
     static LatLng mRestaurantLatLng;
     static String mSelectedPlaceName;
     static double radius = 10;
