@@ -62,4 +62,13 @@ public class JsonHelper {
 
         return value;
     }
+
+    public static JSONObject getJsonObjectFromString(String s) {
+        JSONObject json = null;
+        try {
+            json = new JSONObject(s);
+        } catch (Exception e) {}
+
+        return json;
+    }
 }

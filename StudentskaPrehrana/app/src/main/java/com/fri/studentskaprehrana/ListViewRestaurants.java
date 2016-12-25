@@ -49,7 +49,7 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
         listItems=new ArrayList<Restaurant>();
 
         // Test
-        StaticRestaurantVariables.mRestaurantLatLng = new LatLng(46.052771, 14.503602);
+        StaticRestaurantVariables.mRestaurantLatLng = new LatLng(46.1422922, 14.4062103);
         RestaurantsModel.getRestaurants(this, "getRestaurants");
     }
 
@@ -71,7 +71,6 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Restaurant send = (Restaurant)adapter.getItem(position);
-                //Log.e("TAG",send.phone);
                 Intent intent = new Intent(ListViewRestaurants.this, DetailedViewRestaurant.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("value", send);
