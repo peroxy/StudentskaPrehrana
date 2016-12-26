@@ -32,63 +32,157 @@
                 android:textAllCaps="false"
                 android:textSize="28sp" />
 
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_status"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                android:layout_marginBottom="20dp" />
+
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:text="Naslov"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lb_address"
+                    android:layout_weight="0.5"
+                    android:textStyle="normal|bold"
+                    android:textSize="10sp"
+                    android:textAllCaps="true"
+                    android:layout_marginBottom="3dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_Name"
+                    android:layout_toEndOf="@+id/tv_Name"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_address" />
+
+                <TextView
+                    android:text="Telefon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lb_phone"
+                    android:textSize="10sp"
+                    android:textAllCaps="true"
+                    android:textStyle="normal|bold"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="17dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_Name"
+                    android:layout_alignStart="@+id/tv_Name"
+                    android:id="@+id/tv_phone"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:layout_marginTop="20dp">
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
+                    android:text="Delovni čas"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:paddingRight="15dp">
-
-                    <TextView
-                        android:text="Naslov"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/lb_address"
-                        android:layout_weight="1"
-                        android:textStyle="normal|bold"
-                        android:textSize="10sp"
-                        android:textAllCaps="true"
-                        android:layout_marginBottom="3dp" />
-
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/tv_Name"
-                        android:layout_toEndOf="@+id/tv_Name"
-                        android:layout_weight="1"
-                        android:id="@+id/tv_address" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textStyle="normal|bold"
+                    android:textSize="10sp"
+                    android:id="@+id/lb_opening" />
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5">
+                    android:layout_marginTop="3dp">
 
-                    <TextView
-                        android:text="Telefon"
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/lb_phone"
-                        android:textSize="10sp"
-                        android:textAllCaps="true"
-                        android:textStyle="normal|bold"
-                        android:layout_marginBottom="3dp" />
+                        android:paddingRight="25dp"
+                        android:layout_weight="0.3">
 
-                    <TextView
-                        android:text="TextView"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textStyle="normal|bold"
+                            android:textSize="10sp"
+                            android:id="@+id/lb_weekday"
+                            android:text="Pon - pet"
+                            android:paddingTop="3dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tv_weekday"
+                            android:layout_marginTop="1dp"
+                            android:gravity="center_vertical|fill_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="25dp"
+                        android:layout_weight="0.3"
+                        android:layout_width="match_parent">
+
+                        <TextView
+                            android:text="Sobota"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lb_saturday"
+                            android:textSize="10sp"
+                            android:textStyle="normal|bold"
+                            android:paddingTop="3dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_saturday"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_Name"
-                        android:layout_alignStart="@+id/tv_Name"
-                        android:id="@+id/tv_phone" />
+                        android:paddingRight="25dp"
+                        android:layout_weight="0.3">
+
+                        <TextView
+                            android:text="Nedelja"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lb_sunday"
+                            android:textSize="10sp"
+                            android:textStyle="normal|bold"
+                            android:paddingTop="3dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_sunday"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -97,7 +191,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:text="Ponudba"

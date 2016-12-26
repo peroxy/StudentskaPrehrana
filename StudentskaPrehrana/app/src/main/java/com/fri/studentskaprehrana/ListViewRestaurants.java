@@ -104,6 +104,7 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
             ((TextView)restaurantItem.findViewById(R.id.tv_restaurantLocation)).setText("Naslov: " + currentRes.address);
             ((TextView)restaurantItem.findViewById(R.id.tv_restaurantDistance)).setText(String.format("Oddaljenost: %.1fkm", currentRes.getDistanceInKm(StaticRestaurantVariables.mRestaurantLatLng)));
             ((TextView)restaurantItem.findViewById(R.id.restaurant_number)).setText(Integer.toString(i));
+            ((TextView)restaurantItem.findViewById(R.id.tv_openedTimeLeft)).setText(currentRes.openingTime.getOpenedTimeLeft());
 
             restaurantItem.setOnClickListener(new View.OnClickListener() {
                 @Override

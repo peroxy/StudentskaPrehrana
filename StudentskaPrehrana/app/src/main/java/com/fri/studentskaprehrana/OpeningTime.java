@@ -1,5 +1,7 @@
 package com.fri.studentskaprehrana;
 
+import android.util.Log;
+
 import com.fri.studentskaprehrana.utils.Time;
 import com.fri.studentskaprehrana.utils.TimePeriod;
 
@@ -39,6 +41,8 @@ public class OpeningTime implements Serializable {
 
     public TimePeriod getTodayOpeningTime() {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+
+        Log.d("Day:", String.valueOf(day));
 
         if (day > 1 && day < 7)
             return this.weekDay;

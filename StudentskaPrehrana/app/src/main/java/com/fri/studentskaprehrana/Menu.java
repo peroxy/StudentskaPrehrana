@@ -1,5 +1,7 @@
 package com.fri.studentskaprehrana;
 
+import android.text.TextUtils;
+
 import com.fri.studentskaprehrana.utils.JsonHelper;
 
 import org.json.JSONArray;
@@ -7,33 +9,37 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by ziga on 4. 12. 2016.
  */
 
-/* TO DO:
-Create classes for Menu and both times
- */
-
 public class Menu implements Serializable {
-    protected String dessert;
-    protected String mainCourse;
-    protected String salad;
-    protected String soup;
+    protected String menu;
 
-    public Menu(String des, String mc, String sal, String sou){
-        this.dessert = des == null || des == "null" ? "Ni podatka" : capitalize(des);
-        this.mainCourse = mc == null || mc == "null" ? "Ni podatka" : capitalize(mc);
-        this.salad = sal == null || sal == "null" ? "Ni podatka" : capitalize(sal);
-        this.soup = sou == null || sou == "null" ? "Ni podatka" : capitalize(sou);
+    public Menu(String menu){
+        this.menu = menu;
     }
 
     public Menu(JSONObject json) {
-        this(JsonHelper.getStringFromJSON(json, "Dessert"),
-             JsonHelper.getStringFromJSON(json, "MainCourse"),
-             JsonHelper.getStringFromJSON(json, "Salad"),
-             JsonHelper.getStringFromJSON(json, "Soup"));
+        this.menu = "";
+        String[] items = {
+                JsonHelper.getStringFromJSON(json, "MainCourse").toLowerCase(),
+                JsonHelper.getStringFromJSON(json, "Soup").toLowerCase(),
+                JsonHelper.getStringFromJSON(json, "Salad").toLowerCase(),
+                JsonHelper.getStringFromJSON(json, "Dessert").toLowerCase()
+        };
+
+        ArrayList<String> menuItems = new ArrayList<>();
+
+        for (String item : items) {
+            if (item != null && !item.equals("null"))
+                menuItems.add(capitalize(item));
+        }
+
+        if (menuItems.size() > 0)
+            this.menu = "• " + TextUtils.join("\n• ", menuItems);
     }
 
 
@@ -43,7 +49,7 @@ public class Menu implements Serializable {
     }
     @Override
     public String toString(){
-        return String.format("Main course: %s\nDessert: %s\nSalad: %s\nSoup: %s",this.mainCourse,this.dessert,this.salad,this.soup);
+        return this.menu;
     }
 
     public static Menu[] getMenuItems(JSONArray json) {
@@ -57,29 +63,5 @@ public class Menu implements Serializable {
         }
 
         return menuItems;
-    }
-
-    public String getDessert() {
-        if (dessert == null || dessert.equals("null"))
-            return "brez";
-        return dessert;
-    }
-
-    public String getMainCourse() {
-        if (mainCourse == null || mainCourse.equals("null"))
-            return "brez";
-        return mainCourse;
-    }
-
-    public String getSalad() {
-        if (salad == null || salad.equals("null"))
-            return "brez";
-        return salad;
-    }
-
-    public String getSoup() {
-        if (soup == null || soup.equals("null"))
-            return "brez";
-        return soup;
     }
 }

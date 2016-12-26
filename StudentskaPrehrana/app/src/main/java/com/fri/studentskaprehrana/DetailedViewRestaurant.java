@@ -43,10 +43,18 @@ public class DetailedViewRestaurant extends AppCompatActivity {
             TextView tvName = (TextView) parent.findViewById(R.id.tv_name);
             TextView tvAddress = (TextView) parent.findViewById(R.id.tv_address);
             TextView tvPhoneNumber = (TextView) parent.findViewById(R.id.tv_phone);
+            TextView tvOpenWeekday = (TextView) parent.findViewById(R.id.tv_weekday);
+            TextView tvOpenSaturday = (TextView) parent.findViewById(R.id.tv_saturday);
+            TextView tvOpenSunday = (TextView) parent.findViewById(R.id.tv_sunday);
+            TextView tvStatus = (TextView) parent.findViewById(R.id.tv_status);
 
             tvName.setText(restaurant.name != null && !restaurant.name.equals("null") ? restaurant.name : "Ni podatka");
             tvAddress.setText(restaurant.address != null && !restaurant.address.equals("null") ? restaurant.address : "Ni podatka");
             tvPhoneNumber.setText(restaurant.phone != null && !restaurant.phone.equals("null") ? restaurant.phone : "Ni podatka");
+            tvOpenWeekday.setText(restaurant.openingTime.getWeekDay().toString());
+            tvOpenSaturday.setText(restaurant.openDuringWeekends ? restaurant.openingTime.getSaturday().toString() : "Zaprto");
+            tvOpenSunday.setText(restaurant.openDuringWeekends ? restaurant.openingTime.getSunday().toString() : "Zaprto");
+            tvStatus.setText(restaurant.openingTime.getOpenedTimeLeft());
 
             for (int i = 0; i < menus.length; i++) {
                 Menu currentItem = menus[i];
@@ -56,11 +64,9 @@ public class DetailedViewRestaurant extends AppCompatActivity {
                 if(menuItem.getParent()!=null)
                     ((ViewGroup)menuItem.getParent()).removeView(menuItem);
 
-                ((TextView)menuItem.findViewById(R.id.tv_menuNumber)).setText(String.format("Meni %d", i+1));
-                ((TextView)menuItem.findViewById(R.id.tv_soup)).setText(currentItem.soup);
-                ((TextView)menuItem.findViewById(R.id.tv_salad)).setText(currentItem.salad);
-                ((TextView)menuItem.findViewById(R.id.tv_mainCourse)).setText(currentItem.mainCourse);
-                ((TextView)menuItem.findViewById(R.id.tv_dessert)).setText(currentItem.dessert);
+                ((TextView)menuItem.findViewById(R.id.tv_menuNumber)).setText(String.format("%d. Meni", i+1));
+                ((TextView)menuItem.findViewById(R.id.tv_menuContent)).setText(currentItem.menu);
+
 
                 ((LinearLayout) parent.findViewById(R.id.listMenuItems)).addView(menuItem);
             }

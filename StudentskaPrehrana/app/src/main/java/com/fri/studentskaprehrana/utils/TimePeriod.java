@@ -76,7 +76,7 @@ public class TimePeriod implements Serializable {
     public String toString() {
         if (this.openingTime.getHour() < 0 || this.closingTime.getHour() < 0)
             return this.error;
-        return String.format("Od %s do %s", this.openingTime.toString(), this.closingTime.toString());
+        return String.format("%s - %s", this.openingTime.toString(), this.closingTime.toString());
     }
 
     /**
@@ -90,13 +90,36 @@ public class TimePeriod implements Serializable {
 
         Calendar calendar = Calendar.getInstance();
         Time now = new Time(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-        String result;
 
         // Check if current time is between opening and closing time
-        if (Time.compareTimes(now, openingTime) > -1 && Time.compareTimes(now, closingTime) < 1)
-            return String.format("Odprto še: %s", Time.differenceBetweenTimes(now, closingTime).toString());
-        else
-            return "Zaprto";
+        if (Time.compareTimes(now, openingTime) > -1 && Time.compareTimes(now, closingTime) < 1) {
+            Time timeLeft = Time.differenceBetweenTimes(now, closingTime);
+            String hourText;
+            String minutesText;
+
+            switch (timeLeft.getHour()) {
+                case 1: hourText = "uro"; break;
+                case 2: hourText = "uri"; break;
+                case 3:
+                case 4: hourText = "ure"; break;
+                default: hourText = "ur"; break;
+            }
+
+            switch (timeLeft.getMinutes()) {
+                case 1: minutesText = "minuto"; break;
+                case 2: minutesText = "minuti"; break;
+                case 3:
+                case 4: minutesText = "minute"; break;
+                default: minutesText = "minut"; break;
+            }
+
+            if (timeLeft.getHour() > 0) {
+                return String.format("Odprto še %d %s in %d %s.", timeLeft.getHour(), hourText, timeLeft.getMinutes(), minutesText);
+            }
+            else
+                return String.format("Odprto še %d %s.", timeLeft.getMinutes(), minutesText);
+        } else
+            return "Trenutno zaprto.";
     }
 
     public Time getOpeningTime() {
