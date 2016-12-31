@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Created by kerry on 30. 11. 2016.
  */
 
-public class Restaurant implements Serializable {
+public class Restaurant implements Serializable, Comparable<Restaurant> {
     protected String name;
     protected String address;
     protected String phone;
@@ -32,29 +32,30 @@ public class Restaurant implements Serializable {
     protected boolean servesFastFood;
     protected boolean hasStudentBenefits;
     protected boolean hasDelivery;
+    protected double distanceFromUser;
 
-    public Restaurant(String name, String address, String phone, double price,
-               double xcoord, double ycoord,
-               boolean servesLunch, boolean hasSaladBar,
-               boolean hasVegetarianSupport, boolean hasDisabledSupport, boolean hasDisabledWcSupport,
-               boolean servesPizzas, boolean openDuringWeekends, boolean servesFastFood, boolean hasStudentBenefits, boolean hasDelivery) {
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.price = price;
-        this.xcoord = xcoord;
-        this.ycoord = ycoord;
-        this.servesLunch = servesLunch;
-        this.hasSaladBar = hasSaladBar;
-        this.hasVegetarianSupport = hasVegetarianSupport;
-        this.hasDisabledSupport = hasDisabledSupport;
-        this.hasDisabledWcSupport = hasDisabledWcSupport;
-        this.servesPizzas = servesPizzas;
-        this.openDuringWeekends = openDuringWeekends;
-        this.servesFastFood = servesFastFood;
-        this.hasStudentBenefits = hasStudentBenefits;
-        this.hasDelivery = hasDelivery;
-    }
+//    public Restaurant(String name, String address, String phone, double price,
+//               double xcoord, double ycoord,
+//               boolean servesLunch, boolean hasSaladBar,
+//               boolean hasVegetarianSupport, boolean hasDisabledSupport, boolean hasDisabledWcSupport,
+//               boolean servesPizzas, boolean openDuringWeekends, boolean servesFastFood, boolean hasStudentBenefits, boolean hasDelivery) {
+//        this.name = name;
+//        this.address = address;
+//        this.phone = phone;
+//        this.price = price;
+//        this.xcoord = xcoord;
+//        this.ycoord = ycoord;
+//        this.servesLunch = servesLunch;
+//        this.hasSaladBar = hasSaladBar;
+//        this.hasVegetarianSupport = hasVegetarianSupport;
+//        this.hasDisabledSupport = hasDisabledSupport;
+//        this.hasDisabledWcSupport = hasDisabledWcSupport;
+//        this.servesPizzas = servesPizzas;
+//        this.openDuringWeekends = openDuringWeekends;
+//        this.servesFastFood = servesFastFood;
+//        this.hasStudentBenefits = hasStudentBenefits;
+//        this.hasDelivery = hasDelivery;
+//    }
 
     public Restaurant(JSONObject json) {
 
@@ -81,6 +82,8 @@ public class Restaurant implements Serializable {
 
         this.openDuringWeekends = JsonHelper.getBooleanFromJSON(json, "OpenDuringWeekends");
         this.openingTime = new OpeningTime(JsonHelper.getJSONObjectFromJSON(json, "OpeningTime"));
+
+        this.distanceFromUser = this.getDistanceInKm(StaticRestaurantVariables.mRestaurantLatLng);
     }
 
     @Override
@@ -104,4 +107,13 @@ public class Restaurant implements Serializable {
         return this.getDistance(userLocation)/1000;
     }
 
+    @Override
+    public int compareTo(Restaurant o) {
+        if (this.distanceFromUser < o.distanceFromUser)
+            return -1;
+        else if (this.distanceFromUser > o.distanceFromUser)
+            return 1;
+        else
+            return 0;
+    }
 }

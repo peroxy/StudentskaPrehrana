@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.fri.studentskaprehrana.utils.RequestHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListViewRestaurants extends AppCompatActivity  implements RequestHandler {
@@ -91,6 +92,7 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
                 null, false);
         LinearLayout list = ((LinearLayout) parent.findViewById(R.id.restaurantsList));
 
+        Collections.sort(restaurants);
         for (int i = 0; i < restaurants.size(); i++) {
             Restaurant currentRes = restaurants.get(i);
             View custom = inflater.inflate(R.layout.restaurantlistitem, null, false);

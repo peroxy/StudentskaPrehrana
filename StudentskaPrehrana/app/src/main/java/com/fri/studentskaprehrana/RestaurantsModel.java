@@ -52,7 +52,7 @@ public class RestaurantsModel {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("Response recived ", response.toString());
+//                            Log.d("Response recived ", response.toString());
                             RestaurantsModel.handleResponse(response, handler);
                             pDialog.hide();
                         }
