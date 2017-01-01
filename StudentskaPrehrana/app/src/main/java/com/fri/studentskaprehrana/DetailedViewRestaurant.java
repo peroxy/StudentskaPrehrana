@@ -73,5 +73,7 @@ public class DetailedViewRestaurant extends AppCompatActivity {
 
             setContentView(parent);
         }
+
+        setTitle("Podatki o restavraciji");
     }
 }

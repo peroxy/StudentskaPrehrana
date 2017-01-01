@@ -37,7 +37,8 @@ class StaticRestaurantVariables {
     static LatLng mRestaurantLatLng;
     static String mSelectedPlaceName;
     static double radius = 10;
-    static final double minRadius = 5;
+    static final double minRadius = 1;
+    static final double maxRadius = 50;
 
     static void setLocation(String name, double lat, double lon) {
         mRestaurantSearchLocation = new Location(name);

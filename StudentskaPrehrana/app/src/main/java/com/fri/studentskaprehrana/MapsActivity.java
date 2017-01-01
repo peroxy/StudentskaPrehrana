@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.fri.studentskaprehrana.utils.RequestHandler;
@@ -125,6 +127,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Location y = new Location("daffd");
         y.setLatitude(UPPER_EAST_BOUND.latitude);
         y.setLongitude(UPPER_EAST_BOUND.longitude);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapsActivity.this, ListViewRestaurants.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

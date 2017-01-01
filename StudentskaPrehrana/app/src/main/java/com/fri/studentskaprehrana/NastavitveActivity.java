@@ -47,7 +47,7 @@ public class NastavitveActivity extends AppCompatActivity {
 
         this.sbRadius = (SeekBar) findViewById(R.id.activity_nastavitve_sb_radius);
 
-        this.btSeznam = (Button) findViewById(R.id.btSeznam);
+//        this.btSeznam = (Button) findViewById(R.id.btSeznam);
 
         this.tbLunch.setChecked(StaticRestaurantVariables.lunch);
         this.tbSaladBar.setChecked(StaticRestaurantVariables.saladBar);
@@ -113,19 +113,15 @@ public class NastavitveActivity extends AppCompatActivity {
 
             }
         });
-        btSeznam.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(NastavitveActivity.this, ListViewRestaurants.class);
-                startActivity(intent);
-            }
-        });
 
         sbRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                TextView tv = (TextView) findViewById(R.id.textView);
+                TextView tv = (TextView) findViewById(R.id.tv_radius);
+                int newRadius = progress + (int) StaticRestaurantVariables.minRadius;
 
-                tv.setText(Integer.toString(progress + (int) StaticRestaurantVariables.minRadius));
+                tv.setText(Integer.toString(newRadius) + "km");
+                StaticRestaurantVariables.radius = newRadius;
             }
 
             @Override
@@ -139,6 +135,9 @@ public class NastavitveActivity extends AppCompatActivity {
             }
         });
 
+        TextView tv = (TextView) findViewById(R.id.tv_radius);
+        tv.setText(Integer.toString((int) StaticRestaurantVariables.radius) + " km");
+        sbRadius.setProgress((int) StaticRestaurantVariables.radius - (int) StaticRestaurantVariables.minRadius);
     }
 
 }

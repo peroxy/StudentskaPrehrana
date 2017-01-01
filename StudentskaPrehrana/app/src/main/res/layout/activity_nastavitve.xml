@@ -10,129 +10,228 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fri.studentskaprehrana.NastavitveActivity">
 
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_saladBar"
-        android:layout_alignBaseline="@+id/activity_nastavitve_tb_lunch"
-        android:layout_alignBottom="@+id/activity_nastavitve_tb_lunch"
-        android:layout_centerHorizontal="true"
-        android:textOn="ON SAL"
-        android:textOff="OFF SAL" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_vegetarian"
-        android:layout_alignBaseline="@+id/activity_nastavitve_tb_saladBar"
-        android:layout_alignBottom="@+id/activity_nastavitve_tb_saladBar"
-        android:layout_alignParentEnd="true"
-        android:textOn="ON VEG"
-        android:textOff="OFF VEG" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_disabledWC"
-        android:layout_alignBaseline="@+id/activity_nastavitve_tb_disabled"
-        android:layout_alignBottom="@+id/activity_nastavitve_tb_disabled"
-        android:layout_alignStart="@+id/activity_nastavitve_tb_saladBar"
-        android:textOn="ON DWC"
-        android:textOff="OFF DWC" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_pizzas"
-        android:layout_alignBaseline="@+id/activity_nastavitve_tb_disabledWC"
-        android:layout_alignBottom="@+id/activity_nastavitve_tb_disabledWC"
-        android:layout_alignParentEnd="true"
-        android:textOn="ON PIZ"
-        android:textOff="OFF PIZ" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_studentBenefits"
-        android:layout_alignBaseline="@+id/activity_nastavitve_tb_weekends"
-        android:layout_alignBottom="@+id/activity_nastavitve_tb_weekends"
-        android:layout_alignStart="@+id/activity_nastavitve_tb_disabledWC"
-        android:textOn="ON STB"
-        android:textOff="OFF STB" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_delivery"
-        android:layout_alignBaseline="@+id/activity_nastavitve_tb_studentBenefits"
-        android:layout_alignBottom="@+id/activity_nastavitve_tb_studentBenefits"
-        android:layout_alignParentEnd="true"
-        android:textOn="ON DEL"
-        android:textOff="OFF DEL" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_weekends"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textOn="ON WEE"
-        android:textOff="OFF WEE"/>
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_disabled"
-        android:layout_above="@+id/activity_nastavitve_tb_studentBenefits"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="22dp"
-        android:textOn="ON DIS"
-        android:textOff="OFF DIS" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_tb_lunch"
-        android:layout_marginBottom="26dp"
-        android:layout_above="@+id/activity_nastavitve_tb_disabled"
-        android:layout_alignParentStart="true"
-        android:textOn="ON LUN"
-        android:textOff="OFF LUN" />
-
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_nastavitve_sb_radius"
-        android:layout_above="@+id/activity_nastavitve_tb_lunch"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="96dp"
-        android:layout_alignParentEnd="true"
-        android:max="100"
-        android:progress="10"/>
-
-    <Button
-        android:text="Seznam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/btSeznam" />
+        android:layout_alignParentStart="true">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btSeznam"
-        android:layout_alignEnd="@+id/activity_nastavitve_tb_lunch"
-        android:id="@+id/textView" />
+        <TextView
+            android:text="Radij iskanja restavracij"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:textStyle="normal|bold"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_radius"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_nastavitve_sb_radius"
+            android:max="49"
+            android:progress="10"
+            android:layout_weight="0.11"
+            android:thumbTint="@color/colorPrimary"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:text="Filtriranje restavracij"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:textStyle="normal|bold"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            android:layout_marginBottom="20dp"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_lunch"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_lunch"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Kosila"
+                android:textOff="Kosila"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33"  />
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_saladBar"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_salad"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Solatni bar"
+                android:textOff="Solatni bar"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33"  />
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_pizzas"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_pizza"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Pizza"
+                android:textOff="Pizza"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_vegetarian"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_vegeterian"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Vegetar.\nhrana"
+                android:textOff="Vegetar.\nhrana"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" />
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_studentBenefits"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_benifits"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Študentske\nugodnosti"
+                android:textOff="Študentske\nugodnosti"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" />
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_delivery"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_delivery"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Dostava\nna dom"
+                android:textOff="Dostava\nna dom"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_weekends"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_time"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Odprto\nmed vikendi"
+                android:textOff="Odprto\nmed vikendi"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33" />
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_disabled"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_disabled"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="Dostop za\ninvalide"
+                android:textOff="Dostop za\ninvalide"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33" />
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:id="@+id/activity_nastavitve_tb_disabledWC"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_disabledwc"
+                android:drawableTint="@color/toggle_btn_tint"
+                android:drawablePadding="8dp"
+                android:textOn="WC za\ninvalide"
+                android:textOff="WC za\ninvalide"
+                android:textSize="10dp"
+                android:textColor="@color/toggle_btn_text"
+                android:layout_weight="0.33" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
