@@ -52,6 +52,16 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (StaticRestaurantVariables.mRestaurantLatLng != null) {
+            RestaurantsModel.getRestaurants(this, "getRestaurants");
+        } else {
+            Toast.makeText(this, "Lokacija ni izbrana", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
     public void handleResponse(final List<Restaurant> restaurants) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         RelativeLayout parent = (RelativeLayout) inflater.inflate(R.layout.activity_list_view_restaurants,
@@ -73,7 +83,8 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
             ((TextView)restaurantItem.findViewById(R.id.tv_restaurantDistance)).setText(String.format("Oddaljenost: %.1fkm", currentRes.getDistanceInKm(StaticRestaurantVariables.mRestaurantLatLng)));
             ((TextView)restaurantItem.findViewById(R.id.restaurant_number)).setText(Integer.toString(i));
             ((TextView)restaurantItem.findViewById(R.id.tv_openedTimeLeft)).setText(currentRes.openingTime.getOpenedTimeLeft());
-            ((ImageView) restaurantItem.findViewById(R.id.iv_status)).setImageResource(!currentRes.openingTime.getOpenedTimeLeft().equals("Zaprto") ? R.drawable.ic_open : R.drawable.ic_closed);
+            ((TextView)restaurantItem.findViewById(R.id.tv_toPay)).setText("Cena: " + Double.toString(currentRes.price) + " €");
+            ((ImageView) restaurantItem.findViewById(R.id.iv_status)).setImageResource(!currentRes.openingTime.getOpenedTimeLeft().equals("Trenutno zaprto.") ? R.drawable.ic_open : R.drawable.ic_closed);
 
             restaurantItem.setOnClickListener(new View.OnClickListener() {
                 @Override

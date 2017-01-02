@@ -110,7 +110,6 @@ public class NastavitveActivity extends AppCompatActivity {
         tbDelivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 StaticRestaurantVariables.delivery = isChecked;
-
             }
         });
 

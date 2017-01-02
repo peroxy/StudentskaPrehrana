@@ -47,8 +47,8 @@
             <ImageView
                 app:srcCompat="@drawable/ic_open"
                 android:id="@+id/iv_status"
-                android:tint="@color/colorPrimary"
-                android:layout_width="match_parent"
+                android:tint="@color/colorTextPrimary"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp" />
 
             <TextView
@@ -57,19 +57,131 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_status"
                 android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="27dp"
                 android:layout_weight="1"
                 android:paddingTop="2dp"
                 android:textStyle="normal|bold"
-                android:gravity="center_horizontal" />
+                android:textColor="@color/colorTextPrimary" />
+
+            <TextView
+                android:text="Cena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textSize="10sp"
+                android:textAllCaps="true"
+                android:textStyle="normal|bold"
+                android:layout_marginBottom="3dp" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_toPay"
+                android:textSize="19sp"
+                android:textStyle="normal|bold"
+                android:textColor="@color/colorTextPrimary" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:paddingRight="20dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:text="Delovni čas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textStyle="normal|bold"
+                    android:textSize="10sp"
+                    android:id="@+id/lb_opening" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textStyle="normal|bold"
+                            android:textSize="10sp"
+                            android:id="@+id/lb_weekday"
+                            android:text="Pon - pet"
+                            android:paddingTop="3dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tv_weekday"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:layout_width="match_parent">
+
+                        <TextView
+                            android:text="Sobota"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lb_saturday"
+                            android:textSize="10sp"
+                            android:textStyle="normal|bold"
+                            android:paddingTop="3dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_saturday"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3">
+
+                        <TextView
+                            android:text="Nedelja"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lb_sunday"
+                            android:textSize="10sp"
+                            android:textStyle="normal|bold"
+                            android:paddingTop="3dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_sunday"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:layout_marginTop="30dp">
 
                 <TextView
                     android:text="Naslov"
@@ -101,7 +213,7 @@
                     android:textStyle="normal|bold"
                     android:layout_marginBottom="3dp"
                     android:layout_weight="0.5"
-                    android:layout_marginTop="17dp" />
+                    android:layout_marginTop="27dp" />
 
                 <TextView
                     android:text="TextView"
@@ -113,109 +225,205 @@
                     android:layout_weight="0.5" />
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
+                android:text="Nudijo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:layout_marginTop="20dp">
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:layout_marginTop="27dp"
+                android:textStyle="normal|bold"
+                android:textAllCaps="true"
+                android:textSize="10sp"
+                android:layout_marginBottom="10dp" />
 
-                <TextView
-                    android:text="Delovni čas"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_lunch"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textStyle="normal|bold"
-                    android:textSize="10sp"
-                    android:id="@+id/lb_opening" />
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_lunch"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Kosila"
+                    android:textOff="Kosila"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="3dp">
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_saladBar"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_salad"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Solatni bar"
+                    android:textOff="Solatni bar"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="25dp"
-                        android:layout_weight="0.3">
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_pizzas"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_pizza"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Pizza"
+                    android:textOff="Pizza"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textStyle="normal|bold"
-                            android:textSize="10sp"
-                            android:id="@+id/lb_weekday"
-                            android:text="Pon - pet"
-                            android:paddingTop="3dp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:text="TextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/tv_weekday"
-                            android:layout_marginTop="1dp"
-                            android:gravity="center_vertical|fill_vertical" />
-                    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="25dp"
-                        android:layout_weight="0.3"
-                        android:layout_width="match_parent">
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_vegetarian"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_vegeterian"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Vegetar.\nhrana"
+                    android:textOff="Vegetar.\nhrana"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:clickable="false" />
 
-                        <TextView
-                            android:text="Sobota"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/lb_saturday"
-                            android:textSize="10sp"
-                            android:textStyle="normal|bold"
-                            android:paddingTop="3dp" />
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_studentBenefits"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_benifits"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Študentske\nugodnosti"
+                    android:textOff="Študentske\nugodnosti"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:clickable="false" />
 
-                        <TextView
-                            android:text="TextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tv_saturday"
-                            android:layout_marginTop="1dp" />
-                    </LinearLayout>
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_delivery"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_delivery"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Dostava\nna dom"
+                    android:textOff="Dostava\nna dom"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="25dp"
-                        android:layout_weight="0.3">
+            </LinearLayout>
 
-                        <TextView
-                            android:text="Nedelja"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/lb_sunday"
-                            android:textSize="10sp"
-                            android:textStyle="normal|bold"
-                            android:paddingTop="3dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp">
 
-                        <TextView
-                            android:text="TextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tv_sunday"
-                            android:layout_marginTop="1dp" />
-                    </LinearLayout>
-                </LinearLayout>
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_weekends"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_time"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Odprto\nmed vikendi"
+                    android:textOff="Odprto\nmed vikendi"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
 
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_disabled"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_disabled"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="Dostop za\ninvalide"
+                    android:textOff="Dostop za\ninvalide"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
+
+                <ToggleButton
+                    android:text="ToggleButton"
+                    android:id="@+id/activity_nastavitve_tb_disabledWC"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_disabledwc"
+                    android:drawableTint="@color/toggle_btn_tint"
+                    android:drawablePadding="8dp"
+                    android:textOn="WC za\ninvalide"
+                    android:textOff="WC za\ninvalide"
+                    android:textSize="10dp"
+                    android:textColor="@color/toggle_btn_text"
+                    android:layout_weight="0.33"
+                    android:clickable="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
+                android:layout_marginBottom="20dp">
 
                 <TextView
                     android:text="Ponudba"

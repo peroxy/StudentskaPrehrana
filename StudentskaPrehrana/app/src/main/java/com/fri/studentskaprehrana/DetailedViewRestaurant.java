@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.vision.text.Line;
 
@@ -48,6 +49,8 @@ public class DetailedViewRestaurant extends AppCompatActivity {
             TextView tvOpenSaturday = (TextView) parent.findViewById(R.id.tv_saturday);
             TextView tvOpenSunday = (TextView) parent.findViewById(R.id.tv_sunday);
             TextView tvStatus = (TextView) parent.findViewById(R.id.tv_status);
+            TextView tvToPay = (TextView) parent.findViewById(R.id.tv_toPay);
+            ImageView status = ((ImageView) parent.findViewById(R.id.iv_status));
 
             tvName.setText(restaurant.name != null && !restaurant.name.equals("null") ? restaurant.name : "Ni podatka");
             tvAddress.setText(restaurant.address != null && !restaurant.address.equals("null") ? restaurant.address : "Ni podatka");
@@ -56,7 +59,18 @@ public class DetailedViewRestaurant extends AppCompatActivity {
             tvOpenSaturday.setText(restaurant.openDuringWeekends ? restaurant.openingTime.getSaturday().toString() : "Zaprto");
             tvOpenSunday.setText(restaurant.openDuringWeekends ? restaurant.openingTime.getSunday().toString() : "Zaprto");
             tvStatus.setText(restaurant.openingTime.getOpenedTimeLeft());
-            ((ImageView) parent.findViewById(R.id.iv_status)).setImageResource(!restaurant.openingTime.getOpenedTimeLeft().equals("Zaprto") ? R.drawable.ic_open : R.drawable.ic_closed);
+            status.setImageResource(!restaurant.openingTime.getOpenedTimeLeft().equals("Trenutno zaprto.") ? R.drawable.ic_open : R.drawable.ic_closed);
+            tvToPay.setText(Double.toString(restaurant.price) + " €");
+
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_lunch)).setChecked(restaurant.servesLunch);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_saladBar)).setChecked(restaurant.hasSaladBar);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_pizzas)).setChecked(restaurant.servesPizzas);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_vegetarian)).setChecked(restaurant.hasVegetarianSupport);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_studentBenefits)).setChecked(restaurant.hasStudentBenefits);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_delivery)).setChecked(restaurant.hasDelivery);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_weekends)).setChecked(restaurant.openDuringWeekends);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_disabled)).setChecked(restaurant.hasDisabledSupport);
+            ((ToggleButton) parent.findViewById(R.id.activity_nastavitve_tb_disabledWC)).setChecked(restaurant.hasDisabledWcSupport);
 
             for (int i = 0; i < menus.length; i++) {
                 Menu currentItem = menus[i];

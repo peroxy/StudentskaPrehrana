@@ -64,6 +64,14 @@
             android:textStyle="normal|bold"
             android:layout_marginTop="1dp"
             android:textSize="11sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_toPay"
+            android:textStyle="normal|bold"
+            android:textSize="11sp" />
     </LinearLayout>
 
 </LinearLayout>
