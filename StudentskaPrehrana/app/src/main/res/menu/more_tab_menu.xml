@@ -5,5 +5,6 @@
         android:id="@+id/action_button"
         app:showAsAction="always"
         android:title="NASTAVITVE"
-        android:onClick="nastavitveClick"/>
+        android:onClick="nastavitveClick"
+        android:icon="@drawable/ic_settings_gear" />
 </menu>

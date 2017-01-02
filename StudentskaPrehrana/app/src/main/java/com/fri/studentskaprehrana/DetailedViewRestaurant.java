@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -55,6 +56,7 @@ public class DetailedViewRestaurant extends AppCompatActivity {
             tvOpenSaturday.setText(restaurant.openDuringWeekends ? restaurant.openingTime.getSaturday().toString() : "Zaprto");
             tvOpenSunday.setText(restaurant.openDuringWeekends ? restaurant.openingTime.getSunday().toString() : "Zaprto");
             tvStatus.setText(restaurant.openingTime.getOpenedTimeLeft());
+            ((ImageView) parent.findViewById(R.id.iv_status)).setImageResource(!restaurant.openingTime.getOpenedTimeLeft().equals("Zaprto") ? R.drawable.ic_open : R.drawable.ic_closed);
 
             for (int i = 0; i < menus.length; i++) {
                 Menu currentItem = menus[i];

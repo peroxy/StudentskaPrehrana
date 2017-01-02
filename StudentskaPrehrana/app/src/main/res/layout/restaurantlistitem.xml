@@ -1,48 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/restaurantItem"
     android:paddingBottom="20dp"
     android:clickable="true">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/restaurant_number"
-        android:visibility="gone" />
+    <ImageView
+        app:srcCompat="@drawable/ic_open"
+        android:paddingLeft="0dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:tint="@color/colorTextPrimary"
+        android:id="@+id/iv_status"
+        android:layout_width="30dp"
+        android:layout_height="50dp" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_restaurantName"
-        android:textSize="14sp"
-        android:textStyle="normal|bold"
-        android:paddingBottom="2dp" />
+        android:layout_weight="1"
+        android:paddingLeft="10dp">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_restaurantLocation"
-        android:textSize="11sp"
-        android:paddingBottom="1dp" />
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurant_number"
+            android:visibility="gone" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_restaurantDistance"
-        android:textSize="11sp" />
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_restaurantName"
+            android:textSize="14sp"
+            android:textStyle="normal|bold"
+            android:paddingBottom="2dp" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_openedTimeLeft"
-        android:textStyle="normal|bold"
-        android:layout_marginTop="1dp"
-        android:textSize="11sp" />
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_restaurantLocation"
+            android:textSize="11sp"
+            android:paddingBottom="1dp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_restaurantDistance"
+            android:textSize="11sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_openedTimeLeft"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="1dp"
+            android:textSize="11sp" />
+    </LinearLayout>
+
 </LinearLayout>

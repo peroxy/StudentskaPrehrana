@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,9 +24,23 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
     ArrayAdapter<Restaurant> adapter;
 
     @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.more_tab_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    public void nastavitveClick(MenuItem item) {
+        Intent intent = new Intent(this, NastavitveActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_restaurants);
+        setTitle("Seznam restavracij");
 
         listItems=new ArrayList<Restaurant>();
 
@@ -60,6 +73,7 @@ public class ListViewRestaurants extends AppCompatActivity  implements RequestHa
             ((TextView)restaurantItem.findViewById(R.id.tv_restaurantDistance)).setText(String.format("Oddaljenost: %.1fkm", currentRes.getDistanceInKm(StaticRestaurantVariables.mRestaurantLatLng)));
             ((TextView)restaurantItem.findViewById(R.id.restaurant_number)).setText(Integer.toString(i));
             ((TextView)restaurantItem.findViewById(R.id.tv_openedTimeLeft)).setText(currentRes.openingTime.getOpenedTimeLeft());
+            ((ImageView) restaurantItem.findViewById(R.id.iv_status)).setImageResource(!currentRes.openingTime.getOpenedTimeLeft().equals("Zaprto") ? R.drawable.ic_open : R.drawable.ic_closed);
 
             restaurantItem.setOnClickListener(new View.OnClickListener() {
                 @Override

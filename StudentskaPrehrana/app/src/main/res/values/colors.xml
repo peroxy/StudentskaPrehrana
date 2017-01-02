@@ -7,7 +7,8 @@
 
     <color name="colorPrimary">#0084ff</color>
     <color name="colorPrimaryDark">#006acc</color>
-    <color name="colorAccent">#65b5ff</color>
+    <color name="colorAccent">#006acc</color>
+    <!--#65b5ff-->
     <color name="colorItemNotSelected">#9e9e9e</color>
     <color name="colorTextPrimary">#323b43</color>
     <color name="colorWhite">#ffffff</color>
