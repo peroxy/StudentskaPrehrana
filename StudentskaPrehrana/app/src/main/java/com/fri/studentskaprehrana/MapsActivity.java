@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fri.studentskaprehrana.utils.RequestHandler;
@@ -62,7 +63,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener,
         PlaceSelectionListener, RequestHandler,
-        GoogleMap.OnInfoWindowClickListener {
+        GoogleMap.OnInfoWindowClickListener,
+        GoogleMap.InfoWindowAdapter {
     private final LatLng LOWER_WEST_BOUND = new LatLng(45.427882, 13.347119);
     private final LatLng UPPER_EAST_BOUND = new LatLng(46.904552, 16.664808);
     private final LatLng LJUBLJANA = new LatLng(46.052771, 14.503602);
@@ -92,6 +94,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleMap mMap;
+
+    private View popup = null;
 
     private Marker currentMarker;
     private Circle circle;
@@ -241,6 +245,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mMap != null) {
             mMap.clear();
         }
+
+        StaticRestaurantVariables.customLocationJustSelected = true;
+
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             startLocationUpdates();
         }
@@ -248,8 +255,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (StaticRestaurantVariables.mRestaurantSearchLocation != null) {
             RestaurantsModel.getRestaurants(this, "getRestaurants");
         }
-
-        StaticRestaurantVariables.customLocationJustSelected = true;
 
 //
 //        try {
@@ -291,6 +296,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setLatLngBoundsForCameraTarget(SLOVENIJA_OUTER_BOUNDS);
         mUiSettings = mMap.getUiSettings();
 
+        mMap.setInfoWindowAdapter(this);
         mMap.setOnInfoWindowClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this,
@@ -537,6 +543,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            tempMarker.setTag(0);
 //        }
 
+        if (StaticRestaurantVariables.mRestaurantSearchLocation == null) {
+            StaticRestaurantVariables.mRestaurantChangeLocation = location;
+        }
+
 
         if (!StaticRestaurantVariables.customLocation && mMap != null) {
             StaticRestaurantVariables.setLocation(location.toString(), location.getLatitude(),
@@ -622,6 +632,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 {
                     StaticRestaurantVariables.customLocation = false;
                     customLocationJustSelected = true;
+                    onLocationChanged(StaticRestaurantVariables.mRestaurantSearchLocation);
 
                     return false;
                 }
@@ -675,7 +686,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Restaurant rest = r.next();
             Marker tmpMarker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(rest.xcoord, rest.ycoord))
-                    .title(rest.name));
+                    .title(rest.name)
+                    .snippet(String.format("Odprto še:%s\nCena: %.2f",
+                            rest.openingTime.getOpenedTimeLeft(),
+                            rest.price)));
             tmpMarker.setTag(0);
 
             markers.add(tmpMarker);
@@ -698,6 +712,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             }
         }
+    }
+
+    @Override
+    public View getInfoWindow(Marker marker) {
+        return null;
+    }
+
+    @Override
+    public View getInfoContents(Marker marker) {
+        if (popup == null) {
+            popup = getLayoutInflater().inflate(R.layout.popup, null);
+        }
+
+        TextView tv = (TextView)popup.findViewById(R.id.title);
+
+        tv.setText(marker.getTitle());
+        tv = (TextView)popup.findViewById(R.id.snippet);
+        tv.setText(marker.getSnippet());
+
+        return popup;
     }
 
 //    private void updateUI() {
