@@ -56,6 +56,7 @@ import java.util.List;
 
 import static com.fri.studentskaprehrana.R.id.map;
 import static com.fri.studentskaprehrana.StaticRestaurantVariables.customLocationJustSelected;
+import static com.fri.studentskaprehrana.StaticRestaurantVariables.mRestaurantLatLng;
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -449,7 +450,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            StaticRestaurantVariables.mRestaurantSearchLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Location tmpLoc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            StaticRestaurantVariables.setLocation("", tmpLoc.getLatitude(), tmpLoc.getLongitude());
+            if (StaticRestaurantVariables.mRestaurantSearchLocation != null) {
+                zoomToLocation(mRestaurantLatLng);
+            }
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
 //        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
@@ -545,6 +550,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (StaticRestaurantVariables.mRestaurantSearchLocation == null) {
             StaticRestaurantVariables.mRestaurantChangeLocation = location;
+            zoomToLocation(new LatLng(location.getLatitude(), location.getLongitude()));
         }
 
 
