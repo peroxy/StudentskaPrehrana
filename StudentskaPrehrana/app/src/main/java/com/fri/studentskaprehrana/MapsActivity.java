@@ -693,7 +693,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Marker tmpMarker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(rest.xcoord, rest.ycoord))
                     .title(rest.name)
-                    .snippet(String.format("Odprto še:%s\nCena: %.2f",
+                    .snippet(String.format("%s\nCena: %.2f €",
                             rest.openingTime.getOpenedTimeLeft(),
                             rest.price)));
             tmpMarker.setTag(0);
